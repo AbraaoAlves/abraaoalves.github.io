@@ -101,16 +101,16 @@
     <section id="como">
         <div class="container">
             <div class="row text-center">
-                <h2>Ajude Votando</h2>
-                <h3>
-                    <a      target="_blank"
-                            href="http://app2.pitchburner.com/upglobal/pitch?evtid=406940&group=415348&subid=473793#media_player_0_jwplayer_display_image">
-                        <img    src="img/como/gsb.jpg"
-                                title="Clique para ver o nosso vídeo"
-                                alt="imagem do vídeo publicado no GSB" /></a>
-                </h3>
-                <p>Estamos participando da GSB - Global Startup Battle e precisamos do seu voto para levar
-                nosso trabalho adiante. Ajude clicando no galego acima!</p>
+                
+                <div class="small-12 medium-4 column">
+                    <img class="video" src="img/print-video.png" alt="nota social em ação" />
+                </div>
+                <div class="small-12 medium-8 column">
+                    <h3>Bom para você, melhor para quem recebe</h3>
+                    <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
+                    
+                    <div class="fb-like" data-href="https://facebook.com/NotaSocial.co" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>       
+                </div>
             </div>
         </div>
     </section>
@@ -468,11 +468,7 @@
 
     <!-- Portfolio Modals -->
     <!-- Use the modals below to showcase details como your portfolio projects! -->
-    <style>
-        .modal-body img {
-            height: 400px;
-        }
-    </style>
+    
     <!-- Portfolio Modal 1 
     <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
@@ -507,6 +503,8 @@
     </div>
     -->
 
+    <div id="fb-root"></div>
+    <script src="http://localhost:35729/livereload.js"></script>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -525,6 +523,14 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="js/agency.js"></script>
+    
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&appId=547273951977719&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
 
 </body>
 
