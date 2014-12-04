@@ -13,14 +13,23 @@ $(function() {
         }, 1500, 'easeInOutExpo');
         event.preventDefault();
     });
+
+	// Highlight the top nav as scrolling occurs
+	$('body').scrollspy({
+	    target: '.navbar-fixed-top'
+	})
+
+	// Closes the Responsive Menu on Menu Item Click
+	$('.navbar-collapse ul li a').click(function() {
+	    $('.navbar-toggle:visible').click();
+	});
+
+	$("#video")
+	.on("show.bs.modal", function(){
+		$('<iframe width="560" height="315" src="//www.youtube.com/embed/O9i1CUJBp0Q?autoplay=1" frameborder="0" allowfullscreen>').appendTo($(".modal-wrapper", this));
+	})
+	.on("hidden.bs.modal", function(){
+		$("iframe", $(this)).remove();
+	});    
 });
 
-// Highlight the top nav as scrolling occurs
-$('body').scrollspy({
-    target: '.navbar-fixed-top'
-})
-
-// Closes the Responsive Menu on Menu Item Click
-$('.navbar-collapse ul li a').click(function() {
-    $('.navbar-toggle:visible').click();
-});
