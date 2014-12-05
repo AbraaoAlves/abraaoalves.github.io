@@ -30,6 +30,7 @@ $(function() {
 	})
 	.on("hidden.bs.modal", function(){
 		$("iframe", $(this)).remove();
-	});    
+	});
+
 });
 
