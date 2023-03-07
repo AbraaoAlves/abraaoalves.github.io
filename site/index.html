@@ -11,7 +11,7 @@
 
     <title>Nota Social</title>
 
-    <link rel="icon" type="image/png" href="img/icon.png">
+    <link rel="icon" type="image/png" href="http://abraaoalves.github.io/site/img/icon.png">
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -28,6 +28,7 @@
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -47,16 +48,28 @@
         #video .modal-dialog{
             margin: 75px auto;
         }
+        #title-page{
+            padding-top: 5px;
+        }
+        #title-page img{
+            max-height: 50px;
+            display: initial;
+        }
+
         img.icones{
             margin:0 auto;
             display: block;
             max-width: 100%;
             height: auto;
         }
+
+        #contato ul {
+            padding-top: 10px;
+        }
     </style>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
@@ -66,9 +79,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                
-                <a id="title-page" class="navbar-brand page-scroll" href="#page-top"> 
-                 Nota Social
+
+                <a id="title-page" class="navbar-brand page-scroll media-middle" href="#page-top">
+                    <img class="img-responsive" src="img/logo.png" alt="Logo Nota Social">
+                    <span> Nota Social </span>
                 </a>
             </div>
 
@@ -79,17 +93,11 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#como">Saiba +</a>
+                        <a class="page-scroll" href="#saiba-mais">Saiba +</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">Como funciona</a>
+                        <a class="page-scroll" href="#como-funciona	">Como funciona</a>
                     </li>
-                    <!--li>
-                        <a class="page-scroll" href="#como">Como</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#portfolio">Social</a>
-                    </li-->
                     <li>
                         <a class="page-scroll" href="#portfolio">Parceiros</a>
                     </li>
@@ -97,7 +105,7 @@
                         <a class="page-scroll" href="#team">Time</a>
                     </li>
                     <li>
-                        <a href="mailto:social.nota@gmail.com">Contato</a>
+                        <a class="page-scroll" href="mailto:social.nota@gmail.com" >Contato</a>
                     </li>
                 </ul>
             </div>
@@ -112,12 +120,12 @@
             <div class="intro-text">
                 <div class="intro-lead-in">Transformando sua nota em algo significativo!</div>
                 <div class="intro-heading">Nunca foi tão fácil ajudar</div>
-                <a href="#como" class="page-scroll btn btn-xl">Saiba +</a>
+                <a href="#saiba-mais" class="page-scroll btn btn-xl">Saiba +</a>
             </div>
         </div>
     </header>
 
-    <section id="como">
+    <section id="saiba-mais">
         <div class="container">
             <div class="row">
                 <div class="btn col-md-4" data-toggle="modal" data-target="#video">
@@ -125,30 +133,20 @@
                 </div>
                 <div class="col-md-8">
                     <h3>Bom para você, melhor para quem recebe</h3>
-                    <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
-                    
-                    <div class="fb-like" data-href="https://facebook.com/NotaSocial.co" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>       
+                    <p>O objetivo da NotaSocial é aproximar o doador de notas/cupons fiscais às instituições beneficiadas, permitindo que a doação seja feita de forma virtual e sem complicação.</p>
+                    <p> Curta e compartilhe essa idéia!</p>
+                    <div class="fb-like" data-href="https://facebook.com/NotaSocial.co" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 </div>
-            </div>
-            <div class="row">   
-                <div class="col-sm-8 col-md-9">   
-                    <h3> Ajude doando seu clique !</h3>
-                    <p> Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </p>
-                </div>
-                <div class="col-sm-4 col-md-3">   
-                    <a href="http://www.meliuz.com.br/desafiomeliuz/startup/nota-social#projects" rel="nofollow">
-                        <img class="icones" width="150" height="150" src="/img/competition/desafio-meliuz.png" alt="Desafio Meliuz - Vote!">
-                    </a>
-                </a>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services">
+    <section id="como-funciona">
         <div class="container">
             <div class="row text-center">
                 <h2>Como funciona</h2>
+                <br>  <br>
                 <div class="col-sm-6 col-md-3">
                     <span class="fa-stack fa-4x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
@@ -164,7 +162,7 @@
                     </span>
                     <h4 class="service-heading">Consulte</h4>
                     <p class="text-muted">Consulte suas notas fiscais no seu celular em qualquer lugar; Quer validar aquela garantia? Fácil!</p>
-                </div>  
+                </div>
                 <div class="col-sm-6 col-md-3">
                     <span class="fa-stack fa-4x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
@@ -256,208 +254,64 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
-                        <h4>André Sousa</h4>
-                        <p class="text-muted">Dreamer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="https://www.facebook.com/andreblu"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
+                <div class="col-sm-12 col-md-6">
                     <div class="team-member">
                         <img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
                         <h4>Abraão Alves</h4>
                         <p class="text-muted">Dreamer</p>
                         <ul class="list-inline social-buttons">
-                            <li><a href="https://twitter.com/abraao4lves"><i class="fa fa-twitter"></i></a>
+                            <li><a target="_blank" href="https://twitter.com/abraao4lves"><i class="fa fa-twitter"></i></a>
                             </li>
                             <li><a target="_blank" href="https://www.facebook.com/notasocial.co"><i class="fa fa-facebook"></i></a>
                             </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/3.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Camila Paiva</h4>
-                        <p class="text-muted">Inspiration</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="https://www.facebook.com/CamillaPaivaDeMedeiros" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <li><a target="_blank" href="https://github.com/abraaoalves"><i class="fa fa-github"></i></a>
                             </li>
                         </ul>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/6.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Celio Junior</h4>
-                        <p class="text-muted">Business</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="https://www.facebook.com/celio.junior.52"><i class="fa fa-facebook" target="_blank"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/8.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Felipe de Olivera</h4>
-                        <p class="text-muted">UX Man</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="https://www.facebook.com/felipe.coliveira"><i class="fa fa-facebook"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
+                <div class="col-sm-12 col-md-6">
                     <div class="team-member">
                         <img src="img/team/4.jpg" class="img-responsive img-circle" alt="">
                         <h4>Italo Maia</h4>
                         <p class="text-muted">Dreamer</p>
                         <ul class="list-inline social-buttons">
-                            <li><a href="https://www.facebook.com/italo.maia.br"><i class="fa fa-facebook"></i></a>
+                            <li><a target="_blank"  href="https://www.facebook.com/italo.maia.br"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a target="_blank" href="https://github.com/italomaia"><i class="fa fa-github"></i></a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="team-member">
-                        <img src="img/team/5.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Larissa Praxedes</h4>
-                        <p class="text-muted">Inspiration</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="https://www.facebook.com/Larissampraxedes"><i class="fa fa-facebook"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-sm-3">
-                    <div class="team-member">
-                        <img src="img/team/7.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Sandra Barreto</h4>
-                        <p class="text-muted">Business</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="https://www.facebook.com/sandramaciel.barreto"><i class="fa fa-facebook"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!--div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-                </div>
-            </div-->
         </div>
     </section>
 
-    <!-- Clients Aside -->
-    <!--aside class="clients">
+    <footer id="contato">
         <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-sm-6">
-                    <a href="#">
-                        <img src="img/logos/envato.jpg" class="img-responsive img-centered" alt="">
-                    </a>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <a href="#">
-                        <img src="img/logos/designmodo.jpg" class="img-responsive img-centered" alt="">
-                    </a>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <a href="#">
-                        <img src="img/logos/themeforest.jpg" class="img-responsive img-centered" alt="">
-                    </a>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <a href="#">
-                        <img src="img/logos/creative-market.jpg" class="img-responsive img-centered" alt="">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </aside -->
-
-    <!-- section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Entre em contato</h2>
-                    <h3 class="section-subheading text-muted">Como podemos ajudá-lo?</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <form name="sentMessage" id="contactForm" novalidate>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Nome *" id="name" required data-validation-required-message="Por favor, informe seu nome.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="E-mail *" id="email" required data-validation-required-message="Por favor, informe seu e-mail.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel" class="form-control" placeholder="Telefone *" id="phone" required data-validation-required-message="Por favor, informe seu telefone.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <textarea class="form-control" placeholder="Abra seu coração *" id="message" required data-validation-required-message="Please enter a message."></textarea>
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-lg-12 text-center">
-                                <div id="success"></div>
-                                <button type="submit" class="btn btn-xl">Enviar Mensagem</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section-->
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
+            <div class="row text-left">
+                <div class="col-md-6">
                     <span class="copyright">Copyright &copy; Nota Social 2014</span>
                 </div>
-                <div class="col-md-4">
-                    <ul class="list-inline social-buttons">
-                        <li><a href="https://twitter.com/nota_social"><i class="fa fa-twitter"></i></a>
+                <div class="col-md-6">
+                    <ul class="list-inline">
+                        <li>
+                            <a target="_blank" href="https://twitter.com/nota_social">
+                                <i class="fa fa-twitter"></i>
+                                <span> @Nota_Social </span>
+                            </a>
                         </li>
-                        <li><a href="https://www.facebook.com/notasocial.co"><i class="fa fa-facebook"></i></a>
+                        <li>
+                            <a target="_blank" href="https://www.facebook.com/notasocial.co">
+                                <i class="fa fa-facebook"></i>
+                                <span> facebook.com/NotaSocial.co </span>
+                            </a>
                         </li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline quicklinks">
-                        <li><a href="#">Privacy Policy</a>
-                        </li>
-                        <li><a href="#">Terms of Use</a>
+
+                        <li>
+                            <a target="_blank" href="mailto:social.nota@gmail.com">
+                                <i class="fa fa-envelope"></i>
+                                <span> social.nota@gmail.com </span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -466,54 +320,23 @@
     </footer>
 
     <!-- Modals -->
-    
+
     <div id="video" class="portfolio-modal modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-video">
             <button type="button" class="close modal-close" data-dismiss="modal">
-                <img src="/img/icon-close.png" width="20" height="19">
+                <img src="img/icon-close.png" width="20" height="19">
             </button>
 
             <div class="modal-wrapper"></div>
         </div>
     </div>
 
-    
-    <!-- Portfolio Modal 1 
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            < Project Details Go Here >
-                            <h2>Project Name</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img class="img-responsive" src="img/portfolio/abemce.jpg" alt="">
-                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                            <p>
-                                <strong>Want these icons in this portfolio item sample?</strong>You can download 60 of them for free, courtesy of <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">RoundIcons.com</a>, or you can purchase the 1500 icon set <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">here</a>.</p>
-                            <ul class="list-inline">
-                                <li>Date: July 2014</li>
-                                <li>Client: Round Icons</li>
-                                <li>Category: Graphic Design</li>
-                            </ul>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    -->
+
 
     <div id="fb-root"></div>
+    <!--
     <script src="http://localhost:35729/livereload.js"></script>
+    -->
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -532,7 +355,7 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="js/agency.js"></script>
-    
+
     <script>(function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
