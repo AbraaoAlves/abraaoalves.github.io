@@ -75,11 +75,16 @@
     body {
       display: grid;
       place-items: center;
+      min-height: 100vh;
       padding: 28px 16px;
     }
 
     .site {
       width: min(860px, 100%);
+      min-height: calc(100vh - 56px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       text-align: center;
     }
 
@@ -114,6 +119,12 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
+    }
+
+    .social-grid li:last-child {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: min(425px, 100%);
     }
 
     .social-link {
@@ -185,10 +196,6 @@
       transform: translate(1px, -1px);
     }
 
-    .gmail .icon-wrap {
-      color: var(--gmail);
-    }
-
     .sr-only {
       position: absolute;
       width: 1px;
@@ -216,6 +223,12 @@
       .social-grid {
         grid-template-columns: 1fr;
       }
+
+      .social-grid li:last-child {
+        grid-column: auto;
+        justify-self: stretch;
+        width: 100%;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -231,8 +244,7 @@
 <body>
   <main class="site" id="conteudo" aria-labelledby="hero-title">
     <header class="identity">
-      <h1 id="hero-title">Abraao Alves</h1>
-      <p class="tagline">Desenvolvedor por paixao. Crio experiencias web com foco em clareza, performance e resultado.</p>
+      <h1 id="hero-title">Abraão Alves</h1>
     </header>
 
     <nav aria-label="Redes sociais e contato">
@@ -283,13 +295,13 @@
         </li>
 
         <li>
-          <a class="social-link" href="https://dev.to/abraaoalves" target="_blank" rel="noopener noreferrer me" aria-label="Abrir perfil no DEV Community">
+          <a class="social-link" href="https://stackoverflow.com/users/815478/abra%c3%a3o-alves" target="_blank" rel="noopener noreferrer me" aria-label="Abrir perfil no Stack Overflow">
             <span class="icon-wrap" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" role="img" aria-hidden="true">
-                <path d="M7.83 10.34h1.56c.96 0 1.54.52 1.54 1.66 0 1.14-.58 1.66-1.54 1.66H7.83v-3.32zm0-2.34H4.98V16h2.85c2.85 0 4.23-1.59 4.23-4s-1.38-4-4.23-4zm6.12 0H12l2.48 8h2.48l2.49-8h-1.95l-1.76 6.02L13.95 8zm7.02 0h-4.37V16h4.37v-2.06h-2.35v-1.02h2.16v-1.94h-2.16v-.92h2.35z"/>
+                <path d="M18.09 20.25v-5.59h1.86v7.45H4.02v-7.45h1.86v5.59h12.21zM7.6 16.52h8.77v1.86H7.6v-1.86zm.2-4.22 8.58 1.8-.39 1.82-8.58-1.8.39-1.82zm1.11-4.13 7.95 3.7-.79 1.69-7.95-3.7.79-1.69zm2.22-3.93 6.75 5.61-1.19 1.42-6.75-5.61 1.19-1.42zm4.19-3.35 1.53-1.01 4.8 7.28-1.53 1.01-4.8-7.28z"/>
               </svg>
             </span>
-            <span class="name">DEV</span>
+            <span class="name">StackOverflow</span>
             <svg class="out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M7 17L17 7"/>
               <path d="M8 7h9v9"/>
@@ -298,7 +310,7 @@
         </li>
 
         <li>
-          <a class="social-link gmail" href="mailto:abraao.teodosio@gmail.com" aria-label="Enviar email para Gmail">
+          <a class="social-link" href="mailto:abraao.teodosio@gmail.com" aria-label="Enviar email para Gmail">
             <span class="icon-wrap" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" role="img" aria-hidden="true">
                 <path d="M3 6.75A1.75 1.75 0 0 1 4.75 5h14.5A1.75 1.75 0 0 1 21 6.75V18a1 1 0 0 1-1 1h-2.2V9.94L12 14.02 6.2 9.94V19H4a1 1 0 0 1-1-1V6.75z" fill="currentColor"/>
