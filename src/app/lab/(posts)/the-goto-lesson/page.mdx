@@ -1,0 +1,45 @@
+# The GOTO Lesson
+
+**May 30, 2026**
+
+I know enough Assembly to understand that the evolution of programming languages is largely driven by the need to cap the programmer's ability to make a mess. 
+
+In the year 2000, during a SENAI course on the pic8051 microcontroller, I learned about a powerful instruction called `GOTO`. It basically serves to redirect the program to a specific line in your code. With `GOTO`, you can create loops, functions, and... an incredible amount of spaghetti code.
+
+Not knowing, not limiting, or not having the slightest idea of when to use a "super feature" of a language can be the defining difference between software that is comprehensible by humans and software that isn't.
+
+If your software needs to be understood by humans—if it must be clear so that a team can read and maintain it—the first reviewer must understand what each piece does, and judge whether future humans will understand it too.
+
+## The Failing Grade
+
+I distinctly remember my professor lowering my grade on a fully functional digital marquee project. 
+
+The reason? I was using `GOTO` excessively and unnecessarily. 
+
+```assembly
+; A simulated example of my old pic8051 code
+START:
+    MOV A, #0FFH
+    CALL DELAY
+    GOTO NEXT_STEP
+    
+NEXT_STEP:
+    MOV P1, A
+    GOTO CHECK_BTN
+    
+CHECK_BTN:
+    JB P3.2, START
+    GOTO NEXT_STEP ; Wait, where are we going again?
+```
+
+Two months later, I myself didn't understand anything I had written in that first codebase. That's where I learned the importance of readability and comments.
+
+## AI and Abstraction
+
+This premise—that you don't need to know hosting, `defaultdict`, or specific language features—might be completely true in a scenario where the code doesn't need to be understood by humans. If only the result is evaluated and the code is considered a black box, looking at the details isn't necessary.
+
+But I don't know if AI can maintain code for long without the detailed supervision of a human. Remember: **the code is still our asset!** 
+
+AI doesn't create a new abstraction layer the way Java or .NET did over Assembly. AI generates code and then hands the responsibility back into our hands.
+
+I have been working professionally with software for almost 20 years, and I've worked on one specific platform for over 9 years. In it, I went through several evolutions: `Aurelia -> React`, `Feathers -> Nest`, `Node -> Go`. Code must be built to last.
