@@ -7,8 +7,8 @@ Este documento detalha as micro-tarefas para a execução do novo site. Cada ite
 ## Fase 1: Fundação e Setup (Next.js + Tailwind)
 - [x] Task 1.1: Inicializar projeto Next.js 14+ (App Router) na raiz do repositório.
 - [x] Task 1.2: Configurar Tailwind CSS e estrutura de pastas (assets, components, lib, styles).
-- [ ] Task 1.3: Configurar `next-themes` para suporte a Light/Dark/System mode.
-- [ ] Task 1.4: Configurar tipografia base (Inter/Geist) e variáveis de cores iniciais.
+- [x] Task 1.3: Configurar `next-themes` para suporte a Light/Dark/System mode.
+- [x] Task 1.4: Configurar tipografia base (Inter/Geist) e variáveis de cores iniciais.
 - [ ] Task 1.5: Configurar suporte básico a MDX e Code Hike.
 
 ## Fase 2: Identidade e Motion (Ettrics Style)
