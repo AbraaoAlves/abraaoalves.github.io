@@ -14,6 +14,7 @@
     "@next/mdx": "^16.2.6",
     "@types/mdx": "^2.0.13",
     "codehike": "^1.1.0",
+    "framer-motion": "^12.40.0",
     "lucide-react": "^1.17.0",
     "next": "16.2.6",
     "next-themes": "^0.4.6",
