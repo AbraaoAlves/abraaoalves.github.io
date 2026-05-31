@@ -1,2 +1,2 @@
-import * as ch from "codehike/mdx";
-console.log(ch);
+import * as ch from "codehike/components";
+console.log(Object.keys(ch));
