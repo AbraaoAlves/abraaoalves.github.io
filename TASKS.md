@@ -21,7 +21,7 @@ Este documento detalha as micro-tarefas para a execução do novo site. Cada ite
 ## Fase 3: Conteúdo e Impacto (Javis Perez Structure)
 - [x] Task 3.1: Criar seção "Impact" (Experiência) com foco em resultados da Beakyn.
 - [x] Task 3.2: Implementar seção "Mentorship" com depoimentos (Efeito Multiplicador).
-- [ ] Task 3.3: Criar seção "About" integrando a narrativa de sabedoria e fundamentos (Assembly/Chess/Music).
+- [x] Task 3.3: Criar seção "About" integrando a narrativa de sabedoria e fundamentos (Assembly/Chess/Music).
 - [ ] Task 3.4: Implementar o "Lab" (Blog) template e o primeiro post "The GOTO Lesson".
 
 ## Fase 4: DevOps e Finalização

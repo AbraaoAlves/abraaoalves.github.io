@@ -1,18 +1,18 @@
 
 > abraaoalves.github.io@0.1.0 dev
-> next dev --webpack
+> next dev
 
 ⚠ Port 3000 is in use by an unknown process, using available port 3001 instead.
-▲ Next.js 16.2.6 (webpack)
+▲ Next.js 16.2.6 (Turbopack)
 - Local:         http://localhost:3001
 - Network:       http://192.168.0.8:3001
-✓ Ready in 725ms
+✓ Ready in 575ms
 ⨯ Another next dev server is already running.
 
 - Local:        http://localhost:3000
-- PID:          785561
+- PID:          725836
 - Dir:          /home/morpheus/s/abraao/abraaoalves.github.io
 - Log:          .next/dev/logs/next-development.log
 
-Run kill 785561 to stop it.
+Run kill 725836 to stop it.
 [?25h

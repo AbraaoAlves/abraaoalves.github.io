@@ -105,6 +105,42 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ABOUT / FOUNDATION SECTION */}
+      <section id="about" className="w-full scroll-mt-24">
+        <div className="flex items-center gap-4 mb-8">
+          <h2 className="text-2xl font-bold tracking-tight">The Foundation</h2>
+          <div className="h-px bg-neutral-200 dark:bg-neutral-800 flex-1"></div>
+        </div>
+        
+        <div className="flex flex-col md:flex-row gap-8">
+          <div className="flex-1 space-y-4 text-neutral-600 dark:text-neutral-400">
+            <p>
+              My journey began in 2000 at a local public technical school learning <strong className="text-neutral-900 dark:text-neutral-200">Assembly and pic8051 microcontrollers</strong>. That raw, low-level experience taught me early on that the evolution of programming languages is largely about constraining our ability to write unmaintainable code.
+            </p>
+            <p>
+              A classic lesson from those days—learning the hard way why excessive <code>GOTO</code> statements ruin readability—shaped my philosophy today: <em>"Software must be understood by humans first."</em> If a team cannot read and judge the code, the architecture has failed, regardless of how clever it seems.
+            </p>
+          </div>
+          <div className="md:w-1/3 bg-neutral-50 dark:bg-neutral-900/50 p-6 rounded-2xl border border-neutral-100 dark:border-neutral-800/50 flex flex-col justify-center">
+            <h3 className="font-semibold text-neutral-900 dark:text-neutral-200 mb-2">Beyond the Keyboard</h3>
+            <ul className="text-sm space-y-3">
+              <li className="flex gap-2">
+                <span>♟️</span>
+                <span>Playing chess to practice strategic patience.</span>
+              </li>
+              <li className="flex gap-2">
+                <span>🎻</span>
+                <span>Learning classical music with a double bass.</span>
+              </li>
+              <li className="flex gap-2">
+                <span>🌊</span>
+                <span>Swimming in the sea with my daughters.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
     </main>
   );
 }
