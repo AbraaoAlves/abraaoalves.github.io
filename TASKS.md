@@ -26,6 +26,6 @@ Este documento detalha as micro-tarefas para a execução do novo site. Cada ite
 
 ## Fase 4: DevOps e Finalização
 - [x] Task 4.1: Integrar a Logo SVG customizada (referência CodePen) no Header.
-- [ ] Task 4.2: Configurar GitHub Actions para deploy automático (Static Export).
+- [x] Task 4.2: Configurar GitHub Actions para deploy automático (Static Export).
 - [ ] Task 4.3: Auditoria final de performance e SEO.
 - [ ] Task 4.4: Revisão de copy e polimento final de motion design.
