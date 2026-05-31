@@ -12,7 +12,7 @@ Este documento detalha as micro-tarefas para a execução do novo site. Cada ite
 - [x] Task 1.5: Configurar suporte básico a MDX e Code Hike.
 
 ## Fase 2: Identidade e Motion (Ettrics Style)
-- [ ] Task 2.1: Implementar o componente de Layout base (Header/Footer minimalistas - Javis Perez style).
+- [x] Task 2.1: Implementar o componente de Layout base (Header/Footer minimalistas - Javis Perez style).
 - [ ] Task 2.2: Pesquisa e isolamento da lógica Pretext (ASCII Variable Font).
 - [ ] Task 2.3: Criar o componente `HeroAscii` integrado com a lógica do Pretext.
 - [ ] Task 2.4: Refinar animação e interatividade do nome "ABRAÃO ALVES" no Hero.
