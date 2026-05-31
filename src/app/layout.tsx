@@ -16,8 +16,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Abraão Alves",
-  description: "Staff Software Engineer, Mentor, and Architect.",
+  title: {
+    default: "Abraão Alves | Software Engineering & Mentorship",
+    template: "%s | Abraão Alves"
+  },
+  description: "18+ years of high-impact engineering, architecture, and building people. From Assembly to AI Infrastructure.",
+  openGraph: {
+    title: "Abraão Alves | Software Engineering & Mentorship",
+    description: "Building software that lasts. High-impact engineering, mentorship, and architecture since 2008.",
+    url: "https://abraaoalves.github.io",
+    siteName: "Abraão Alves",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Abraão Alves",
+    description: "18+ years of high-impact engineering and mentorship.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  }
 };
 
 export default function RootLayout({
