@@ -14,12 +14,13 @@ import { AsciiTextCanvas } from "./asciiart";
  * the page in both light and dark instead of being a hard black/white box.
  */
 
-// Page background per theme (matches <body> bg-white / dark:bg-neutral-950).
-const PAPER_LIGHT = "#ffffff";
-const PAPER_DARK = "#0a0a0a";
-// Ink (the ASCII characters).
-const INK_LIGHT = "#171717";
-const INK_DARK = "#ededed";
+// Page background per theme — MUST match <body> (warm paper / warm near-black)
+// so the canvas panel is invisible and only the ASCII letters show.
+const PAPER_LIGHT = "#f4f1ea";
+const PAPER_DARK = "#0c0a09";
+// Ink (the ASCII characters): warm stone.
+const INK_LIGHT = "#1c1917";
+const INK_DARK = "#e7e5e4";
 
 // What fills the letters: shade blocks (\u2593\u2592\u2591\u2588) rather than letters. A dense,
 // low-variance fill keeps the letterform silhouette readable (letters-in-letters
@@ -73,12 +74,12 @@ export function Hero() {
         />
       </div>
 
-      <p className="mt-8 max-w-2xl text-lg md:text-xl text-neutral-600 dark:text-neutral-400 text-balance">
+      <p className="mt-8 max-w-2xl text-lg md:text-xl text-stone-600 dark:text-stone-400 text-balance">
         Building software that lasts. High-impact engineering, architecture, and
         mentorship since 2008.
       </p>
 
-      <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-500">
+      <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-500">
         <span>Staff Engineer</span>
         <span className="text-brand">/</span>
         <span>Architect</span>
