@@ -1,8 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useTheme } from "next-themes";
 import { AsciiTextCanvas } from "./asciiart";
-import { AsciiLink } from "./ascii-link";
 
 // Internal page links (left column). Mirror the header nav.
 const pageLinks = [
@@ -33,9 +33,15 @@ const INK_LIGHT = "#c9c7c4";
 const INK_DARK = "#2b2b2b";
 const FILL_SOURCE = "▓█▒▓░█";
 
-// Ettrics footer links: ~32px, light weight, sentence case, high contrast.
+// Ettrics footer spotlight: hovering anywhere in the footer dims every element
+// (`group-hover:opacity-40`); the specifically hovered/focused link returns to
+// full opacity (important so it beats the group-hover dim), so the active link
+// stays intact while everything around it — including the ASCII art — recedes.
+const dimClass = "transition-opacity duration-300 ease-out group-hover:opacity-40";
 const linkClass =
-  "text-3xl md:text-[2rem] leading-tight font-light tracking-tight text-neutral-900 dark:text-neutral-50";
+  "text-3xl md:text-[2rem] leading-tight font-light tracking-tight text-neutral-900 dark:text-neutral-50 " +
+  dimClass +
+  " hover:opacity-100! focus-visible:opacity-100!";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -43,9 +49,10 @@ export function Footer() {
   const isDark = resolvedTheme === "dark";
 
   return (
-    <footer className="w-full border-t border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950 mt-auto">
-      {/* Giant ASCII name wordmark spanning the footer width, like ettrics.com. */}
-      <div aria-hidden="true" className="w-full overflow-hidden px-4">
+    <footer className="group w-full border-t border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950 mt-auto">
+      {/* Giant ASCII name wordmark spanning the footer width, like ettrics.com.
+          Dims with the rest of the footer on hover (no hover override). */}
+      <div aria-hidden="true" className={"w-full overflow-hidden px-4 " + dimClass}>
         <AsciiTextCanvas
           text="ABRAÃO ALVES"
           source={FILL_SOURCE}
@@ -68,7 +75,9 @@ export function Footer() {
             <ul className="flex flex-col gap-1">
               {pageLinks.map((link) => (
                 <li key={link.href}>
-                  <AsciiLink href={link.href} label={link.label} className={linkClass} />
+                  <Link href={link.href} className={linkClass}>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -78,15 +87,22 @@ export function Footer() {
             <ul className="flex flex-col gap-1">
               {externalLinks.map((link) => (
                 <li key={link.label}>
-                  <AsciiLink href={link.href} label={link.label} external className={linkClass} />
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={linkClass}
+                  >
+                    {link.label}
+                  </a>
                 </li>
               ))}
             </ul>
           </nav>
         </div>
 
-        {/* Bottom strip: copyright (left) / meta (right). */}
-        <div className="mt-12 flex flex-col gap-2 border-t border-neutral-100 pt-6 text-sm text-neutral-500 dark:border-neutral-800/60 dark:text-neutral-400 sm:flex-row sm:items-center sm:justify-between">
+        {/* Bottom strip: copyright (left) / meta (right). Dims as one unit. */}
+        <div className={"mt-12 flex flex-col gap-2 border-t border-neutral-100 pt-6 text-sm text-neutral-500 dark:border-neutral-800/60 dark:text-neutral-400 sm:flex-row sm:items-center sm:justify-between " + dimClass}>
           <p>© {currentYear} Abraão Alves</p>
           <p className="font-mono text-xs uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
             v1.0
