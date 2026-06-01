@@ -7,7 +7,7 @@ export type Shader = {
   cell: (col: number, row: number, t: number) => ShaderCell | null;
 };
 
-type MaskShaderOptions = {
+export type MaskShaderOptions = {
   drawMask?: DrawFn;
   source?: string;
   speed?: number;
@@ -16,12 +16,12 @@ type MaskShaderOptions = {
   phaseJitter?: number;
 };
 
-type TextMaskShaderOptions = Omit<MaskShaderOptions, "drawMask"> & {
+export type TextMaskShaderOptions = Omit<MaskShaderOptions, "drawMask"> & {
   text?: string;
   weight?: number;
 };
 
-type ShapeMaskShaderOptions = Omit<MaskShaderOptions, "drawMask"> & {
+export type ShapeMaskShaderOptions = Omit<MaskShaderOptions, "drawMask"> & {
   drawShape?: DrawFn;
 };
 
@@ -29,7 +29,7 @@ export type ImageMaskShaderOptions = Omit<MaskShaderOptions, "drawMask"> & {
   img?: HTMLImageElement;
 };
 
-type RippleShaderOptions = {
+export type RippleShaderOptions = {
   source?: string;
   scale?: number;
   speed?: number;
@@ -41,7 +41,7 @@ type RippleShaderOptions = {
   origin?: { x: number; y: number };
 };
 
-type WaveShaderOptions = {
+export type WaveShaderOptions = {
   ramp?: string;
   scale?: number;
   speed?: number;
@@ -83,26 +83,30 @@ function createMaskShader({
     },
   };
 }
+export function createTextMaskDrawFn({ text = "TEXT", weight = 800 }: Pick<TextMaskShaderOptions, "text" | "weight"> = {}): DrawFn {
+  return (ctx, cols, rows) => {
+    const lines = text.split("\n");
+    const probe = 100;
+    ctx.font = `${weight} ${probe}px ui-sans-serif, system-ui, sans-serif`;
+    let maxW = 1;
+    for (const l of lines) maxW = Math.max(maxW, ctx.measureText(l).width || 1);
+    const lineGap = 1.04;
+    const fs = Math.max(1, probe * Math.min(
+      (cols * 0.92) / maxW,
+      (rows * 0.82) / (lines.length * probe * lineGap)
+    ));
+    ctx.font = `${weight} ${fs}px ui-sans-serif, system-ui, sans-serif`;
+    ctx.fillStyle = "#000"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    const lh = fs * lineGap;
+    let y = rows / 2 - (lines.length * lh) / 2 + lh / 2;
+    for (const l of lines) { ctx.fillText(l, cols / 2, y); y += lh; }
+  };
+}
+
 /* TEXT MASK */
 export function createTextMaskShader({ text = "TEXT", weight = 800, ...rest }: TextMaskShaderOptions = {}) {
   return createMaskShader({
-    drawMask (ctx, cols, rows) {
-      const lines = text.split("\n");
-      const probe = 100;
-      ctx.font = `${weight} ${probe}px ui-sans-serif, system-ui, sans-serif`;
-      let maxW = 1;
-      for (const l of lines) maxW = Math.max(maxW, ctx.measureText(l).width || 1);
-      const lineGap = 1.04;
-      const fs = Math.max(1, probe * Math.min(
-        (cols * 0.92) / maxW,
-        (rows * 0.82) / (lines.length * probe * lineGap)
-      ));
-      ctx.font = `${weight} ${fs}px ui-sans-serif, system-ui, sans-serif`;
-      ctx.fillStyle = "#000"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-      const lh = fs * lineGap;
-      let y = rows / 2 - (lines.length * lh) / 2 + lh / 2;
-      for (const l of lines) { ctx.fillText(l, cols / 2, y); y += lh; }
-    },
+    drawMask: createTextMaskDrawFn({ text, weight }),
     ...rest,
   });
 }
