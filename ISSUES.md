@@ -1,5 +1,20 @@
 # ISSUES — Review of abraaoalves.github.io (feature/new-site)
 
+> **Resolution status (updated 2026-06-01, branch feature/new-site):**
+> - ✅ **#1** theme toggle + dead CSS vars (toggle uses `resolvedTheme`; `.dark` drives vars; hydration aria-label fixed)
+> - ✅ **#2** hero — rebuilt as a legible Ettrics ASCII wordmark (shade-block dither fill, theme-blended)
+> - ✅ **#3** Ettrics face — warm paper palette (stone), ghost headers, brand accent, scroll-reveal motion
+> - ✅ **#4** logo — real isometric "A" from the pen
+> - ✅ **#5** Lab — data-driven listing + real Code Hike syntax highlighting
+> - ✅ **#6** page-fade — transform-only reveal, respects reduced-motion, no invisible HTML
+> - ✅ **#7** deploy — paths run at repo root, triggers on `master`
+> - ✅ **#8** SEO — sitemap, robots, OG image, metadataBase
+> - ✅ **#9** boilerplate — stock svgs removed, real favicon from the logo
+> - ✅ **#10** perpetual rAF — solved by the new canvas (IntersectionObserver pause + fps cap + reduced-motion)
+> - ⚠️ **#11** content/copy (mentorship attribution clarified; dates + social links still to verify with real data)
+> - ⚪ **#12–#14** polish — `next start` script, font-preload warning, minor a11y (hero now has a real sr-only h1)
+
+
 > Review date: 2026-05-31. Tested live at `http://localhost:3000` (`next dev --webpack`) with a headless browser, in both light and dark mode, desktop (1280px) and mobile (375px). Cross-referenced against the stated design targets — **ettrics.com** (typography + motion) and **javisperez.com** (structure + name-as-hero) — and the user's real logo pen (https://codepen.io/AbraaoAlves/pen/BjzPjy, titled "My logo").
 
 ## Goal recap (from AGENTS.md / MEMORY.md)
