@@ -11,16 +11,20 @@ const nextConfig = {
   },
 };
 
+// Code Hike maps fenced code blocks to a <Code> component (provided in
+// src/mdx-components.tsx) so blocks render with real syntax highlighting.
+const chConfig = { components: { code: "Code" } };
+
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
     remarkPlugins: [
       remarkGfm,
-      remarkCodeHike,
+      [remarkCodeHike, chConfig],
     ],
     rehypePlugins: [],
     recmaPlugins: [
-      recmaCodeHike,
+      [recmaCodeHike, chConfig],
     ],
   },
 });
