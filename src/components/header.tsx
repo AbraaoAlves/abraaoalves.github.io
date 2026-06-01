@@ -10,9 +10,9 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-stone-200 bg-[#f4f1ea]/80 backdrop-blur dark:border-stone-800 dark:bg-[#0c0a09]/80">
+    <header className="sticky top-0 z-50 w-full border-b border-neutral-200 bg-white/80 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/80">
       <div className="container mx-auto flex h-14 max-w-4xl items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight text-stone-900 dark:text-stone-50 hover:opacity-80 transition-opacity">
+        <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight text-neutral-900 dark:text-neutral-50 hover:opacity-80 transition-opacity">
           <Logo className="h-6 w-6" />
           <span>ABRAÃO ALVES</span>
         </Link>
@@ -21,14 +21,14 @@ export function Header() {
             href="/#work" 
             className={cn(
               "text-sm font-medium transition-colors",
-              pathname === "/" ? "text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-50" : "text-stone-600 dark:text-stone-400"
+              pathname === "/" ? "text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50" : "text-neutral-600 dark:text-neutral-400"
             )}
           >
             Work
           </Link>
           <Link 
             href="/#mentorship" 
-            className="text-sm font-medium text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-50 transition-colors"
+            className="text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50 transition-colors"
           >
             Mentorship
           </Link>
@@ -37,8 +37,8 @@ export function Header() {
             className={cn(
               "text-sm font-medium transition-colors",
               pathname.startsWith("/lab") 
-                ? "text-stone-900 dark:text-stone-50" 
-                : "text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-50"
+                ? "text-neutral-900 dark:text-neutral-50" 
+                : "text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-50"
             )}
           >
             Lab
