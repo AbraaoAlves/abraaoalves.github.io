@@ -1,5 +1,6 @@
 import { AsciiArtCanvas } from "@/components/asciiart";
 import { Hero } from "@/components/hero";
+import { Reveal } from "@/components/reveal";
 
 function SectionHeader({ ghost, label }: { ghost: string; label: string }) {
   return (
@@ -21,9 +22,9 @@ export default function Home() {
 
       {/* WORK / IMPACT SECTION */}
       <section id="work" className="w-full scroll-mt-24">
-        <SectionHeader ghost="Work" label="Selected Impact" />
+        <Reveal><SectionHeader ghost="Work" label="Selected Impact" /></Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <Reveal delay={0.1} className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Beakyn */}
           <div className="group flex flex-col gap-3 p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 hover:border-brand dark:hover:border-brand transition-colors">
             <div className="flex justify-between items-start">
@@ -49,18 +50,20 @@ export default function Home() {
           <div className="group flex flex-col gap-3 p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 hover:border-brand dark:hover:border-brand transition-colors">
             <AsciiArtCanvas art="USmap" source="smartscout." speed={1} background="#0a0a0a" color="white" ripple clickable />
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* MENTORSHIP SECTION */}
       <section id="mentorship" className="w-full scroll-mt-24">
-        <SectionHeader ghost="People" label="Building Teams" />
+        <Reveal><SectionHeader ghost="People" label="Building Teams" /></Reveal>
 
-        <p className="text-neutral-600 dark:text-neutral-400 mb-8 max-w-3xl">
-          The true measure of a Staff Engineer is the multiplier effect. Over the years, I've had the privilege of hiring, mentoring, and shaping the careers of exceptional developers who now lead the industry.
-        </p>
+        <Reveal>
+          <p className="text-neutral-600 dark:text-neutral-400 mb-8 max-w-3xl">
+            The true measure of a Staff Engineer is the multiplier effect. Over the years, I've had the privilege of hiring, mentoring, and shaping the careers of exceptional developers who now lead the industry.
+          </p>
+        </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Reveal delay={0.1} className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <blockquote className="p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-100 dark:border-neutral-800/50">
             <p className="text-sm text-neutral-600 dark:text-neutral-300 italic mb-4">
               "Abraão is far more than a brilliant Principal Engineer. He is the kind of leader who 'sets the house in order,' establishing clear quality standards that elevate the entire engineering organization... the best leader I have worked with in my entire career."
@@ -88,14 +91,14 @@ export default function Home() {
             </p>
             <footer className="text-sm font-medium">On mentoring Lamartine</footer>
           </blockquote>
-        </div>
+        </Reveal>
       </section>
 
       {/* ABOUT / FOUNDATION SECTION */}
       <section id="about" className="w-full scroll-mt-24">
-        <SectionHeader ghost="Roots" label="The Foundation" />
+        <Reveal><SectionHeader ghost="Roots" label="The Foundation" /></Reveal>
 
-        <div className="flex flex-col md:flex-row gap-8">
+        <Reveal delay={0.1} className="flex flex-col md:flex-row gap-8">
           <div className="flex-1 space-y-4 text-neutral-600 dark:text-neutral-400">
             <p>
               My journey began in 2000 at a local public technical school learning <strong className="text-neutral-900 dark:text-neutral-200">Assembly and pic8051 microcontrollers</strong>. That raw, low-level experience taught me early on that the evolution of programming languages is largely about constraining our ability to write unmaintainable code.
@@ -121,7 +124,7 @@ export default function Home() {
               </li>
             </ul>
           </div>
-        </div>
+        </Reveal>
       </section>
 
     </main>
