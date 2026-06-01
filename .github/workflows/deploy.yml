@@ -7,7 +7,7 @@ name: Deploy Next.js site to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["feature/new-site"] # Ajustar para "main" ou "master" após o merge
+    branches: ["master"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -36,7 +36,7 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
-          cache-dependency-path: abraao/abraaoalves.github.io/package-lock.json
+          cache-dependency-path: package-lock.json
       - name: Setup Pages
         uses: actions/configure-pages@v4
         with:
@@ -45,14 +45,12 @@ jobs:
           static_site_generator: next
       - name: Install dependencies
         run: npm ci
-        working-directory: abraao/abraaoalves.github.io
       - name: Build with Next.js
         run: npm run build
-        working-directory: abraao/abraaoalves.github.io
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./abraao/abraaoalves.github.io/out
+          path: ./out
 
   # Deployment job
   deploy:
