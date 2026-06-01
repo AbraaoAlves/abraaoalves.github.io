@@ -6,6 +6,10 @@
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Brand accent — derived from the logo mark */
+  --color-brand: #5b9bd5;
+  --color-brand-deep: #1f4e79;
 }
 
 :root {
@@ -13,11 +17,11 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Driven by next-themes' class attribute so the in-app toggle controls these,
+   not just the OS preference. */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 body {

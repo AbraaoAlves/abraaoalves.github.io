@@ -13,7 +13,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-neutral-200 bg-white/80 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/80">
       <div className="container mx-auto flex h-14 max-w-4xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight text-neutral-900 dark:text-neutral-50 hover:opacity-80 transition-opacity">
-          <Logo className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+          <Logo className="h-6 w-6" />
           <span>ABRAÃO ALVES</span>
         </Link>
         <nav className="flex items-center gap-6">
