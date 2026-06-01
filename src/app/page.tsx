@@ -1,3 +1,4 @@
+import { AsciiArtCanvas } from "@/components/asciiart";
 import { Hero } from "@/components/hero";
 
 function SectionHeader({ ghost, label }: { ghost: string; label: string }) {
@@ -27,7 +28,7 @@ export default function Home() {
           <div className="group flex flex-col gap-3 p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 hover:border-brand dark:hover:border-brand transition-colors">
             <div className="flex justify-between items-start">
               <h3 className="font-semibold text-xl">The 9-Year Evolution</h3>
-              <span className="text-xs font-mono px-2 py-1 bg-neutral-100 dark:bg-neutral-900 rounded text-neutral-500">2017 - Present</span>
+              <span className="text-xs font-mono px-2 py-1 bg-neutral-100 dark:bg-neutral-900 rounded text-neutral-500">2017 - 2026</span>
             </div>
             <p className="text-sm text-neutral-600 dark:text-neutral-400">
               As the first Brazilian engineer hired at <span className="font-medium text-neutral-900 dark:text-neutral-200">Beakyn</span>, I led the architectural evolution from an early Aurelia/FeathersJS MVP to a highly scalable global platform using React, NestJS, and Go.
@@ -46,23 +47,7 @@ export default function Home() {
 
           {/* Ontic2 / Compliance */}
           <div className="group flex flex-col gap-3 p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 hover:border-brand dark:hover:border-brand transition-colors">
-            <div className="flex justify-between items-start">
-              <h3 className="font-semibold text-xl">AI & Compliance Architecture</h3>
-              <span className="text-xs font-mono px-2 py-1 bg-neutral-100 dark:bg-neutral-900 rounded text-neutral-500">2024 - 2026</span>
-            </div>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-              Built guardrails and architecture for enterprise AI systems, ensuring compliance with strict global standards (ISO 27001/42001, SOC 2) and passing institutional investor Due Diligence.
-            </p>
-            <ul className="text-sm text-neutral-500 dark:text-neutral-500 space-y-2 mt-2">
-              <li className="flex gap-2">
-                <span className="text-brand">›</span>
-                <span>Implemented LLM training traceability and prompt-injection safeguards.</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-brand">›</span>
-                <span>Designed Zero Trust "air-gapped" topologies and SBOM CI/CD pipelines.</span>
-              </li>
-            </ul>
+            <AsciiArtCanvas art="USmap" source="smartscout." speed={1} background="#0a0a0a" color="white" ripple clickable />
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { AsciiArtCanvas, AsciiTextCanvas } from "./asciiart";
 
 /**
  * Name-forward hero in the Ettrics footer style: the name is a wordmark used as
@@ -77,26 +78,23 @@ export function Hero() {
       <h1 className="sr-only">Abraão Alves — software engineering, architecture, and mentorship</h1>
 
       <div
-        ref={ref}
         aria-hidden="true"
-        className="relative w-full select-none overflow-hidden text-neutral-900 dark:text-neutral-100 h-[34vw] min-h-[170px] max-h-[420px]"
-        style={{
-          maskImage: mask,
-          WebkitMaskImage: mask,
-          maskRepeat: "no-repeat",
-          WebkitMaskRepeat: "no-repeat",
-          maskPosition: "left center",
-          WebkitMaskPosition: "left center",
-          maskSize: "contain",
-          WebkitMaskSize: "contain",
-        }}
+        // className="flex relative w-full select-none overflow-hidden text-neutral-900 dark:text-neutral-100 h-[34vw] min-h-[170px] max-h-[420px]"
+        // style={{
+        //   maskImage: mask,
+        //   WebkitMaskImage: mask,
+        //   maskRepeat: "no-repeat",
+        //   WebkitMaskRepeat: "no-repeat",
+        //   maskPosition: "left center",
+        //   WebkitMaskPosition: "left center",
+        //   maskSize: "contain",
+        //   WebkitMaskSize: "contain",
+        // }}
       >
-        <pre
-          className="m-0 font-mono leading-none tracking-normal text-current"
-          style={{ fontSize: `${CHAR_H}px`, lineHeight: `${CHAR_H}px` }}
-        >
-          {ascii}
-        </pre>
+        <AsciiArtCanvas art="logo" speed={2} background="#0a0a0a" color="white" ripple clickable/>
+        <AsciiTextCanvas text="ABRAÃO" speed={2} background="#0a0a0a" color="white" ripple clickable />
+        <AsciiTextCanvas text="ALVES" speed={2} background="#0a0a0a" color="white" ripple clickable />
+
       </div>
 
       <p className="mt-8 max-w-2xl text-lg md:text-xl text-neutral-600 dark:text-neutral-400 text-balance">
