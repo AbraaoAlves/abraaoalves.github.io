@@ -16,8 +16,8 @@ export default function OgImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0a0a0a",
-          color: "#ededed",
+          background: "#0c0a09",
+          color: "#e7e5e4",
           padding: "72px",
           fontFamily: "sans-serif",
         }}
@@ -29,7 +29,7 @@ export default function OgImage() {
           <div style={{ fontSize: 150, fontWeight: 900, lineHeight: 1 }}>ABRAÃO</div>
           <div style={{ fontSize: 150, fontWeight: 900, lineHeight: 1 }}>ALVES</div>
         </div>
-        <div style={{ display: "flex", fontSize: 32, color: "#a3a3a3" }}>
+        <div style={{ display: "flex", fontSize: 32, color: "#a8a29e" }}>
           Building software that lasts. Since 2008.
         </div>
       </div>

@@ -13,15 +13,16 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Warm Ettrics paper + ink */
+  --background: #f4f1ea;
+  --foreground: #1c1917;
 }
 
 /* Driven by next-themes' class attribute so the in-app toggle controls these,
    not just the OS preference. */
 .dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #0c0a09;
+  --foreground: #e7e5e4;
 }
 
 body {
