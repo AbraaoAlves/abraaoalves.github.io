@@ -1,26 +1,30 @@
-import { ThemeToggle } from "@/components/theme-toggle";
-import { HeroAscii } from "@/components/hero-ascii";
+import { Hero } from "@/components/hero";
+
+function SectionHeader({ ghost, label }: { ghost: string; label: string }) {
+  return (
+    <div className="mb-10">
+      <span className="block select-none text-6xl md:text-8xl font-black uppercase leading-none tracking-tight text-neutral-100 dark:text-neutral-900">
+        {ghost}
+      </span>
+      <h2 className="-mt-4 md:-mt-6 pl-1 font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-brand">
+        {label}
+      </h2>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
-    <main className="flex-1 flex flex-col items-center p-4 md:p-8 gap-16 max-w-5xl mx-auto w-full mb-20">
-      <section className="w-full flex flex-col items-center pt-8">
-        <HeroAscii text="ABRAÃO ALVES" />
-        <p className="text-lg text-neutral-500 dark:text-neutral-400 text-center max-w-2xl mt-8">
-          Building software that lasts. High-impact engineering, mentorship, and architecture since 2008.
-        </p>
-      </section>
+    <main className="flex-1 flex flex-col p-4 md:p-8 gap-24 max-w-5xl mx-auto w-full mb-24">
+      <Hero />
 
       {/* WORK / IMPACT SECTION */}
       <section id="work" className="w-full scroll-mt-24">
-        <div className="flex items-center gap-4 mb-8">
-          <h2 className="text-2xl font-bold tracking-tight">Selected Impact</h2>
-          <div className="h-px bg-neutral-200 dark:bg-neutral-800 flex-1"></div>
-        </div>
+        <SectionHeader ghost="Work" label="Selected Impact" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Beakyn */}
-          <div className="group flex flex-col gap-3 p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors">
+          <div className="group flex flex-col gap-3 p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 hover:border-brand dark:hover:border-brand transition-colors">
             <div className="flex justify-between items-start">
               <h3 className="font-semibold text-xl">The 9-Year Evolution</h3>
               <span className="text-xs font-mono px-2 py-1 bg-neutral-100 dark:bg-neutral-900 rounded text-neutral-500">2017 - Present</span>
@@ -30,18 +34,18 @@ export default function Home() {
             </p>
             <ul className="text-sm text-neutral-500 dark:text-neutral-500 space-y-2 mt-2">
               <li className="flex gap-2">
-                <span className="text-neutral-300 dark:text-neutral-700">›</span>
+                <span className="text-brand">›</span>
                 <span>Architected complex geospatial data visualization layers using Mapbox GL for Outfront Media.</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-neutral-300 dark:text-neutral-700">›</span>
+                <span className="text-brand">›</span>
                 <span>Championed DX (Developer Experience) with Storybook, SWC, and strict pre-commit CI pipelines.</span>
               </li>
             </ul>
           </div>
 
           {/* Ontic2 / Compliance */}
-          <div className="group flex flex-col gap-3 p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors">
+          <div className="group flex flex-col gap-3 p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 hover:border-brand dark:hover:border-brand transition-colors">
             <div className="flex justify-between items-start">
               <h3 className="font-semibold text-xl">AI & Compliance Architecture</h3>
               <span className="text-xs font-mono px-2 py-1 bg-neutral-100 dark:bg-neutral-900 rounded text-neutral-500">2024 - 2026</span>
@@ -51,11 +55,11 @@ export default function Home() {
             </p>
             <ul className="text-sm text-neutral-500 dark:text-neutral-500 space-y-2 mt-2">
               <li className="flex gap-2">
-                <span className="text-neutral-300 dark:text-neutral-700">›</span>
+                <span className="text-brand">›</span>
                 <span>Implemented LLM training traceability and prompt-injection safeguards.</span>
               </li>
               <li className="flex gap-2">
-                <span className="text-neutral-300 dark:text-neutral-700">›</span>
+                <span className="text-brand">›</span>
                 <span>Designed Zero Trust "air-gapped" topologies and SBOM CI/CD pipelines.</span>
               </li>
             </ul>
@@ -65,11 +69,8 @@ export default function Home() {
 
       {/* MENTORSHIP SECTION */}
       <section id="mentorship" className="w-full scroll-mt-24">
-        <div className="flex items-center gap-4 mb-8">
-          <h2 className="text-2xl font-bold tracking-tight">Building People</h2>
-          <div className="h-px bg-neutral-200 dark:bg-neutral-800 flex-1"></div>
-        </div>
-        
+        <SectionHeader ghost="People" label="Building Teams" />
+
         <p className="text-neutral-600 dark:text-neutral-400 mb-8 max-w-3xl">
           The true measure of a Staff Engineer is the multiplier effect. Over the years, I've had the privilege of hiring, mentoring, and shaping the careers of exceptional developers who now lead the industry.
         </p>
@@ -81,37 +82,34 @@ export default function Home() {
             </p>
             <footer className="text-sm font-medium">Juan Pujol</footer>
           </blockquote>
-          
+
           <blockquote className="p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-100 dark:border-neutral-800/50">
             <p className="text-sm text-neutral-600 dark:text-neutral-300 italic mb-4">
               "He goes beyond 'making it work': he prioritizes security, performance, and long‑term reliability... He adds maturity, rigor, and a systemic mindset—an invaluable asset to any engineering team."
             </p>
             <footer className="text-sm font-medium">Bruno Lázaro</footer>
           </blockquote>
-          
+
           <blockquote className="p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-100 dark:border-neutral-800/50">
             <p className="text-sm text-neutral-600 dark:text-neutral-300 italic mb-4">
-              "Working with Hiléo Andersson is knowing your engineering foundation is in safe hands. I had the privilege of seeing his growth... evolving from mid‑level developer to the software architect responsible for our entire authentication."
+              "Working with Hiléo is knowing your engineering foundation is in safe hands. I had the privilege of seeing his growth... evolving from mid‑level developer to the software architect responsible for our entire authentication."
             </p>
-            <footer className="text-sm font-medium">Mentoring Hiléo</footer>
+            <footer className="text-sm font-medium">On mentoring Hiléo Andersson</footer>
           </blockquote>
-          
+
           <blockquote className="p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-100 dark:border-neutral-800/50">
             <p className="text-sm text-neutral-600 dark:text-neutral-300 italic mb-4">
-              "I had the pleasure of working with Lamartine... his contribution goes far beyond delivering functional code. He’s one of those rare professionals who combines a strong product‑first mindset with impeccable technical rigor."
+              "His contribution goes far beyond delivering functional code. He's one of those rare professionals who combines a strong product‑first mindset with impeccable technical rigor."
             </p>
-            <footer className="text-sm font-medium">Mentoring Lamartine</footer>
+            <footer className="text-sm font-medium">On mentoring Lamartine</footer>
           </blockquote>
         </div>
       </section>
 
       {/* ABOUT / FOUNDATION SECTION */}
       <section id="about" className="w-full scroll-mt-24">
-        <div className="flex items-center gap-4 mb-8">
-          <h2 className="text-2xl font-bold tracking-tight">The Foundation</h2>
-          <div className="h-px bg-neutral-200 dark:bg-neutral-800 flex-1"></div>
-        </div>
-        
+        <SectionHeader ghost="Roots" label="The Foundation" />
+
         <div className="flex flex-col md:flex-row gap-8">
           <div className="flex-1 space-y-4 text-neutral-600 dark:text-neutral-400">
             <p>

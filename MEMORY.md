@@ -24,7 +24,7 @@ Este arquivo contém o registro histórico dos prompts do usuário e as principa
 ### Frontend & Motion Design
 - **ASCII Canvas Renderer:** O efeito visual agressivo do Ettrics pode ser recriado em React usando um canvas oculto para renderizar texto com fontes variáveis e converter os dados de pixel (luminância) em caracteres ASCII dinamicamente.
 - **Logo SVG Customizada:** Integramos uma logo geométrica complexa (baseada em um trabalho anterior do Abraão no CodePen) como um componente React funcional, permitindo controle dinâmico de cores via Tailwind.
-- **Next.js 16 + Turbopack:** Descobrimos que o Turbopack ainda tem limitações com MDX loaders ao passar opções não-serializáveis (como instâncias de plugins remark). O uso de `next dev --webpack` é necessário para compatibilidade com ecossistemas complexos como o Code Hike.
+- **Next.js 16 + Turbopack:** Descobrimos que o Turbopack ainda tem limitações com MDX loaders ao passar opções não-serializáveis (como instâncias de plugins remark). O uso de `next dev --webpack` e `next build --webpack` é necessário para compatibilidade com ecossistemas complexos como o Code Hike.
 - **Tailwind CSS 4:** Iniciamos o uso da versão 4, que simplifica a importação de plugins (ex: `@plugin "@tailwindcss/typography"`) diretamente no CSS.
 
 ### Integração de Conteúdo
