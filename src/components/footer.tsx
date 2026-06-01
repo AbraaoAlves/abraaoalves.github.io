@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useTheme } from "next-themes";
 import { AsciiTextCanvas } from "./asciiart";
+import { AsciiLink } from "./ascii-link";
 
 // Internal page links (left column). Mirror the header nav.
 const pageLinks = [
@@ -35,7 +35,7 @@ const FILL_SOURCE = "▓█▒▓░█";
 
 // Ettrics footer links: ~32px, light weight, sentence case, high contrast.
 const linkClass =
-  "text-3xl md:text-[2rem] leading-tight font-light tracking-tight text-neutral-900 hover:text-brand dark:text-neutral-50 dark:hover:text-brand transition-colors";
+  "text-3xl md:text-[2rem] leading-tight font-light tracking-tight text-neutral-900 dark:text-neutral-50";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -68,9 +68,7 @@ export function Footer() {
             <ul className="flex flex-col gap-1">
               {pageLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className={linkClass}>
-                    {link.label}
-                  </Link>
+                  <AsciiLink href={link.href} label={link.label} className={linkClass} />
                 </li>
               ))}
             </ul>
@@ -80,14 +78,7 @@ export function Footer() {
             <ul className="flex flex-col gap-1">
               {externalLinks.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={linkClass}
-                  >
-                    {link.label}
-                  </a>
+                  <AsciiLink href={link.href} label={link.label} external className={linkClass} />
                 </li>
               ))}
             </ul>
