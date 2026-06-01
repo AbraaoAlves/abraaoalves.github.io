@@ -1,100 +1,76 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { AsciiArtCanvas, AsciiTextCanvas } from "./asciiart";
+import { useTheme } from "next-themes";
+import { AsciiTextCanvas } from "./asciiart";
 
 /**
- * Name-forward hero in the Ettrics footer style: the name is a wordmark used as
- * a CSS mask over a static field of ASCII characters. The font mask keeps the
- * name perfectly legible while the ASCII texture fills the letterforms.
+ * Name-forward hero in the Ettrics `.framer-bov0b3-container` style: the name is
+ * rendered as a bold wordmark whose letterforms are filled with a slowly
+ * scrolling field of ASCII characters. The canvas background is set to the page
+ * background so the panel is invisible — only the ASCII-filled letters show,
+ * exactly like the Ettrics footer wordmark.
  *
- * Reference: the `.framer-bov0b3-container` treatment on ettrics.com/about —
- * a <pre> of monospace characters clipped by a `-webkit-mask-image` wordmark.
+ * Theme-aware: ink + paper flip with the active theme so the wordmark belongs to
+ * the page in both light and dark instead of being a hard black/white box.
  */
 
-// Two-line wordmark. White = visible region of the mask.
-const NAME_LINES = ["ABRAÃO", "ALVES"];
+// Page background per theme (matches <body> bg-white / dark:bg-neutral-950).
+const PAPER_LIGHT = "#ffffff";
+const PAPER_DARK = "#0a0a0a";
+// Ink (the ASCII characters).
+const INK_LIGHT = "#171717";
+const INK_DARK = "#ededed";
 
-// Classic ASCII density ramp, sparse → dense.
-const RAMP = " ..:-=+*#%@";
-
-// Monospace cell metrics at the 10px font size below (width ≈ 0.6em).
-const CHAR_W = 6;
-const CHAR_H = 10;
-
-// Deterministic smooth field (no Math.random → no SSR/client hydration drift).
-function buildAscii(cols: number, rows: number): string {
-  let out = "";
-  for (let y = 0; y < rows; y++) {
-    for (let x = 0; x < cols; x++) {
-      const v =
-        Math.sin(x * 0.18) +
-        Math.cos(y * 0.26) +
-        Math.sin((x + y) * 0.09) +
-        Math.sin((x - y) * 0.13);
-      const n = (v + 4) / 8; // normalise ~0..1
-      const i = Math.max(0, Math.min(RAMP.length - 1, Math.floor(n * RAMP.length)));
-      out += RAMP[i];
-    }
-    out += "\n";
-  }
-  return out;
-}
-
-function maskUrl(): string {
-  // Inline SVG <text> mask. Generic heavy sans so it renders without web fonts
-  // (data-URI SVG masks can't load @font-face). viewBox tuned to the two lines.
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 116'>` +
-    `<text x='100' y='52' text-anchor='middle' font-family='Arial Black, Arial Narrow, Arial, sans-serif' font-weight='900' font-size='56' letter-spacing='-2' fill='#fff'>${NAME_LINES[0]}</text>` +
-    `<text x='100' y='110' text-anchor='middle' font-family='Arial Black, Arial Narrow, Arial, sans-serif' font-weight='900' font-size='56' letter-spacing='-2' fill='#fff'>${NAME_LINES[1]}</text>` +
-    `</svg>`;
-  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
-}
+// What fills the letters: shade blocks (\u2593\u2592\u2591\u2588) rather than letters. A dense,
+// low-variance fill keeps the letterform silhouette readable (letters-in-letters
+// dissolve into noise) while the scrolling shades give the ASCII/dither texture.
+const FILL_SOURCE = "\u2593\u2592\u2591\u2593\u2588\u2592";
 
 export function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
-  // Seed with a reasonably sized field so SSR/first paint isn't empty.
-  const [ascii, setAscii] = useState(() => buildAscii(180, 44));
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const regen = () => {
-      const cols = Math.ceil(el.clientWidth / CHAR_W) + 1;
-      const rows = Math.ceil(el.clientHeight / CHAR_H) + 1;
-      setAscii(buildAscii(cols, rows));
-    };
-    regen();
-    const ro = new ResizeObserver(regen);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const mask = maskUrl();
+  // resolvedTheme is undefined on the server / first paint → defaults to light.
+  // Theme only affects canvas *drawing* (passed as props), not server-rendered
+  // markup, so there's no hydration mismatch and no mount guard is needed.
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+  const background = isDark ? PAPER_DARK : PAPER_LIGHT;
+  const color = isDark ? INK_DARK : INK_LIGHT;
 
   return (
     <section className="w-full pt-10 md:pt-16 pb-8">
-      {/* Accessible name for screen readers / SEO */}
-      <h1 className="sr-only">Abraão Alves — software engineering, architecture, and mentorship</h1>
+      {/* Real accessible name — the canvas below is decorative. */}
+      <h1 className="sr-only">
+        Abraão Alves — software engineering, architecture, and mentorship
+      </h1>
 
-      <div
-        aria-hidden="true"
-        // className="flex relative w-full select-none overflow-hidden text-neutral-900 dark:text-neutral-100 h-[34vw] min-h-[170px] max-h-[420px]"
-        // style={{
-        //   maskImage: mask,
-        //   WebkitMaskImage: mask,
-        //   maskRepeat: "no-repeat",
-        //   WebkitMaskRepeat: "no-repeat",
-        //   maskPosition: "left center",
-        //   WebkitMaskPosition: "left center",
-        //   maskSize: "contain",
-        //   WebkitMaskSize: "contain",
-        // }}
-      >
-        <AsciiArtCanvas art="logo" speed={2} background="#0a0a0a" color="white" ripple clickable/>
-        <AsciiTextCanvas text="ABRAÃO" speed={2} background="#0a0a0a" color="white" ripple clickable />
-        <AsciiTextCanvas text="ALVES" speed={2} background="#0a0a0a" color="white" ripple clickable />
-
+      <div aria-hidden="true" className="flex flex-col gap-1">
+        {/* One word per line so each fills the full width (width-bound auto-fit)
+            and reads as a bold wordmark instead of a small, centered block. */}
+        <AsciiTextCanvas
+          text="ABRAÃO"
+          source={FILL_SOURCE}
+          speed={2}
+          fontSize={12}
+          weight={900}
+          threshold={0.25}
+          feather={0.5}
+          color={color}
+          background={background}
+          className="w-full h-[18vw] min-h-[150px] max-h-[230px]"
+          style={{ minHeight: 150 }}
+        />
+        <AsciiTextCanvas
+          text="ALVES"
+          source={FILL_SOURCE}
+          speed={2}
+          fontSize={12}
+          weight={900}
+          threshold={0.25}
+          feather={0.5}
+          color={color}
+          background={background}
+          className="w-full h-[18vw] min-h-[150px] max-h-[230px]"
+          style={{ minHeight: 150 }}
+        />
       </div>
 
       <p className="mt-8 max-w-2xl text-lg md:text-xl text-neutral-600 dark:text-neutral-400 text-balance">
