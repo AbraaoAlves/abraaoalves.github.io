@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://abraaoalves.github.io"),
   title: {
     default: "Abraão Alves | Software Engineering & Mentorship",
     template: "%s | Abraão Alves"
