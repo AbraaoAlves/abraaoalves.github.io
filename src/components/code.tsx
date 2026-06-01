@@ -10,7 +10,7 @@ export async function Code({ codeblock }: { codeblock: RawCode }) {
   return (
     <Pre
       code={highlighted}
-      className="my-6 overflow-x-auto rounded-xl border border-stone-800 p-5 text-sm leading-relaxed"
+      className="my-6 overflow-x-auto rounded-xl border border-neutral-800 p-5 text-sm leading-relaxed"
     />
   );
 }
