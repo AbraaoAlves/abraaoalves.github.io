@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { AsciiTextCanvas } from "./asciiart";
+import { ThemeSwitch } from "./theme-switch";
 
 // Internal page links (left column). Mirror the header nav.
 const pageLinks = [
@@ -13,15 +14,12 @@ const pageLinks = [
 ];
 
 // External profiles (right column). Opens in a new tab.
-// TODO: verify these handles — placeholders based on the `abraaoalves` pattern.
-// Stack Overflow in particular uses a numeric user id, not a slug.
 const externalLinks = [
-  { label: "GitHub", href: "https://github.com/abraaoalves" },
-  { label: "X", href: "https://x.com/abraaoalves" },
   { label: "LinkedIn", href: "https://linkedin.com/in/abraaoalves" },
-  { label: "Stack Overflow", href: "https://stackoverflow.com/users/abraaoalves" },
-  { label: "HackerRank", href: "https://www.hackerrank.com/abraaoalves" },
-  { label: "CodePen", href: "https://codepen.io/abraaoalves" },
+  { label: "GitHub", href: "https://github.com/abraaoalves" },
+  { label: "X", href: "https://x.com/abraao4lves" },
+  { label: "Stack Overflow", href: "https://stackoverflow.com/users/815478" },
+  { label: "CodePen", href: "https://codepen.io/AbraaoAlves" },
 ];
 
 // Giant ASCII wordmark, Ettrics-style. Background must match the footer bg so
@@ -33,13 +31,14 @@ const INK_LIGHT = "#c9c7c4";
 const INK_DARK = "#2b2b2b";
 const FILL_SOURCE = "▓█▒▓░█";
 
-// Ettrics footer spotlight: hovering anywhere in the footer dims every element
-// (`group-hover:opacity-40`); the specifically hovered/focused link returns to
-// full opacity (important so it beats the group-hover dim), so the active link
-// stays intact while everything around it — including the ASCII art — recedes.
-const dimClass = "transition-opacity duration-300 ease-out group-hover:opacity-40";
+// Ettrics footer spotlight: the dim is triggered only while a link is actually
+// hovered/focused (`group-has-[a:hover]`), not just while the cursor is inside
+// the footer — so leaving a link onto empty space restores everything at once.
+// The hovered/focused link returns to full opacity (important, to beat the dim).
+const dimClass =
+  "transition-opacity duration-300 ease-out group-has-[a:hover]:opacity-40 group-has-[a:focus-visible]:opacity-40";
 const linkClass =
-  "text-3xl md:text-[2rem] leading-tight font-light tracking-tight text-neutral-900 dark:text-neutral-50 " +
+  "text-4xl md:text-[2.5rem] leading-[1.2] font-light tracking-tight text-neutral-900 dark:text-neutral-50 " +
   dimClass +
   " hover:opacity-100! focus-visible:opacity-100!";
 
@@ -69,36 +68,41 @@ export function Footer() {
       </div>
 
       <div className="container mx-auto max-w-4xl px-4 pb-12">
-        {/* Two link columns: page nav (left) / external profiles (right). */}
-        <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
-          <nav aria-label="Site">
-            <ul className="flex flex-col gap-1">
-              {pageLinks.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className={linkClass}>
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+        {/* Link columns on the left (both left-aligned, side by side, like
+            ettrics.com); descriptive theme switch pinned to the bottom-right. */}
+        <div className="flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex flex-col gap-10 sm:flex-row sm:gap-x-24">
+            <nav aria-label="Site">
+              <ul className="flex flex-col">
+                {pageLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className={linkClass}>
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-          <nav aria-label="Elsewhere" className="sm:text-right">
-            <ul className="flex flex-col gap-1">
-              {externalLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={linkClass}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+            <nav aria-label="Elsewhere">
+              <ul className="flex flex-col">
+                {externalLinks.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={linkClass}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+
+          <ThemeSwitch className={dimClass} />
         </div>
 
         {/* Bottom strip: copyright (left) / meta (right). Dims as one unit. */}

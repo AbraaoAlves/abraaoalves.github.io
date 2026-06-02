@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ThemeToggle } from "./theme-toggle";
 import { cn } from "@/lib/utils";
 import { Logo } from "./icons/logo";
 
@@ -43,7 +42,6 @@ export function Header() {
           >
             Lab
           </Link>
-          <ThemeToggle />
         </nav>
       </div>
     </header>
