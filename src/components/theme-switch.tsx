@@ -33,10 +33,10 @@ export function ThemeSwitch({ className }: { className?: string }) {
             aria-pressed={active}
             onClick={() => setTheme(value)}
             className={
-              "transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-400 rounded " +
+              "transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-stone-400 rounded " +
               (active
-                ? "text-neutral-900 dark:text-neutral-50"
-                : "text-neutral-400 hover:text-neutral-700 dark:text-neutral-500 dark:hover:text-neutral-300")
+                ? "text-stone-900 dark:text-stone-50"
+                : "text-stone-400 hover:text-stone-700 dark:text-stone-500 dark:hover:text-stone-300")
             }
           >
             <Icon className="h-[1.15rem] w-[1.15rem]" />

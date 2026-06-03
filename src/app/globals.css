@@ -4,24 +4,28 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-hanken);
+  --font-mono: var(--font-plex-mono);
 
-  /* Brand accent — derived from the logo mark */
+  /* Ettrics-spirit monochrome palette: warm paper + ink. */
+  --color-paper: #faf9f7;
+  --color-ink: #121212;
+
+  /* Retained only for the logo mark / OG image; not used in UI chrome. */
   --color-brand: #5b9bd5;
   --color-brand-deep: #1f4e79;
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf9f7;
+  --foreground: #121212;
 }
 
-/* Driven by next-themes' class attribute so the in-app toggle controls these,
-   not just the OS preference. */
+/* Driven by next-themes' class attribute so the in-app switch controls these,
+   not just the OS preference. Dark is the inverted paper/ink. */
 .dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #121212;
+  --foreground: #faf9f7;
 }
 
 body {
@@ -30,15 +34,15 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
-/* Typography Overrides */
+/* Typography Overrides (monochrome, warm) */
 .prose {
   max-width: 65ch;
   line-height: 1.6;
 }
 
 .prose pre {
-  background-color: #0f172a; /* Slate 950 */
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #121212; /* ink */
+  border: 1px solid rgba(250, 249, 247, 0.1);
   border-radius: 0.75rem;
   padding: 1.5rem;
   font-size: 0.875rem;
@@ -47,13 +51,13 @@ body {
 
 .prose code {
   font-weight: 500;
-  background-color: rgba(0,0,0,0.05);
+  background-color: rgba(18, 18, 18, 0.06);
   padding: 0.2em 0.4em;
   border-radius: 0.25em;
 }
 
 .dark .prose code {
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(250, 249, 247, 0.1);
 }
 
 .prose code::before,

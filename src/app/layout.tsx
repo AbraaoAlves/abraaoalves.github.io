@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LenisProvider } from "@/components/lenis-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Ettrics uses Saans (commercial). Hanken Grotesk is the closest free variable
+// grotesque; IBM Plex Mono matches their eyebrow/label mono exactly.
+const hanken = Hanken_Grotesk({
+  variable: "--font-hanken",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
   subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -49,21 +53,23 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${hanken.variable} ${plexMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50 selection:bg-neutral-200 dark:selection:bg-neutral-800">
+      <body className="min-h-full flex flex-col bg-[#faf9f7] text-[#121212] dark:bg-[#121212] dark:text-[#faf9f7] selection:bg-[#121212] selection:text-[#faf9f7] dark:selection:bg-[#faf9f7] dark:selection:text-[#121212]">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <div className="flex-1 flex flex-col">
-            {children}
-          </div>
-          <Footer />
+          <LenisProvider>
+            <Header />
+            <div className="flex-1 flex flex-col">
+              {children}
+            </div>
+            <Footer />
+          </LenisProvider>
         </ThemeProvider>
       </body>
     </html>

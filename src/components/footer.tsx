@@ -25,9 +25,9 @@ const externalLinks = [
 // Giant ASCII wordmark, Ettrics-style. Background must match the footer bg so
 // the canvas panel is invisible; ink is a muted tone so the name reads as a
 // textural wordmark behind the links rather than shouting over them.
-const PAPER_LIGHT = "#ffffff";
-const PAPER_DARK = "#0a0a0a";
-const INK_LIGHT = "#c9c7c4";
+const PAPER_LIGHT = "#faf9f7";
+const PAPER_DARK = "#121212";
+const INK_LIGHT = "#d8d3c8";
 const INK_DARK = "#2b2b2b";
 const FILL_SOURCE = "▓█▒▓░█";
 
@@ -38,7 +38,7 @@ const FILL_SOURCE = "▓█▒▓░█";
 const dimClass =
   "transition-opacity duration-300 ease-out group-has-[a:hover]:opacity-40 group-has-[a:focus-visible]:opacity-40";
 const linkClass =
-  "text-4xl md:text-[2.5rem] leading-[1.2] font-light tracking-tight text-neutral-900 dark:text-neutral-50 " +
+  "text-4xl md:text-[2.5rem] leading-[1.2] font-light tracking-tight text-stone-900 dark:text-stone-50 " +
   dimClass +
   " hover:opacity-100! focus-visible:opacity-100!";
 
@@ -48,7 +48,7 @@ export function Footer() {
   const isDark = resolvedTheme === "dark";
 
   return (
-    <footer className="group w-full border-t border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950 mt-auto">
+    <footer className="group w-full border-t border-stone-200 bg-paper dark:border-stone-800 dark:bg-ink mt-auto">
       {/* Giant ASCII name wordmark spanning the footer width, like ettrics.com.
           Dims with the rest of the footer on hover (no hover override). */}
       <div aria-hidden="true" className={"w-full overflow-hidden px-4 " + dimClass}>
@@ -106,9 +106,9 @@ export function Footer() {
         </div>
 
         {/* Bottom strip: copyright (left) / meta (right). Dims as one unit. */}
-        <div className={"mt-12 flex flex-col gap-2 border-t border-neutral-100 pt-6 text-sm text-neutral-500 dark:border-neutral-800/60 dark:text-neutral-400 sm:flex-row sm:items-center sm:justify-between " + dimClass}>
+        <div className={"mt-12 flex flex-col gap-2 border-t border-stone-100 pt-6 text-sm text-stone-500 dark:border-stone-800/60 dark:text-stone-400 sm:flex-row sm:items-center sm:justify-between " + dimClass}>
           <p>© {currentYear} Abraão Alves</p>
-          <p className="font-mono text-xs uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+          <p className="font-mono text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500">
             v1.0
           </p>
         </div>

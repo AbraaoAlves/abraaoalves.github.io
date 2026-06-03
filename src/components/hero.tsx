@@ -1,89 +1,108 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { AsciiTextCanvas } from "./asciiart";
+import { AsciiArtCanvas, AsciiTextCanvas } from "./asciiart";
 
 /**
- * Name-forward hero in the Ettrics `.framer-bov0b3-container` style: the name is
- * rendered as a bold wordmark whose letterforms are filled with a slowly
- * scrolling field of ASCII characters. The canvas background is set to the page
- * background so the panel is invisible — only the ASCII-filled letters show,
- * exactly like the Ettrics footer wordmark.
- *
- * Theme-aware: ink + paper flip with the active theme so the wordmark belongs to
- * the page in both light and dark instead of being a hard black/white box.
+ * Ettrics-spirit hero: the geometric logo rendered as a faint ASCII watermark
+ * fills the section background, with the name set as a bold ASCII wordmark in
+ * front and a mono eyebrow above. Monochrome (warm paper + ink), theme-aware:
+ * every canvas background matches the page so the panels stay invisible and
+ * only the characters show.
  */
 
-// Page background per theme (matches <body> bg-white / dark:bg-neutral-950).
-const PAPER_LIGHT = "#ffffff";
-const PAPER_DARK = "#0a0a0a";
-// Ink (the ASCII characters).
-const INK_LIGHT = "#171717";
-const INK_DARK = "#ededed";
+// Page background per theme — MUST match <body> so canvas panels are invisible.
+const PAPER_LIGHT = "#faf9f7";
+const PAPER_DARK = "#121212";
+// Ink (the name): full-contrast paper/ink flip.
+const INK_LIGHT = "#121212";
+const INK_DARK = "#faf9f7";
+// Watermark (the logo): one subtle step off the paper so it reads as texture.
+const WATERMARK_LIGHT = "#ddd6c6";
+const WATERMARK_DARK = "#2e2e2e";
+// Shade blocks give the logo a clean faint silhouette (not scattered words).
+const WATERMARK_FILL = "▓▒░▓";
 
-// What fills the letters: shade blocks (\u2593\u2592\u2591\u2588) rather than letters. A dense,
-// low-variance fill keeps the letterform silhouette readable (letters-in-letters
-// dissolve into noise) while the scrolling shades give the ASCII/dither texture.
-const FILL_SOURCE = "\u2593\u2592\u2591\u2593\u2588\u2592";
+// Shade-block fill keeps the wordmark silhouette legible (see hero recipe).
+const NAME_FILL = "▓█▒▓░█";
 
 export function Hero() {
   // resolvedTheme is undefined on the server / first paint → defaults to light.
-  // Theme only affects canvas *drawing* (passed as props), not server-rendered
-  // markup, so there's no hydration mismatch and no mount guard is needed.
+  // Theme only affects canvas *drawing* (props), not server-rendered markup,
+  // so there's no hydration mismatch and no mount guard is needed.
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
-  const background = isDark ? PAPER_DARK : PAPER_LIGHT;
-  const color = isDark ? INK_DARK : INK_LIGHT;
+  const paper = isDark ? PAPER_DARK : PAPER_LIGHT;
+  const ink = isDark ? INK_DARK : INK_LIGHT;
+  const watermark = isDark ? WATERMARK_DARK : WATERMARK_LIGHT;
 
   return (
-    <section className="w-full pt-10 md:pt-16 pb-8">
-      {/* Real accessible name — the canvas below is decorative. */}
+    <section className="relative w-full min-h-[80vh] flex flex-col justify-center overflow-hidden py-16 md:py-24">
+      {/* Real accessible name — the canvases below are decorative. */}
       <h1 className="sr-only">
         Abraão Alves — software engineering, architecture, and mentorship
       </h1>
 
-      <div aria-hidden="true" className="flex flex-col gap-1">
-        {/* One word per line so each fills the full width (width-bound auto-fit)
-            and reads as a bold wordmark instead of a small, centered block. */}
-        <AsciiTextCanvas
-          text="ABRAÃO"
-          source={FILL_SOURCE}
-          speed={2}
+      {/* Background watermark: the logo mark as faint ASCII, filling the hero. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 flex items-center justify-center"
+      >
+        <AsciiArtCanvas
+          art="logo"
+          ripple={false}
+          source={WATERMARK_FILL}
+          speed={1}
           fontSize={12}
-          weight={900}
-          threshold={0.25}
-          feather={0.5}
-          color={color}
-          background={background}
-          className="w-full h-[18vw] min-h-[150px] max-h-[230px]"
-          style={{ minHeight: 150 }}
-        />
-        <AsciiTextCanvas
-          text="ALVES"
-          source={FILL_SOURCE}
-          speed={2}
-          fontSize={12}
-          weight={900}
-          threshold={0.25}
-          feather={0.5}
-          color={color}
-          background={background}
-          className="w-full h-[18vw] min-h-[150px] max-h-[230px]"
-          style={{ minHeight: 150 }}
+          threshold={0.5}
+          color={watermark}
+          background={paper}
+          className="h-full w-full max-w-5xl"
+          style={{ minHeight: 0 }}
         />
       </div>
 
-      <p className="mt-8 max-w-2xl text-lg md:text-xl text-neutral-600 dark:text-neutral-400 text-balance">
-        Building software that lasts. High-impact engineering, architecture, and
-        mentorship since 2008.
-      </p>
+      {/* Foreground content. */}
+      <div className="relative z-10">
+        <p className="font-mono text-xs md:text-sm uppercase tracking-[0.16em] text-stone-500 dark:text-stone-400">
+          Staff Engineer · Architect · Mentor
+        </p>
 
-      <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-500">
-        <span>Staff Engineer</span>
-        <span className="text-brand">/</span>
-        <span>Architect</span>
-        <span className="text-brand">/</span>
-        <span>Mentor</span>
+        <div aria-hidden="true" className="mt-6 flex flex-col gap-1">
+          {/* One word per line so each fills the full width (width-bound auto-fit)
+              and reads as a bold wordmark instead of a small, centered block. */}
+          <AsciiTextCanvas
+            text="ABRAÃO"
+            source={NAME_FILL}
+            speed={2}
+            fontSize={12}
+            weight={900}
+            threshold={0.25}
+            feather={0.5}
+            color={ink}
+            background={paper}
+            className="w-full h-[16vw] min-h-[120px] max-h-[210px]"
+            style={{ minHeight: 120 }}
+          />
+          <AsciiTextCanvas
+            text="ALVES"
+            source={NAME_FILL}
+            speed={2}
+            fontSize={12}
+            weight={900}
+            threshold={0.25}
+            feather={0.5}
+            color={ink}
+            background={paper}
+            className="w-full h-[16vw] min-h-[120px] max-h-[210px]"
+            style={{ minHeight: 120 }}
+          />
+        </div>
+
+        <p className="mt-8 max-w-2xl text-lg md:text-xl leading-relaxed text-stone-600 dark:text-stone-300 text-balance">
+          Building software that lasts. High-impact engineering, architecture,
+          and mentorship since 2008.
+        </p>
       </div>
     </section>
   );
