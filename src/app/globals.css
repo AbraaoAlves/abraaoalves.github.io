@@ -4,45 +4,136 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: var(--font-hanken);
-  --font-mono: var(--font-plex-mono);
+  /* Font families — wired to next/font CSS variables (see layout.tsx).
+     Exposed here so both Tailwind utilities (font-display/-mono/-sans) and the
+     ported component CSS (var(--font-display) …) resolve to the same stacks. */
+  --font-sans: var(--font-hanken), system-ui, sans-serif;
+  --font-body: var(--font-hanken), system-ui, sans-serif;
+  --font-display: var(--font-space), "Space Grotesk", sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
-  /* Ettrics-spirit monochrome palette: warm paper + ink. */
-  --color-paper: #faf9f7;
-  --color-ink: #121212;
-
-  /* Retained only for the logo mark / OG image; not used in UI chrome. */
+  /* Retained for the logo mark / OG image only; not used in UI chrome. */
+  --color-paper: #f6f5f2;
+  --color-ink: #0b0c0d;
   --color-brand: #5b9bd5;
   --color-brand-deep: #1f4e79;
 }
 
+/* =========================================================================
+   Theme tokens — ported verbatim from proto/index.html (the source of truth).
+   Light is the :root default; .dark (next-themes class attribute) flips to the
+   near-black warm-ink slab. These are theme-switched, so they live here as
+   custom properties rather than in @theme (which is static).
+   ========================================================================= */
 :root {
-  --background: #faf9f7;
-  --foreground: #121212;
+  --bg:        #f6f5f2;
+  --bg-1:      #ecebe6;   /* raised surface */
+  --bg-2:      #fbfaf8;   /* card */
+  --line:      rgba(20,22,24,0.13);
+  --line-2:    rgba(20,22,24,0.22);
+  --fg:        #141618;
+  --fg-1:      #383c3e;   /* secondary text — AA on bg */
+  --fg-2:      #565a5c;   /* muted / meta — AA on bg */
+  --fg-3:      #6c7072;   /* faint — AA-small on bg */
+  --accent:    #2f6fb0;   /* optional interactive accent */
+  --ghost:     rgba(20,22,24,0.06); /* giant ghost headings */
+  --ascii-fg-default: #1d2022;
+  --footer-bg: #e8e5dc;            /* distinct warm panel on the light page */
+  --footer-line: rgba(20,22,24,0.12);
+  --shadow:    0 1px 0 rgba(255,255,255,0.6) inset, 0 24px 50px -34px rgba(20,22,24,0.35);
+
+  /* derived / tweakable */
+  --ascii-fg: var(--ascii-fg-default);
+  --cta: var(--fg);             /* CTA fill — accent tweak can override */
+  --link-underline: var(--fg);
+
+  /* type scale (consistent step ratio) */
+  --t-label: clamp(12px, .86vw, 13px);    /* mono eyebrows / meta */
+  --t-small: clamp(14px, 1vw, 15.5px);    /* dense list text */
+  --t-body:  clamp(16px, 1.05vw, 17.5px); /* body copy */
+  --t-lead:  clamp(20px, 2.1vw, 28px);    /* hero / section lead */
+  --t-h3:    clamp(23px, 2.7vw, 32px);
+  --t-h2:    clamp(42px, 7vw, 94px);
+
+  /* layout */
+  --space-scale: 1;
+  --maxw: 1240px;
+  --gut: clamp(20px, 5vw, 80px);
+  --sec: calc(clamp(110px, 15vh, 200px) * var(--space-scale));
+
+  /* legacy aliases — kept so existing prose/markup using these keep working */
+  --background: var(--bg);
+  --foreground: var(--fg);
 }
 
-/* Driven by next-themes' class attribute so the in-app switch controls these,
-   not just the OS preference. Dark is the inverted paper/ink. */
 .dark {
-  --background: #121212;
-  --foreground: #faf9f7;
+  --bg:        #0b0c0d;
+  --bg-1:      #111315;
+  --bg-2:      #16191b;
+  --line:      rgba(255,255,255,0.12);
+  --line-2:    rgba(255,255,255,0.20);
+  --fg:        #f6f7f7;
+  --fg-1:      #d2d5d6;
+  --fg-2:      #abafb1;
+  --fg-3:      #888d8f;
+  --accent:    #6ea8e6;
+  --ghost:     rgba(255,255,255,0.05);
+  --ascii-fg-default: #e7e9e9;
+  --footer-bg: #15171a;
+  --footer-line: rgba(255,255,255,0.13);
+  --shadow:    0 1px 0 rgba(255,255,255,0.04) inset, 0 24px 60px -30px rgba(0,0,0,0.8);
+}
+
+/* ---- Base ---------------------------------------------------------------- */
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background .5s ease, color .5s ease;
 }
 
-/* Typography Overrides (monochrome, warm) */
+::selection { background: var(--fg); color: var(--bg); }
+
+/* film grain + vignette — the prototype's signature texture over the whole page.
+   Fixed, non-interactive, overlay-blended at very low opacity (imperceptible on
+   text, just enough tooth on the flat fields). */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAnIGhlaWdodD0nMTYwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC44NScgbnVtT2N0YXZlcz0nMicgc3RpdGNoVGlsZXM9J3N0aXRjaCcvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbHRlcj0ndXJsKCNuKScgb3BhY2l0eT0nMC41Jy8+PC9zdmc+");
+  opacity: .035;
+  mix-blend-mode: overlay;
+}
+
+/* App content sits above the grain so type stays crisp (proto gives sections
+   z-index:2 for the same reason). */
+.app-layer { position: relative; z-index: 2; }
+
+/* ---- Typography overrides (monochrome, warm) ---------------------------- */
 .prose {
   max-width: 65ch;
   line-height: 1.6;
 }
 
 .prose pre {
-  background-color: #121212; /* ink */
-  border: 1px solid rgba(250, 249, 247, 0.1);
+  background-color: var(--bg-2);
+  border: 1px solid var(--line);
   border-radius: 0.75rem;
   padding: 1.5rem;
   font-size: 0.875rem;
@@ -51,13 +142,9 @@ body {
 
 .prose code {
   font-weight: 500;
-  background-color: rgba(18, 18, 18, 0.06);
+  background-color: color-mix(in srgb, var(--fg) 8%, transparent);
   padding: 0.2em 0.4em;
   border-radius: 0.25em;
-}
-
-.dark .prose code {
-  background-color: rgba(250, 249, 247, 0.1);
 }
 
 .prose code::before,

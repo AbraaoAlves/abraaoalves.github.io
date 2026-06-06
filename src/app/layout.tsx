@@ -1,20 +1,28 @@
 import type { Metadata } from "next";
-import { Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { Hanken_Grotesk, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LenisProvider } from "@/components/lenis-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
-// Ettrics uses Saans (commercial). Hanken Grotesk is the closest free variable
-// grotesque; IBM Plex Mono matches their eyebrow/label mono exactly.
+// Type system from proto/index.html (the source of truth):
+//   Space Grotesk 700 — display (headings, ghost text, names, brand)
+//   Hanken Grotesk    — body copy and leads
+//   JetBrains Mono    — eyebrows, meta, labels, buttons
 const hanken = Hanken_Grotesk({
   variable: "--font-hanken",
   subsets: ["latin"],
 });
 
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
   weight: ["400", "500"],
 });
@@ -53,10 +61,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${hanken.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${hanken.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-[#faf9f7] text-[#121212] dark:bg-[#121212] dark:text-[#faf9f7] selection:bg-[#121212] selection:text-[#faf9f7] dark:selection:bg-[#faf9f7] dark:selection:text-[#121212]">
+      {/* Background/foreground come from the token system in globals.css. */}
+      <body className="min-h-full flex flex-col">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -64,11 +73,13 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <LenisProvider>
-            <Header />
-            <div className="flex-1 flex flex-col">
-              {children}
+            <div className="app-layer flex flex-1 flex-col">
+              <Header />
+              <div className="flex flex-1 flex-col">
+                {children}
+              </div>
+              <Footer />
             </div>
-            <Footer />
           </LenisProvider>
         </ThemeProvider>
       </body>
