@@ -1,5 +1,5 @@
 import { Hero } from "@/components/hero";
-import { Geo, Work, Stack, Mentorship, Roots, Lab } from "@/components/sections";
+import { Geo, Work, Stack, Mentorship, Lab } from "@/components/sections";
 
 /**
  * Home — composed from the prototype (proto/index.html) section order:
@@ -14,7 +14,6 @@ export default function Home() {
       <Work />
       <Stack />
       <Mentorship />
-      <Roots />
       <Lab />
     </main>
   );

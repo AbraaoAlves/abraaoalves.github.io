@@ -21,6 +21,7 @@ export function Header() {
     { label: nav.work, href: "/#work" },
     { label: nav.mentorship, href: "/#mentorship" },
     { label: nav.lab, href: "/lab" },
+    { label: nav.about, href: "/about" },
   ];
 
   React.useEffect(() => {

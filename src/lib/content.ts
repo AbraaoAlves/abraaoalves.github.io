@@ -6,7 +6,7 @@ import type { Lang } from "@/components/language-provider";
  * CONTENT[lang]. SOCIALS is language-independent and uses real profile URLs.
  */
 export type LangContent = {
-  nav: { work: string; mentorship: string; lab: string };
+  nav: { work: string; mentorship: string; lab: string; about: string };
   hero: {
     eyebrow: string;
     lead: string;
@@ -75,7 +75,7 @@ export type LangContent = {
 
 export const CONTENT: Record<Lang, LangContent> = {
   en: {
-    nav: { work: "Work", mentorship: "Mentorship", lab: "Lab" },
+    nav: { work: "Work", mentorship: "Mentorship", lab: "Lab", about: "About" },
     hero: {
       eyebrow: "STAFF ENGINEER · ARCHITECT · MENTOR",
       lead: "Building software that lasts — high-impact engineering, architecture, and mentorship since 2008.",
@@ -209,12 +209,13 @@ export const CONTENT: Record<Lang, LangContent> = {
         ["Work", "/#work"],
         ["Mentorship", "/#mentorship"],
         ["Lab", "/lab"],
+        ["About", "/about"],
       ],
     },
   },
 
   pt: {
-    nav: { work: "Work", mentorship: "Mentoria", lab: "Lab" },
+    nav: { work: "Work", mentorship: "Mentoria", lab: "Lab", about: "Sobre" },
     hero: {
       eyebrow: "STAFF ENGINEER · ARQUITETO · MENTOR",
       lead: "Construindo software que perdura — engenharia de alto impacto, arquitetura e mentoria desde 2008.",
@@ -348,6 +349,7 @@ export const CONTENT: Record<Lang, LangContent> = {
         ["Trabalho", "/#work"],
         ["Mentoria", "/#mentorship"],
         ["Lab", "/lab"],
+        ["Sobre", "/about"],
       ],
     },
   },
