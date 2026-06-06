@@ -59,11 +59,12 @@ export function Geo() {
             <AsciiArtCanvas
               art="USmap"
               ripple
-              source="geospatiallatlng·smartscout "
-              speed={4}
-              scale={0.16}
+              source="·smartscout"
+              speed={1.3}
+              scale={0.18}
+              origin={{x: 0.7475041918307729, y: 0.42154605263157896}}
               threshold={0.5}
-              fontSize={11}
+              fontSize={10}
               color={isDark ? INK_DARK : INK_LIGHT}
               background={isDark ? BG1_DARK : BG1_LIGHT}
               className="h-[32vw] min-h-[200px] max-h-[380px] w-full"

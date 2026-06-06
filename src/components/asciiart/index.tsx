@@ -1,8 +1,8 @@
 "use client";
 import React, { useMemo, useState } from "react";
 import { AsciiCanvas } from "./canvas";
-import { createTextMaskShader, createRippleShader } from "./masks";
-import { drawLogo as drawUSMap } from "./drawImages";
+import { createTextMaskShader, createRippleShader, createTextMaskDrawFn } from "./masks";
+import { drawUSMap } from "./drawImages";
 
 export { AsciiCanvas } from "./canvas";
 export type { AsciiCanvasProps } from "./canvas";
@@ -74,9 +74,13 @@ export default function AsciiArtDemo() {
   const [waveWarp,  setWaveWarp]  = useState(0.9);
   const [clipUS,    setClipUS]    = useState(false);
   const [waveOrigin, setWaveOrigin] = useState({ x: 0.5, y: 0.5 });
-
+  
+  const drawMask = useMemo(() => createTextMaskDrawFn({ text, weight:800 }), [text]);
+    
   const textShader = useMemo(
-    () => createTextMaskShader({ text, source, speed, phaseJitter: jitter }),
+    () => createRippleShader({ drawMask, source, speed }),
+      
+      //createTextMaskShader({ text, source, speed, phaseJitter: jitter }),
     [text, source, speed, jitter]
   );
   // const mapShader = useMemo(

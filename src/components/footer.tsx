@@ -38,11 +38,11 @@ export function Footer() {
             <AsciiArtCanvas
               art="logo"
               ripple
-              source="abraãoalves△"
-              speed={3}
+              source="abraão alves△"
+              speed={1.3}
               scale={0.18}
               threshold={0.5}
-              fontSize={12}
+              fontSize={10}
               color={isDark ? LOGO_DARK : LOGO_LIGHT}
               background={isDark ? FOOTER_BG_DARK : FOOTER_BG_LIGHT}
               className="aspect-square w-full"

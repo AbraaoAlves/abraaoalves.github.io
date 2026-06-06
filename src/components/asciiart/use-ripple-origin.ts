@@ -15,7 +15,7 @@ const clamp01 = (value: number) => Math.max(0, Math.min(1, value));
 
 export function useRippleOrigin({
   clickable = false,
-  defaultOrigin = { x: 0.5, y: 0.5 },
+  defaultOrigin = { x: 0.1, y: 1 },
   origin,
   onOriginChange,
 }: UseRippleOriginOptions) {
