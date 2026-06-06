@@ -315,45 +315,24 @@ body::before {
   flex-shrink: 0;
 }
 
-/* --- Language dropdown --- */
-.fc-lang { position: relative; }
-
-.fc-lang-btn {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 4px 8px 4px 6px;
-  background: transparent; border: 0; border-radius: 999px;
-  font-family: var(--font-mono); font-size: 12px; letter-spacing: .05em;
-  color: var(--fg-2); cursor: pointer;
-  transition: color .2s, background .2s;
+/* --- Language toggle (PT | EN) --- */
+.fc-lang {
+  display: inline-flex; align-items: center; gap: 2px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em;
 }
-.fc-lang-btn:hover { color: var(--fg); background: color-mix(in srgb, var(--fg) 8%, transparent); }
-.fc-lang-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
-.fc-lang-label { white-space: nowrap; }
-@media (max-width: 480px) { .fc-lang-label { display: none; } }
-
-.fc-chevron { transition: transform .2s ease; }
-.fc-chevron.open { transform: rotate(180deg); }
-
-.fc-lang-menu {
-  position: absolute; bottom: calc(100% + 8px); left: 0;
-  min-width: 120px; margin: 0; padding: 4px 0; list-style: none;
-  background: var(--bg-1);
-  border: 1px solid var(--line-2);
-  border-radius: 10px;
-  box-shadow: 0 8px 24px -6px rgba(0,0,0,.22);
-  overflow: hidden;
-}
-.fc-lang-menu li[aria-selected="true"] button { color: var(--fg); }
-.fc-lang-menu button {
-  display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  width: 100%; padding: 8px 14px;
+.fc-lang-opt {
+  padding: 4px 6px;
   background: transparent; border: 0;
-  font-family: var(--font-mono); font-size: 12px; letter-spacing: .05em;
-  color: var(--fg-2); cursor: pointer; text-align: left;
-  transition: background .15s, color .15s;
+  font: inherit; letter-spacing: inherit;
+  color: var(--fg-3); cursor: pointer;
+  transition: color .2s;
 }
-.fc-lang-menu button:hover { background: color-mix(in srgb, var(--fg) 8%, transparent); color: var(--fg); }
-.fc-check { font-size: 11px; color: var(--fg-2); }
+.fc-lang-opt:hover { color: var(--fg-1); }
+.fc-lang-opt.active {
+  color: var(--fg); font-weight: 600;
+  text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px;
+}
+.fc-lang-sep { color: var(--line-2); user-select: none; }
 
 /* --- Theme icons in the widget --- */
 .fc-theme { display: inline-flex; gap: 1px; }

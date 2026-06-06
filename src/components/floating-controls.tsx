@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Globe, Monitor, Sun, Moon, ChevronDown } from "lucide-react";
+import { Monitor, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useLanguage } from "./language-provider";
 
@@ -11,37 +11,18 @@ const themeOptions = [
   { value: "dark", label: "Dark", Icon: Moon },
 ] as const;
 
-const langLabels: Record<string, string> = { en: "English", pt: "Português" };
+const langs = ["pt", "en"] as const;
+const langNames: Record<string, string> = { en: "English", pt: "Português" };
 
 /**
- * Fixed bottom-right controls: language dropdown (Akita-style) + three-way
- * theme toggle with View Transition wipe. Sits outside the header so it
- * persists through all scroll positions.
+ * Fixed bottom-right controls: a `PT | EN` language toggle (Akita-style — active
+ * locale in bold + underline) and a three-way theme toggle with a View
+ * Transition wipe. Sits outside the header so it persists through all scroll
+ * positions.
  */
 export function FloatingControls() {
-  const [langOpen, setLangOpen] = React.useState(false);
   const { theme, resolvedTheme, setTheme } = useTheme();
   const { lang, setLang, mounted } = useLanguage();
-  const langRef = React.useRef<HTMLDivElement>(null);
-
-  // Close language dropdown on outside click or Escape
-  React.useEffect(() => {
-    if (!langOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setLangOpen(false);
-    };
-    const onClick = (e: MouseEvent) => {
-      if (langRef.current && !langRef.current.contains(e.target as Node)) {
-        setLangOpen(false);
-      }
-    };
-    document.addEventListener("keydown", onKey);
-    document.addEventListener("mousedown", onClick);
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.removeEventListener("mousedown", onClick);
-    };
-  }, [langOpen]);
 
   // Circular clip-path wipe from the bottom-right corner
   const changeTheme = (value: string, ev: React.MouseEvent) => {
@@ -104,36 +85,24 @@ export function FloatingControls() {
 
   return (
     <div className="floating-controls" aria-label="Display controls">
-      {/* Language dropdown */}
-      <div className="fc-lang" ref={langRef}>
-        <button
-          type="button"
-          className="fc-lang-btn"
-          aria-haspopup="listbox"
-          aria-expanded={langOpen}
-          aria-label="Select language"
-          onClick={() => setLangOpen((o) => !o)}
-        >
-          <Globe aria-hidden="true" />
-          <span className="fc-lang-label">{langLabels[lang]}</span>
-          <ChevronDown className={`fc-chevron${langOpen ? " open" : ""}`} aria-hidden="true" />
-        </button>
-
-        {langOpen && (
-          <ul className="fc-lang-menu" role="listbox" aria-label="Language">
-            {(["en", "pt"] as const).map((l) => (
-              <li key={l} role="option" aria-selected={lang === l}>
-                <button
-                  type="button"
-                  onClick={() => { setLang(l); setLangOpen(false); }}
-                >
-                  {langLabels[l]}
-                  {lang === l && <span className="fc-check" aria-hidden="true">✓</span>}
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
+      {/* PT | EN language toggle */}
+      <div className="fc-lang" role="group" aria-label="Language">
+        {langs.map((l, i) => (
+          <React.Fragment key={l}>
+            {i > 0 && (
+              <span className="fc-lang-sep" aria-hidden="true">|</span>
+            )}
+            <button
+              type="button"
+              className={`fc-lang-opt${lang === l ? " active" : ""}`}
+              aria-pressed={mounted && lang === l}
+              aria-label={langNames[l]}
+              onClick={() => setLang(l)}
+            >
+              {l.toUpperCase()}
+            </button>
+          </React.Fragment>
+        ))}
       </div>
 
       <div className="fc-divider" aria-hidden="true" />
