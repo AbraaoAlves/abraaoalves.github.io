@@ -16,20 +16,20 @@ export default function OgImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0a0a0a",
-          color: "#ededed",
+          background: "#0b0c0d",
+          color: "#f6f7f7",
           padding: "72px",
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", fontSize: 26, letterSpacing: 6, color: "#5b9bd5", textTransform: "uppercase" }}>
+        <div style={{ display: "flex", fontSize: 26, letterSpacing: 6, color: "#abafb1", textTransform: "uppercase" }}>
           Staff Engineer · Architect · Mentor
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 150, fontWeight: 900, lineHeight: 1 }}>ABRAÃO</div>
-          <div style={{ fontSize: 150, fontWeight: 900, lineHeight: 1 }}>ALVES</div>
+          <div style={{ fontSize: 150, fontWeight: 900, lineHeight: 1, letterSpacing: -4 }}>ABRAÃO</div>
+          <div style={{ fontSize: 150, fontWeight: 900, lineHeight: 1, letterSpacing: -4 }}>ALVES</div>
         </div>
-        <div style={{ display: "flex", fontSize: 32, color: "#a3a3a3" }}>
+        <div style={{ display: "flex", fontSize: 32, color: "#abafb1" }}>
           Building software that lasts. Since 2008.
         </div>
       </div>

@@ -67,6 +67,13 @@ export default function RootLayout({
     >
       {/* Background/foreground come from the token system in globals.css. */}
       <body className="min-h-full flex flex-col">
+        {/* Arm scroll-reveal before paint. `.reveal` is visible by default; this
+            adds the hidden start state, so content shows if JS never runs. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "try{document.documentElement.classList.add('js-anim')}catch(e){}",
+          }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

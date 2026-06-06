@@ -1,13 +1,19 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 
 /**
- * Scroll-triggered reveal: content slides up and fades in once when it enters
- * the viewport — the kinetic scroll feel of ettrics.com. Honors
- * prefers-reduced-motion (renders static) and never leaves content hidden for
- * users without JS, since the animation only runs client-side after mount.
+ * Scroll-triggered reveal (proto/index.html): content slides up and fades in
+ * once when it enters the viewport.
+ *
+ * Robustness: `.reveal` is visible by default; the hidden start state only
+ * applies under `.js-anim` (added pre-paint by an inline script in the layout).
+ * So if JS never runs — no-JS, static export, crawlers — content is shown
+ * regardless. A stall guard force-shows the element if the transition never
+ * advances (throttled/background tab). Honors prefers-reduced-motion via CSS.
+ *
+ * `delay` is in seconds, applied as a transition-delay to stagger groups.
  */
 export function Reveal({
   children,
@@ -18,19 +24,56 @@ export function Reveal({
   delay?: number;
   className?: string;
 }) {
-  const reduce = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
 
-  if (reduce) return <div className={className}>{children}</div>;
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    let guard: ReturnType<typeof setTimeout> | undefined;
+    const show = () => {
+      el.classList.add("in");
+      // If the reveal transition never advances (paused timeline), snap visible
+      // so content is never trapped.
+      guard = setTimeout(() => {
+        if (parseFloat(getComputedStyle(el).opacity) < 0.05) {
+          el.classList.add("reveal-force");
+        }
+      }, 1000);
+    };
+
+    if (!("IntersectionObserver" in window)) {
+      show();
+      return () => guard && clearTimeout(guard);
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            show();
+            io.disconnect();
+            break;
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+    );
+    io.observe(el);
+
+    return () => {
+      io.disconnect();
+      if (guard) clearTimeout(guard);
+    };
+  }, []);
 
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -12% 0px" }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
+    <div
+      ref={ref}
+      className={className ? `reveal ${className}` : "reveal"}
+      style={delay ? { transitionDelay: `${delay}s` } : undefined}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
