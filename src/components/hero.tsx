@@ -5,6 +5,8 @@ import { AsciiTextCanvas } from "./asciiart";
 import { Reveal } from "./reveal";
 import { Eyebrow } from "./ui/eyebrow";
 import { Button } from "./ui/button";
+import { useLanguage } from "./language-provider";
+import { CONTENT } from "@/lib/content";
 
 /**
  * Hero from proto/index.html: a two-column grid — lead/meta/CTAs on the left,
@@ -23,13 +25,13 @@ const PAPER_DARK = "#0b0c0d";
 const INK_LIGHT = "#1d2022";
 const INK_DARK = "#e7e9e9";
 
-const META = ["Based in Brazil", "Remote", "Fluent English"];
-
 export function Hero() {
   // resolvedTheme is undefined on the server / first paint → defaults to light.
   // Theme only affects canvas *drawing* (props), not server-rendered markup, so
   // there is no hydration mismatch and no mount guard is needed.
   const { resolvedTheme } = useTheme();
+  const { lang } = useLanguage();
+  const t = CONTENT[lang].hero;
   const isDark = resolvedTheme === "dark";
   const paper = isDark ? PAPER_DARK : PAPER_LIGHT;
   const ink = isDark ? INK_DARK : INK_LIGHT;
@@ -45,18 +47,15 @@ export function Hero() {
         <div className="hero-grid">
           <div className="hero-left">
             <Reveal>
-              <Eyebrow>Staff Engineer · Architect · Mentor</Eyebrow>
+              <Eyebrow>{t.eyebrow}</Eyebrow>
             </Reveal>
 
             <Reveal delay={0.08}>
-              <p className="lead">
-                Building software that lasts — high-impact engineering,
-                architecture, and mentorship since 2008.
-              </p>
+              <p className="lead">{t.lead}</p>
             </Reveal>
 
             <Reveal delay={0.16} className="hero-meta">
-              {META.map((m, i) => (
+              {t.meta.map((m, i) => (
                 <span key={m}>
                   {i > 0 ? <span className="dot" aria-hidden="true" /> : null}
                   {m}
@@ -66,17 +65,17 @@ export function Hero() {
 
             <Reveal delay={0.24} className="btn-row">
               <Button href="#contact" variant="primary" arrow>
-                Get in touch
+                {t.ctaPrimary}
               </Button>
               <Button href="#work" variant="ghost">
-                See selected work
+                {t.ctaSecondary}
               </Button>
             </Reveal>
 
             <Reveal delay={0.32}>
               <a href="#geo" className="scroll-cue">
                 <span className="line" aria-hidden="true" />
-                Scroll
+                {t.cue}
               </a>
             </Reveal>
           </div>

@@ -1,22 +1,22 @@
+"use client";
+
 import { Reveal } from "@/components/reveal";
 import { SectionHead } from "@/components/ui/section-head";
-
-const COLS: { h: string; items: string[] }[] = [
-  { h: "Languages", items: ["TypeScript", "JavaScript", "Go", "C#", "Java", "Ruby", "SQL"] },
-  { h: "Frontend", items: ["React", "Redux · Saga", "Web Workers", "GraphQL", "Mapbox GL", "Tailwind · SASS"] },
-  { h: "Backend & Data", items: ["Node.js", "PostgreSQL", "MongoDB · DynamoDB", "ElasticSearch", "Redis", "RabbitMQ"] },
-  { h: "Infra & Ops", items: ["AWS · Vercel", "CI/CD · Serverless", "Devcontainers", "PostHog · Sentry", "TDD", "AI Workflow"] },
-];
+import { useLanguage } from "@/components/language-provider";
+import { CONTENT } from "@/lib/content";
 
 /** Stack/toolkit section from proto/index.html: four hairline-headed columns. */
 export function Stack() {
+  const { lang } = useLanguage();
+  const t = CONTENT[lang].stack;
+
   return (
     <section className="section" id="stack">
       <div className="wrap">
-        <SectionHead eyebrow="Toolkit" ghost="STACK" title="Stack" />
+        <SectionHead eyebrow={t.eyebrow} ghost={t.ghost} title={t.title} />
 
         <div className="stack-grid">
-          {COLS.map((col, i) => (
+          {t.cols.map((col, i) => (
             <Reveal className="stack-col" key={col.h} delay={i * 0.06}>
               <h4>{col.h}</h4>
               <ul>

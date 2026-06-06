@@ -6,12 +6,7 @@ import { Monitor, Sun, Moon, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Logo } from "./icons/logo";
 import { useLanguage } from "./language-provider";
-
-const navLinks = [
-  { label: "Work", href: "/#work" },
-  { label: "Mentorship", href: "/#mentorship" },
-  { label: "Lab", href: "/lab" },
-];
+import { CONTENT } from "@/lib/content";
 
 const themeOptions = [
   { value: "system", label: "System theme", Icon: Monitor },
@@ -30,6 +25,12 @@ export function Header() {
   const [mounted, setMounted] = React.useState(false);
   const { theme, setTheme } = useTheme();
   const { lang, setLang } = useLanguage();
+  const nav = CONTENT[lang].nav;
+  const navLinks = [
+    { label: nav.work, href: "/#work" },
+    { label: nav.mentorship, href: "/#mentorship" },
+    { label: nav.lab, href: "/lab" },
+  ];
 
   React.useEffect(() => setMounted(true), []);
 

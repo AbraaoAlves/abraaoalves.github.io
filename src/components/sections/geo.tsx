@@ -4,6 +4,8 @@ import { useTheme } from "next-themes";
 import { AsciiArtCanvas } from "@/components/asciiart";
 import { Reveal } from "@/components/reveal";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { useLanguage } from "@/components/language-provider";
+import { CONTENT } from "@/lib/content";
 
 // The geo-map surface is --bg-1, so the canvas bg must match that (not --bg) to
 // stay invisible. Ink tracks the theme.
@@ -12,14 +14,6 @@ const BG1_DARK = "#111315";
 const INK_LIGHT = "#1d2022";
 const INK_DARK = "#e7e9e9";
 
-const CHROME = ["us-albers // reactive", "records: 100,000+"];
-const CHIPS: [string, string][] = [
-  ["100K+", "records, client-side"],
-  ["10s → 800ms", "query latency"],
-  ["200+", "pre-computed personas"],
-  ["Mapbox GL", "visual layers"],
-];
-
 /**
  * Geospatial centerpiece from proto/index.html: a bordered card holding the US
  * map rendered as shimmering ASCII (existing engine, `ripple` shader), with a
@@ -27,6 +21,8 @@ const CHIPS: [string, string][] = [
  */
 export function Geo() {
   const { resolvedTheme } = useTheme();
+  const { lang } = useLanguage();
+  const t = CONTENT[lang].geo;
   const isDark = resolvedTheme === "dark";
 
   return (
@@ -38,30 +34,26 @@ export function Geo() {
             aria-hidden="true"
             style={{ fontSize: "clamp(80px,15vw,210px)" }}
           >
-            PLACE
+            {t.ghost}
           </div>
           <Reveal className="geo-head real">
-            <Eyebrow>Geospatial</Eyebrow>
+            <Eyebrow>{t.eyebrow}</Eyebrow>
             <h2
               className="h-display"
               style={{ fontSize: "clamp(34px,5.4vw,72px)", maxWidth: "15ch" }}
             >
-              Where data meets place.
+              {t.title}
             </h2>
             <p className="body-lg" style={{ maxWidth: "60ch" }}>
-              For nine years I owned the interactive map at the heart of
-              SmartScout — a geographic audience-intelligence platform —
-              rendering 100,000+ records of reactive data in the browser without
-              dropping a frame. Solving problems that live on a map is what I do
-              best.
+              {t.body}
             </p>
           </Reveal>
         </div>
 
         <Reveal className="geo-map" delay={0.1}>
           <div className="map-chrome">
-            <span>{CHROME[0]}</span>
-            <span>{CHROME[1]}</span>
+            <span>{t.chrome[0]}</span>
+            <span>{t.chrome[1]}</span>
           </div>
           <div className="map-canvas-wrap">
             <AsciiArtCanvas
@@ -81,7 +73,7 @@ export function Geo() {
         </Reveal>
 
         <Reveal className="geo-foot" delay={0.16}>
-          {CHIPS.map((c) => (
+          {t.chips.map((c) => (
             <span key={c[0]} className="chip">
               <span className="sq" aria-hidden="true" />
               <b>{c[0]}</b> {c[1]}

@@ -6,25 +6,10 @@ import { AsciiArtCanvas } from "./asciiart";
 import { Reveal } from "./reveal";
 import { Eyebrow } from "./ui/eyebrow";
 import { Button } from "./ui/button";
+import { useLanguage } from "./language-provider";
+import { CONTENT, SOCIALS } from "@/lib/content";
 
 const EMAIL = "abraao.teodosio@gmail.com";
-
-// Internal navigation (cross-route safe so the footer works on /lab too).
-const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "Work", href: "/#work" },
-  { label: "Mentorship", href: "/#mentorship" },
-  { label: "Lab", href: "/lab" },
-];
-
-// External profiles. Real URLs (proto SOCIALS carried placeholders).
-const SOCIALS = [
-  { label: "LinkedIn", href: "https://linkedin.com/in/abraaoalves" },
-  { label: "GitHub", href: "https://github.com/abraaoalves" },
-  { label: "Stack Overflow", href: "https://stackoverflow.com/users/815478" },
-  { label: "X", href: "https://x.com/abraao4lves" },
-  { label: "CodePen", href: "https://codepen.io/AbraaoAlves" },
-];
 
 // The footer is a distinct slab (--footer-bg); the ASCII logo backdrop must use
 // that bg to stay invisible, with ink one step off full contrast per theme.
@@ -41,6 +26,8 @@ const LOGO_DARK = "#e7e9e9";
 export function Footer() {
   const year = new Date().getFullYear();
   const { resolvedTheme } = useTheme();
+  const { lang } = useLanguage();
+  const t = CONTENT[lang].contact;
   const isDark = resolvedTheme === "dark";
 
   return (
@@ -64,11 +51,11 @@ export function Footer() {
           </div>
 
           <div className="foot-hero-text">
-            <Eyebrow>Contact</Eyebrow>
-            <p className="foot-cta">Let’s build something that lasts.</p>
+            <Eyebrow>{t.eyebrow}</Eyebrow>
+            <p className="foot-cta">{t.cta}</p>
             <div className="btn-row">
               <Button href={`mailto:${EMAIL}`} variant="primary" arrow>
-                Get in touch
+                {t.ctaLink}
               </Button>
               <Button
                 href="https://linkedin.com/in/abraaoalves"
@@ -83,18 +70,18 @@ export function Footer() {
 
         <div className="foot-cols">
           <Reveal className="foot-col">
-            <h5>Navigate</h5>
+            <h5>{t.navH}</h5>
             <ul>
-              {NAV_LINKS.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href}>{l.label}</Link>
+              {t.navLinks.map(([label, href]) => (
+                <li key={href}>
+                  <Link href={href}>{label}</Link>
                 </li>
               ))}
             </ul>
           </Reveal>
 
           <Reveal className="foot-col" delay={0.06}>
-            <h5>Connect</h5>
+            <h5>{t.connectH}</h5>
             <ul>
               {SOCIALS.map((s) => (
                 <li key={s.label}>
@@ -107,7 +94,7 @@ export function Footer() {
           </Reveal>
 
           <Reveal className="foot-col" delay={0.12}>
-            <h5>Email</h5>
+            <h5>{t.emailH}</h5>
             <ul>
               <li>
                 <a href={`mailto:${EMAIL}`}>
