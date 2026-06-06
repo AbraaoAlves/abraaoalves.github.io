@@ -151,3 +151,75 @@ body::before {
 .prose code::after {
   content: "";
 }
+
+/* =========================================================================
+   Shared primitives — ported verbatim from proto/index.html.
+   Layout helpers, eyebrow/ghost heading, display type, and the button system.
+   ========================================================================= */
+
+/* ---- Layout helpers ----------------------------------------------------- */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gut); }
+.section { position: relative; padding: var(--sec) 0; z-index: 2; }
+.section + .section { border-top: 1px solid var(--line); }
+.relz { position: relative; z-index: 2; }
+
+/* ---- Eyebrow / mono label ----------------------------------------------- */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--t-label);
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  display: inline-flex; align-items: center; gap: .9em;
+}
+.eyebrow .tick { width: 26px; height: 1px; background: var(--line-2); display: inline-block; }
+
+/* ---- Giant ghost heading behind a section title ------------------------- */
+.ghosthead { position: relative; }
+.ghosthead .ghost {
+  position: absolute; left: -0.06em; top: -0.42em;
+  font-family: var(--font-display);
+  font-weight: 700; line-height: .8;
+  font-size: clamp(86px, 17vw, 240px);
+  letter-spacing: -0.03em;
+  color: var(--ghost);
+  pointer-events: none; user-select: none; white-space: nowrap; z-index: 0;
+}
+.ghosthead .real { position: relative; z-index: 1; }
+
+/* ---- Display + body type ------------------------------------------------- */
+.h-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.0;
+}
+.lead {
+  font-size: var(--t-lead);
+  line-height: 1.45;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+  max-width: 24ch;
+  font-weight: 500;
+}
+.body-lg { font-size: var(--t-body); color: var(--fg-1); text-wrap: pretty; line-height: 1.62; }
+.muted { color: var(--fg-2); }
+
+/* ---- Buttons / CTAs ----------------------------------------------------- */
+.btn-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.btn {
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: .04em;
+  text-transform: uppercase; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 15px 24px; border-radius: 10px; border: 1px solid transparent;
+  cursor: pointer; white-space: nowrap; line-height: 1; text-decoration: none;
+  transition: background .25s ease, color .25s ease, border-color .25s ease, transform .2s ease;
+}
+.btn .ar { transition: transform .25s ease; }
+.btn:hover .ar { transform: translateX(4px); }
+.btn-primary { background: var(--cta); color: var(--bg); border-color: var(--cta); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -14px color-mix(in srgb, var(--cta) 70%, transparent); }
+.btn-ghost { background: transparent; color: var(--fg); border-color: var(--line-2); }
+.btn-ghost:hover { border-color: var(--fg); background: color-mix(in srgb, var(--fg) 6%, transparent); }
+.btn:focus-visible { outline: 2px solid var(--cta); outline-offset: 3px; }
