@@ -3,4 +3,3 @@ export { Work } from "./work";
 export { Stack } from "./stack";
 export { Mentorship } from "./mentorship";
 export { Roots } from "./roots";
-export { Lab } from "./lab";

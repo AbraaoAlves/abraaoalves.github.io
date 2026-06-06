@@ -1,37 +1,45 @@
+"use client";
+
 import Link from "next/link";
+import { Reveal } from "@/components/reveal";
+import { SectionHead } from "@/components/ui/section-head";
+import { useLanguage } from "@/components/language-provider";
+import { CONTENT } from "@/lib/content";
 import { posts } from "@/lib/posts";
 
-export default function LabIndex() {
+const postTags: Record<string, string> = {
+  "the-goto-lesson": "CRAFT",
+};
+
+export default function LabPage() {
+  const { lang } = useLanguage();
+  const t = CONTENT[lang].lab;
+
   return (
-    <main className="flex-1 flex flex-col p-4 md:p-8 max-w-3xl mx-auto w-full mb-20 pt-16">
-      <div className="mb-10">
-        <span className="block select-none text-6xl md:text-8xl font-black uppercase leading-none tracking-tight text-stone-200 dark:text-stone-800">
-          Lab
-        </span>
-        <h1 className="-mt-4 md:-mt-6 pl-1 font-mono text-xs md:text-sm uppercase tracking-[0.16em] text-stone-500 dark:text-stone-400">
-          Writing & Experiments
-        </h1>
-      </div>
+    <main className="flex flex-1 flex-col">
+      <section className="section">
+        <div className="wrap">
+          <SectionHead eyebrow={t.eyebrow} ghost={t.ghost} title={t.title} />
 
-      <p className="text-stone-600 dark:text-stone-400 mb-12">
-        A collection of deep dives into architecture, systems engineering, and the principles that survive the test of time. Exploring the &quot;why&quot; behind the code.
-      </p>
+          <Reveal>
+            <p className="body-lg" style={{ marginTop: 22, maxWidth: "52ch" }}>
+              {t.body}
+            </p>
+          </Reveal>
 
-      <div className="flex flex-col gap-6">
-        {posts.map((post) => (
-          <Link
-            key={post.slug}
-            href={`/lab/${post.slug}`}
-            className="group flex flex-col gap-2 p-6 rounded-2xl border border-stone-200 dark:border-stone-800 bg-paper dark:bg-stone-950 hover:border-stone-400 dark:hover:border-stone-600 transition-colors"
-          >
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-semibold group-hover:text-stone-900 dark:group-hover:text-stone-100 transition-colors">{post.title}</h2>
-              <span className="text-stone-400 dark:text-stone-500 font-mono text-sm">{post.date}</span>
-            </div>
-            <p className="text-stone-600 dark:text-stone-400 text-sm mt-2">{post.excerpt}</p>
-          </Link>
-        ))}
-      </div>
+          <div className="lab-grid">
+            {posts.map((post, i) => (
+              <Reveal key={post.slug} delay={i * 0.06}>
+                <Link href={`/lab/${post.slug}`} className="lab-item lab-item--link">
+                  <span className="d">{post.date}</span>
+                  <span className="ti">{post.title}</span>
+                  <span className="tag">{postTags[post.slug] ?? "LAB"}</span>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
