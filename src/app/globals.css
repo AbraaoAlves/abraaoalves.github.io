@@ -223,3 +223,72 @@ body::before {
 .btn-ghost { background: transparent; color: var(--fg); border-color: var(--line-2); }
 .btn-ghost:hover { border-color: var(--fg); background: color-mix(in srgb, var(--fg) 6%, transparent); }
 .btn:focus-visible { outline: 2px solid var(--cta); outline-offset: 3px; }
+
+/* =========================================================================
+   Nav — fixed top bar, transparent until scrolled (proto/index.html).
+   ========================================================================= */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--gut); height: 64px;
+  border-bottom: 1px solid transparent;
+  transition: background .4s ease, border-color .4s ease, backdrop-filter .4s ease;
+}
+.nav.scrolled {
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand .mark { width: 26px; height: 26px; }
+.brand .mark path { fill: var(--fg) !important; }
+.brand .mark .mark-lo { fill: var(--fg-2) !important; }
+.brand .name {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 15px; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap;
+}
+.nav-links { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 40px); }
+.nav-links a {
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: .07em;
+  color: var(--fg-2); position: relative; padding: 4px 0;
+  transition: color .25s ease;
+}
+.nav-links a::after {
+  content: ""; position: absolute; left: 0; bottom: -2px; height: 1px; width: 0;
+  background: var(--fg); transition: width .3s ease;
+}
+.nav-links a:hover { color: var(--fg); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-tools { display: flex; align-items: center; gap: 14px; }
+.lang-toggle {
+  display: inline-flex; border: 1px solid var(--line-2); border-radius: 999px; overflow: hidden;
+}
+.lang-toggle button {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em;
+  padding: 5px 10px; background: transparent; border: 0; color: var(--fg-2); cursor: pointer;
+  transition: color .2s, background .2s;
+}
+.lang-toggle button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.theme-toggle { display: inline-flex; gap: 2px; }
+.icon-btn {
+  width: 30px; height: 30px; display: grid; place-items: center;
+  background: transparent; border: 1px solid transparent; border-radius: 8px;
+  color: var(--fg-3); cursor: pointer; transition: color .2s, border-color .2s, background .2s;
+}
+.icon-btn:hover { color: var(--fg-1); }
+.icon-btn[aria-pressed="true"] { color: var(--fg); border-color: var(--line-2); background: var(--bg-1); }
+.icon-btn svg { width: 16px; height: 16px; }
+.nav-burger { display: none; }
+
+@media (max-width: 680px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; position: fixed; inset: 64px 0 auto 0; flex-direction: column; gap: 0;
+    background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px var(--gut) 18px;
+  }
+  .nav-links.open a { padding: 14px 0; font-size: 15px; border-bottom: 1px solid var(--line); }
+  .nav-burger { display: grid; }
+}
+@media (max-width: 960px) and (min-width: 681px) { .brand .name { display: none; } }

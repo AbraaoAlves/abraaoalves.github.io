@@ -22,10 +22,12 @@ export function Logo({ className }: { className?: string }) {
         fillRule="evenodd"
         d="M374,565 L684.4,27.3 L995,565 Z M684.4,207.3 L477.9,565 L891.1,565 Z"
       />
-      {/* Dark facets — isometric shading on the right leg and inner chevron */}
-      <path fill="#1F4E79" d="M995.8,562.4L837.4,471.8L685.2,210.1L684.8,27.7l311,534.7Z" />
-      <path fill="#1F4E79" d="M550,565.7l103.1,0.8L738.2,420.3L686.6,330.9L550,565.7Z" />
-      <path fill="#1F4E79" d="M999.6,562.5l-108.1,1.3l-55,-93.2l163.1,91.9Z" />
+      {/* Dark facets — isometric shading on the right leg and inner chevron.
+          The `mark-lo` class lets the nav recolor them to the muted token for a
+          two-tone monochrome brand mark (see `.brand .mark .mark-lo`). */}
+      <path className="mark-lo" fill="#1F4E79" d="M995.8,562.4L837.4,471.8L685.2,210.1L684.8,27.7l311,534.7Z" />
+      <path className="mark-lo" fill="#1F4E79" d="M550,565.7l103.1,0.8L738.2,420.3L686.6,330.9L550,565.7Z" />
+      <path className="mark-lo" fill="#1F4E79" d="M999.6,562.5l-108.1,1.3l-55,-93.2l163.1,91.9Z" />
     </svg>
   );
 }

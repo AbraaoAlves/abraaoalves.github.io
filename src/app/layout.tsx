@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hanken_Grotesk, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LanguageProvider } from "@/components/language-provider";
 import { LenisProvider } from "@/components/lenis-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -72,15 +73,18 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <LenisProvider>
-            <div className="app-layer flex flex-1 flex-col">
-              <Header />
-              <div className="flex flex-1 flex-col">
-                {children}
+          <LanguageProvider>
+            <LenisProvider>
+              <div className="app-layer flex flex-1 flex-col">
+                <Header />
+                {/* pt-16 clears the fixed 64px nav for every route. */}
+                <div className="flex flex-1 flex-col pt-16">
+                  {children}
+                </div>
+                <Footer />
               </div>
-              <Footer />
-            </div>
-          </LenisProvider>
+            </LenisProvider>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
