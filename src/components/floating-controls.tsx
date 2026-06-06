@@ -21,7 +21,7 @@ const langLabels: Record<string, string> = { en: "English", pt: "Português" };
 export function FloatingControls() {
   const [langOpen, setLangOpen] = React.useState(false);
   const { theme, resolvedTheme, setTheme } = useTheme();
-  const { lang, setLang } = useLanguage();
+  const { lang, setLang, mounted } = useLanguage();
   const langRef = React.useRef<HTMLDivElement>(null);
 
   // Close language dropdown on outside click or Escape
@@ -145,7 +145,7 @@ export function FloatingControls() {
             key={value}
             type="button"
             className="fc-icon-btn"
-            aria-pressed={theme !== undefined && theme === value}
+            aria-pressed={mounted && theme === value}
             aria-label={`${label} theme`}
             title={`${label} theme`}
             onClick={(e) => changeTheme(value, e)}
