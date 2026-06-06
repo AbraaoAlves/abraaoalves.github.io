@@ -421,6 +421,45 @@ body::before {
 .lab-item .ti { font-family: var(--font-display); font-weight: 700; font-size: clamp(18px,2vw,24px); letter-spacing: -0.01em; }
 .lab-item .tag { font-family: var(--font-mono); font-size: 12px; letter-spacing: .07em; color: var(--fg-2); border: 1px solid var(--line-2); border-radius: 999px; padding: 4px 12px; }
 
+/* =========================================================================
+   Contact / footer — an always-distinct surface in both themes, with an ASCII
+   logo backdrop and an ettrics-style hover spotlight (proto/index.html).
+   ========================================================================= */
+.footer {
+  position: relative; padding: var(--sec) 0 40px; z-index: 2; overflow: hidden;
+  background: var(--footer-bg); color: var(--fg); border-top: 1px solid var(--footer-line);
+  transition: background .5s ease, color .5s ease, border-color .5s ease;
+}
+.footer::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(130% 90% at 80% 22%, color-mix(in srgb, var(--fg) 6%, transparent), transparent 58%); }
+.footer .wrap { position: relative; z-index: 1; }
+
+.foot-hero { position: relative; margin-bottom: clamp(48px,7vw,96px); min-height: clamp(180px,24vw,300px); display: flex; align-items: center; }
+.foot-logo-bg { position: absolute; top: 50%; right: 0; transform: translateY(-50%);
+  width: clamp(190px, 33vw, 440px); opacity: .55; pointer-events: none; z-index: 0; transition: opacity .4s ease;
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent); mask-image: radial-gradient(closest-side, #000 55%, transparent); }
+.foot-hero-text { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 22px; }
+.foot-cta { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; line-height: 1.04; font-size: clamp(34px, 6vw, 74px); max-width: 15ch; color: var(--fg); }
+.footer .eyebrow { color: var(--fg-2); }
+.footer .eyebrow .tick { background: var(--line-2); }
+
+.foot-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px,3vw,48px); padding-bottom: clamp(40px,5vw,64px); border-bottom: 1px solid var(--footer-line); }
+.foot-col h5 { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-2); margin-bottom: 18px; }
+.foot-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.foot-col a { font-size: 17px; color: var(--fg); display: inline-flex; align-items: center; gap: 10px; transition: color .35s, gap .2s; width: fit-content; white-space: nowrap; }
+.foot-col a:hover { gap: 14px; }
+.foot-col a .ext { font-family: var(--font-mono); font-size: 12px; color: var(--fg-2); transition: color .35s; }
+.foot-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 26px; flex-wrap: wrap; gap: 14px; }
+.foot-bottom .c { font-family: var(--font-mono); font-size: 12.5px; color: var(--fg-2); transition: color .35s; }
+.foot-bottom .v { font-family: var(--font-mono); font-size: 12.5px; color: var(--fg-3); letter-spacing: .1em; transition: color .35s; }
+
+/* spotlight: hovering any footer link fades all other links + text */
+.footer :is(.foot-cta, .foot-col h5, .foot-col a, .foot-bottom .c, .foot-bottom .v, .eyebrow) { transition: color .35s ease; }
+.footer:has(a:hover) :is(.foot-cta, .foot-col h5, .foot-col a, .foot-col a .ext, .foot-bottom .c, .foot-bottom .v, .eyebrow) { color: var(--fg-3); }
+.footer:has(a:hover) .foot-col a:hover { color: var(--fg) !important; }
+.footer:has(a:hover) a:hover .ext { color: var(--fg-2) !important; }
+.footer:has(a:hover) .foot-logo-bg { opacity: .16; }
+
 @media (max-width: 1080px) {
   .hero-grid { grid-template-columns: 1fr; gap: 36px; }
   .ascii-name { order: -1; }
@@ -429,6 +468,7 @@ body::before {
   .ment-grid, .roots-grid { grid-template-columns: 1fr; }
   .work-item { grid-template-columns: 60px 1fr; }
   .work-item .meta-r { grid-column: 1 / -1; flex-direction: row; align-items: center; }
+  .foot-cols { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 680px) {
   .mig-grid { grid-template-columns: 1fr; }
@@ -436,4 +476,7 @@ body::before {
   .work-item .bullets { grid-column: 1 / -1; }
   .lab-item { grid-template-columns: 64px 1fr; row-gap: 6px; }
   .lab-item .tag { grid-column: 2; justify-self: start; }
+  .foot-cols { grid-template-columns: 1fr; }
+  .foot-hero { min-height: 0; }
+  .foot-logo-bg { width: 56vw; right: -8%; opacity: .3; }
 }

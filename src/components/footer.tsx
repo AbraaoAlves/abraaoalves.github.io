@@ -2,115 +2,125 @@
 
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { AsciiTextCanvas } from "./asciiart";
-import { ThemeSwitch } from "./theme-switch";
+import { AsciiArtCanvas } from "./asciiart";
+import { Reveal } from "./reveal";
+import { Eyebrow } from "./ui/eyebrow";
+import { Button } from "./ui/button";
 
-// Internal page links (left column). Mirror the header nav.
-const pageLinks = [
+const EMAIL = "abraao.teodosio@gmail.com";
+
+// Internal navigation (cross-route safe so the footer works on /lab too).
+const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Work", href: "/#work" },
   { label: "Mentorship", href: "/#mentorship" },
   { label: "Lab", href: "/lab" },
 ];
 
-// External profiles (right column). Opens in a new tab.
-const externalLinks = [
+// External profiles. Real URLs (proto SOCIALS carried placeholders).
+const SOCIALS = [
   { label: "LinkedIn", href: "https://linkedin.com/in/abraaoalves" },
   { label: "GitHub", href: "https://github.com/abraaoalves" },
-  { label: "X", href: "https://x.com/abraao4lves" },
   { label: "Stack Overflow", href: "https://stackoverflow.com/users/815478" },
+  { label: "X", href: "https://x.com/abraao4lves" },
   { label: "CodePen", href: "https://codepen.io/AbraaoAlves" },
 ];
 
-// Giant ASCII wordmark, Ettrics-style. Background must match the footer bg so
-// the canvas panel is invisible; ink is a muted tone so the name reads as a
-// textural wordmark behind the links rather than shouting over them.
-const PAPER_LIGHT = "#faf9f7";
-const PAPER_DARK = "#121212";
-const INK_LIGHT = "#d8d3c8";
-const INK_DARK = "#2b2b2b";
-const FILL_SOURCE = "▓█▒▓░█";
+// The footer is a distinct slab (--footer-bg); the ASCII logo backdrop must use
+// that bg to stay invisible, with ink one step off full contrast per theme.
+const FOOTER_BG_LIGHT = "#e8e5dc";
+const FOOTER_BG_DARK = "#15171a";
+const LOGO_LIGHT = "#1d2022";
+const LOGO_DARK = "#e7e9e9";
 
-// Ettrics footer spotlight: the dim is triggered only while a link is actually
-// hovered/focused (`group-has-[a:hover]`), not just while the cursor is inside
-// the footer — so leaving a link onto empty space restores everything at once.
-// The hovered/focused link returns to full opacity (important, to beat the dim).
-const dimClass =
-  "transition-opacity duration-300 ease-out group-has-[a:hover]:opacity-40 group-has-[a:focus-visible]:opacity-40";
-const linkClass =
-  "text-4xl md:text-[2.5rem] leading-[1.2] font-light tracking-tight text-stone-900 dark:text-stone-50 " +
-  dimClass +
-  " hover:opacity-100! focus-visible:opacity-100!";
-
+/**
+ * Contact / footer from proto/index.html: a CTA block over an ASCII logo
+ * backdrop, three link columns (Navigate / Connect / Email), a version strip,
+ * and the ettrics spotlight — hovering any link dims everything else.
+ */
 export function Footer() {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
 
   return (
-    <footer className="group w-full border-t border-stone-200 bg-paper dark:border-stone-800 dark:bg-ink mt-auto">
-      {/* Giant ASCII name wordmark spanning the footer width, like ettrics.com.
-          Dims with the rest of the footer on hover (no hover override). */}
-      <div aria-hidden="true" className={"w-full overflow-hidden px-4 " + dimClass}>
-        <AsciiTextCanvas
-          text="ABRAÃO ALVES"
-          source={FILL_SOURCE}
-          speed={2}
-          fontSize={12}
-          weight={900}
-          threshold={0.25}
-          feather={0.5}
-          color={isDark ? INK_DARK : INK_LIGHT}
-          background={isDark ? PAPER_DARK : PAPER_LIGHT}
-          className="mx-auto w-full max-w-4xl h-[15vw] min-h-[90px] max-h-[180px]"
-          style={{ minHeight: 90 }}
-        />
-      </div>
-
-      <div className="container mx-auto max-w-4xl px-4 pb-12">
-        {/* Link columns on the left (both left-aligned, side by side, like
-            ettrics.com); descriptive theme switch pinned to the bottom-right. */}
-        <div className="flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
-          <div className="flex flex-col gap-10 sm:flex-row sm:gap-x-24">
-            <nav aria-label="Site">
-              <ul className="flex flex-col">
-                {pageLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className={linkClass}>
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            <nav aria-label="Elsewhere">
-              <ul className="flex flex-col">
-                {externalLinks.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={linkClass}
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+    <footer className="footer" id="contact">
+      <div className="wrap">
+        <Reveal className="foot-hero">
+          <div className="foot-logo-bg" aria-hidden="true">
+            <AsciiArtCanvas
+              art="logo"
+              ripple
+              source="abraãoalves△"
+              speed={3}
+              scale={0.18}
+              threshold={0.5}
+              fontSize={12}
+              color={isDark ? LOGO_DARK : LOGO_LIGHT}
+              background={isDark ? FOOTER_BG_DARK : FOOTER_BG_LIGHT}
+              className="aspect-square w-full"
+              style={{ minHeight: 0 }}
+            />
           </div>
 
-          <ThemeSwitch className={dimClass} />
+          <div className="foot-hero-text">
+            <Eyebrow>Contact</Eyebrow>
+            <p className="foot-cta">Let’s build something that lasts.</p>
+            <div className="btn-row">
+              <Button href={`mailto:${EMAIL}`} variant="primary" arrow>
+                Get in touch
+              </Button>
+              <Button
+                href="https://linkedin.com/in/abraaoalves"
+                variant="ghost"
+                newTab
+              >
+                LinkedIn
+              </Button>
+            </div>
+          </div>
+        </Reveal>
+
+        <div className="foot-cols">
+          <Reveal className="foot-col">
+            <h5>Navigate</h5>
+            <ul>
+              {NAV_LINKS.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href}>{l.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+
+          <Reveal className="foot-col" delay={0.06}>
+            <h5>Connect</h5>
+            <ul>
+              {SOCIALS.map((s) => (
+                <li key={s.label}>
+                  <a href={s.href} target="_blank" rel="noopener noreferrer">
+                    {s.label} <span className="ext">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+
+          <Reveal className="foot-col" delay={0.12}>
+            <h5>Email</h5>
+            <ul>
+              <li>
+                <a href={`mailto:${EMAIL}`}>
+                  {EMAIL} <span className="ext">↗</span>
+                </a>
+              </li>
+            </ul>
+          </Reveal>
         </div>
 
-        {/* Bottom strip: copyright (left) / meta (right). Dims as one unit. */}
-        <div className={"mt-12 flex flex-col gap-2 border-t border-stone-100 pt-6 text-sm text-stone-500 dark:border-stone-800/60 dark:text-stone-400 sm:flex-row sm:items-center sm:justify-between " + dimClass}>
-          <p>© {currentYear} Abraão Alves</p>
-          <p className="font-mono text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500">
-            v1.0
-          </p>
+        <div className="foot-bottom">
+          <span className="c">© {year} Abraão Alves</span>
+          <span className="v">V2.0</span>
         </div>
       </div>
     </footer>
