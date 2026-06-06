@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { Logo } from "./icons/logo";
 import { useLanguage } from "./language-provider";
 import { CONTENT } from "@/lib/content";
+import { localizeHref } from "@/lib/i18n";
 
 /**
  * Fixed top nav from proto/index.html: transparent until scrolled (then a
@@ -33,7 +34,7 @@ export function Header() {
 
   return (
     <header className={`nav${scrolled ? " scrolled" : ""}`}>
-      <Link className="brand" href="/" aria-label="Abraão Alves — home">
+      <Link className="brand" href={localizeHref("/", lang)} aria-label="Abraão Alves — home">
         <Logo className="mark" />
         <span className="name">Abraão Alves</span>
       </Link>
@@ -44,7 +45,7 @@ export function Header() {
         aria-label="Primary"
       >
         {navLinks.map((link) => (
-          <Link key={link.href} href={link.href}>
+          <Link key={link.href} href={localizeHref(link.href, lang)}>
             {link.label}
           </Link>
         ))}

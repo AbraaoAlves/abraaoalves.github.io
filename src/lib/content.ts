@@ -71,14 +71,16 @@ export type LangContent = {
     emailH: string;
     navLinks: [string, string][];
   };
+  /** Per-locale SEO strings for <head> (title/description). */
+  meta: { title: string; description: string };
 };
 
 export const CONTENT: Record<Lang, LangContent> = {
   en: {
     nav: { work: "Work", mentorship: "Mentorship", lab: "Lab", about: "About" },
     hero: {
-      eyebrow: "STAFF ENGINEER · ARCHITECT · MENTOR",
-      lead: "Building software that lasts — high-impact engineering, architecture, and mentorship since 2008.",
+      eyebrow: "SOFTWARE ENGINEER · CONSULTANT · MENTOR",
+      lead: "Building software that lasts with Javascript since 2008.",
       meta: ["Based in Brazil", "Remote", "Fluent English"],
       cue: "Scroll",
       ctaPrimary: "Get in touch",
@@ -211,6 +213,11 @@ export const CONTENT: Record<Lang, LangContent> = {
         ["Lab", "/lab"],
         ["About", "/about"],
       ],
+    },
+    meta: {
+      title: "Abraão Alves | Software Engineering & Mentorship",
+      description:
+        "Building software that lasts — 18+ years of high-impact engineering, architecture, and mentorship. From Assembly to AI infrastructure.",
     },
   },
 
@@ -351,6 +358,11 @@ export const CONTENT: Record<Lang, LangContent> = {
         ["Lab", "/lab"],
         ["Sobre", "/about"],
       ],
+    },
+    meta: {
+      title: "Abraão Alves | Engenharia de Software & Mentoria",
+      description:
+        "Software que não envelhece — 18+ anos de engenharia de alto impacto, arquitetura e mentoria. Do Assembly à infraestrutura de IA.",
     },
   },
 };

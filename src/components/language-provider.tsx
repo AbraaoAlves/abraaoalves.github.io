@@ -1,66 +1,60 @@
 "use client";
 
 import * as React from "react";
+import { usePathname, useRouter } from "next/navigation";
+import {
+  DEFAULT_LOCALE,
+  STORAGE_KEY,
+  extractLocale,
+  swapLocale,
+  type Locale,
+} from "@/lib/i18n";
 
-export type Lang = "en" | "pt";
+export type Lang = Locale;
 
 type LanguageContextValue = {
   lang: Lang;
   setLang: (lang: Lang) => void;
-  /** False until the persisted preference has been read on the client. */
+  /** False until hydrated on the client (for aria state that must match SSR). */
   mounted: boolean;
 };
 
 const LanguageContext = React.createContext<LanguageContextValue | null>(null);
 
-const STORAGE_KEY = "aa_lang";
-
-/** Same-tab subscribers, notified by setLang (the `storage` event is cross-tab only). */
-const listeners = new Set<() => void>();
-
-function subscribe(callback: () => void) {
-  listeners.add(callback);
-  window.addEventListener("storage", callback);
-  return () => {
-    listeners.delete(callback);
-    window.removeEventListener("storage", callback);
-  };
-}
-
-function readStored(): Lang {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored === "pt" || stored === "en") return stored;
-  } catch {
-    /* ignore */
-  }
-  return "en";
-}
+/** No-op store subscription — `mounted` only needs the server/client snapshot split. */
+const emptySubscribe = () => () => {};
 
 /**
- * Site language state (EN / PT), persisted to localStorage and reflected on
- * <html lang>. SSR/first paint default to "en" (matching layout); the stored
- * preference is read via useSyncExternalStore, which swaps in the client value
- * after hydration with no mismatch. Content consumption lives in the section
- * components (Phase G).
+ * Site language state, now driven by the URL (`/en/*`, `/pt/*`) for SEO — the
+ * locale is the first path segment, so server and client always agree (no
+ * hydration mismatch). `setLang` navigates to the equivalent path in the other
+ * locale and remembers the choice in localStorage for the root redirect. The
+ * `useLanguage()` API is unchanged, so consumers keep reading `CONTENT[lang]`.
  */
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const lang = React.useSyncExternalStore<Lang>(subscribe, readStored, () => "en");
-  // True once hydrated on the client; server/first paint report false.
-  const mounted = React.useSyncExternalStore(subscribe, () => true, () => false);
+  const pathname = usePathname();
+  const router = useRouter();
+  const lang = extractLocale(pathname) ?? DEFAULT_LOCALE;
+
+  // False on the server / first paint, true once hydrated — no setState-in-effect.
+  const mounted = React.useSyncExternalStore(emptySubscribe, () => true, () => false);
 
   React.useEffect(() => {
     document.documentElement.lang = lang;
   }, [lang]);
 
-  const setLang = React.useCallback((next: Lang) => {
-    try {
-      localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      /* ignore */
-    }
-    listeners.forEach((l) => l());
-  }, []);
+  const setLang = React.useCallback(
+    (next: Lang) => {
+      if (next === lang) return;
+      try {
+        localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        /* ignore */
+      }
+      router.push(swapLocale(pathname, next));
+    },
+    [lang, pathname, router]
+  );
 
   const value = React.useMemo(
     () => ({ lang, setLang, mounted }),

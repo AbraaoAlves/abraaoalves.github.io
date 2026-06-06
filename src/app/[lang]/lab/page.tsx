@@ -5,6 +5,7 @@ import { Reveal } from "@/components/reveal";
 import { SectionHead } from "@/components/ui/section-head";
 import { useLanguage } from "@/components/language-provider";
 import { CONTENT } from "@/lib/content";
+import { localizeHref } from "@/lib/i18n";
 import { posts } from "@/lib/posts";
 
 const postTags: Record<string, string> = {
@@ -30,7 +31,7 @@ export default function LabPage() {
           <div className="lab-grid">
             {posts.map((post, i) => (
               <Reveal key={post.slug} delay={i * 0.06}>
-                <Link href={`/lab/${post.slug}`} className="lab-item lab-item--link">
+                <Link href={localizeHref(`/lab/${post.slug}`, lang)} className="lab-item lab-item--link">
                   <span className="d">{post.date}</span>
                   <span className="ti">{post.title}</span>
                   <span className="tag">{postTags[post.slug] ?? "LAB"}</span>

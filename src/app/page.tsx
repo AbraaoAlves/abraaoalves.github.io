@@ -1,19 +1,15 @@
-import { Hero } from "@/components/hero";
-import { Geo, Work, Stack, Mentorship } from "@/components/sections";
+import type { Metadata } from "next";
+import { LocaleRedirect } from "@/components/locale-redirect";
 
-/**
- * Home — composed from the prototype (proto/index.html) section order:
- * Hero → Geo → Work (+migrations) → Stack → Mentorship → Roots → Lab.
- * The Footer/Contact block is rendered by the layout.
- */
-export default function Home() {
-  return (
-    <main className="flex flex-1 flex-col">
-      <Hero />
-      <Geo />
-      <Work />
-      <Stack />
-      <Mentorship />
-    </main>
-  );
+// The root carries no content of its own — it forwards to /en or /pt — so keep
+// it out of the index; crawlers reach the localized URLs via the sitemap.
+export const metadata: Metadata = {
+  robots: { index: false, follow: true },
+  alternates: {
+    languages: { en: "/en", pt: "/pt", "x-default": "/en" },
+  },
+};
+
+export default function RootRedirectPage() {
+  return <LocaleRedirect />;
 }

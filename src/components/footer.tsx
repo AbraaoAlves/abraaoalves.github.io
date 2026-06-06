@@ -8,6 +8,7 @@ import { Eyebrow } from "./ui/eyebrow";
 import { Button } from "./ui/button";
 import { useLanguage } from "./language-provider";
 import { CONTENT, SOCIALS } from "@/lib/content";
+import { localizeHref } from "@/lib/i18n";
 
 const EMAIL = "abraao.teodosio@gmail.com";
 
@@ -74,7 +75,7 @@ export function Footer() {
             <ul>
               {t.navLinks.map(([label, href]) => (
                 <li key={href}>
-                  <Link href={href}>{label}</Link>
+                  <Link href={localizeHref(href, lang)}>{label}</Link>
                 </li>
               ))}
             </ul>
