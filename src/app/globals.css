@@ -292,3 +292,38 @@ body::before {
   .nav-burger { display: grid; }
 }
 @media (max-width: 960px) and (min-width: 681px) { .brand .name { display: none; } }
+
+/* =========================================================================
+   Hero — proto/index.html
+   ========================================================================= */
+.hero { padding-top: clamp(120px, 17vh, 180px); padding-bottom: var(--sec); overflow: hidden; }
+.hero-grid {
+  display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.18fr);
+  gap: clamp(24px, 4vw, 72px); align-items: center;
+}
+.hero-left { display: flex; flex-direction: column; gap: clamp(22px, 3vw, 34px); }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+.hero-meta span {
+  font-family: var(--font-mono); font-size: var(--t-label); letter-spacing: .05em; color: var(--fg-2);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.hero-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--fg-3); }
+.scroll-cue {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--fg-2);
+}
+.scroll-cue .line { width: 40px; height: 1px; background: var(--line-2); position: relative; overflow: hidden; }
+.scroll-cue .line::after {
+  content: ""; position: absolute; inset: 0; width: 40%; background: var(--fg);
+  animation: cueslide 2.4s ease-in-out infinite;
+}
+@keyframes cueslide { 0%{transform:translateX(-100%)} 60%,100%{transform:translateX(280%)} }
+@media (prefers-reduced-motion: reduce) { .scroll-cue .line::after { animation: none; } }
+
+.ascii-name { width: 100%; }
+
+@media (max-width: 1080px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .ascii-name { order: -1; }
+}

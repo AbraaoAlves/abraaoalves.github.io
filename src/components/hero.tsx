@@ -1,108 +1,105 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { AsciiArtCanvas, AsciiTextCanvas } from "./asciiart";
+import { AsciiTextCanvas } from "./asciiart";
+import { Reveal } from "./reveal";
+import { Eyebrow } from "./ui/eyebrow";
+import { Button } from "./ui/button";
 
 /**
- * Ettrics-spirit hero: the geometric logo rendered as a faint ASCII watermark
- * fills the section background, with the name set as a bold ASCII wordmark in
- * front and a mono eyebrow above. Monochrome (warm paper + ink), theme-aware:
- * every canvas background matches the page so the panels stay invisible and
- * only the characters show.
+ * Hero from proto/index.html: a two-column grid — lead/meta/CTAs on the left,
+ * the name rendered as a shimmering ASCII wordmark on the right (collapses to a
+ * single column with the wordmark on top below 1080px).
+ *
+ * The ASCII canvas paints an opaque background, so it MUST match the page bg to
+ * stay invisible; colors flip with the theme. The shimmer is the existing
+ * engine's `ripple` shader clipped to the name mask.
  */
 
-// Page background per theme — MUST match <body> so canvas panels are invisible.
-const PAPER_LIGHT = "#faf9f7";
-const PAPER_DARK = "#121212";
-// Ink (the name): full-contrast paper/ink flip.
-const INK_LIGHT = "#121212";
-const INK_DARK = "#faf9f7";
-// Watermark (the logo): one subtle step off the paper so it reads as texture.
-const WATERMARK_LIGHT = "#ddd6c6";
-const WATERMARK_DARK = "#2e2e2e";
-// Shade blocks give the logo a clean faint silhouette (not scattered words).
-const WATERMARK_FILL = "▓▒░▓";
+// Page background per theme — MUST match --bg so the canvas panel is invisible.
+const PAPER_LIGHT = "#f6f5f2";
+const PAPER_DARK = "#0b0c0d";
+// ASCII ink — the proto's auto ascii-fg (one step off full contrast).
+const INK_LIGHT = "#1d2022";
+const INK_DARK = "#e7e9e9";
 
-// Shade-block fill keeps the wordmark silhouette legible (see hero recipe).
-const NAME_FILL = "▓█▒▓░█";
+const META = ["Based in Brazil", "Remote", "Fluent English"];
 
 export function Hero() {
   // resolvedTheme is undefined on the server / first paint → defaults to light.
-  // Theme only affects canvas *drawing* (props), not server-rendered markup,
-  // so there's no hydration mismatch and no mount guard is needed.
+  // Theme only affects canvas *drawing* (props), not server-rendered markup, so
+  // there is no hydration mismatch and no mount guard is needed.
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
   const paper = isDark ? PAPER_DARK : PAPER_LIGHT;
   const ink = isDark ? INK_DARK : INK_LIGHT;
-  const watermark = isDark ? WATERMARK_DARK : WATERMARK_LIGHT;
 
   return (
-    <section className="relative w-full min-h-[80vh] flex flex-col justify-center overflow-hidden py-16 md:py-24">
-      {/* Real accessible name — the canvases below are decorative. */}
+    <section className="hero section" id="top">
+      {/* Real accessible name — the canvas below is decorative. */}
       <h1 className="sr-only">
         Abraão Alves — software engineering, architecture, and mentorship
       </h1>
 
-      {/* Background watermark: the logo mark as faint ASCII, filling the hero. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-center justify-center"
-      >
-        <AsciiArtCanvas
-          art="logo"
-          ripple={false}
-          source={WATERMARK_FILL}
-          speed={1}
-          fontSize={12}
-          threshold={0.5}
-          color={watermark}
-          background={paper}
-          className="h-full w-full max-w-5xl"
-          style={{ minHeight: 0 }}
-        />
-      </div>
+      <div className="wrap">
+        <div className="hero-grid">
+          <div className="hero-left">
+            <Reveal>
+              <Eyebrow>Staff Engineer · Architect · Mentor</Eyebrow>
+            </Reveal>
 
-      {/* Foreground content. */}
-      <div className="relative z-10">
-        <p className="font-mono text-xs md:text-sm uppercase tracking-[0.16em] text-stone-500 dark:text-stone-400">
-          Staff Engineer · Architect · Mentor
-        </p>
+            <Reveal delay={0.08}>
+              <p className="lead">
+                Building software that lasts — high-impact engineering,
+                architecture, and mentorship since 2008.
+              </p>
+            </Reveal>
 
-        <div aria-hidden="true" className="mt-6 flex flex-col gap-1">
-          {/* One word per line so each fills the full width (width-bound auto-fit)
-              and reads as a bold wordmark instead of a small, centered block. */}
-          <AsciiTextCanvas
-            text="ABRAÃO"
-            source={NAME_FILL}
-            speed={2}
-            fontSize={12}
-            weight={900}
-            threshold={0.25}
-            feather={0.5}
-            color={ink}
-            background={paper}
-            className="w-full h-[16vw] min-h-[120px] max-h-[210px]"
-            style={{ minHeight: 120 }}
-          />
-          <AsciiTextCanvas
-            text="ALVES"
-            source={NAME_FILL}
-            speed={2}
-            fontSize={12}
-            weight={900}
-            threshold={0.25}
-            feather={0.5}
-            color={ink}
-            background={paper}
-            className="w-full h-[16vw] min-h-[120px] max-h-[210px]"
-            style={{ minHeight: 120 }}
-          />
+            <Reveal delay={0.16} className="hero-meta">
+              {META.map((m, i) => (
+                <span key={m}>
+                  {i > 0 ? <span className="dot" aria-hidden="true" /> : null}
+                  {m}
+                </span>
+              ))}
+            </Reveal>
+
+            <Reveal delay={0.24} className="btn-row">
+              <Button href="#contact" variant="primary" arrow>
+                Get in touch
+              </Button>
+              <Button href="#work" variant="ghost">
+                See selected work
+              </Button>
+            </Reveal>
+
+            <Reveal delay={0.32}>
+              <a href="#geo" className="scroll-cue">
+                <span className="line" aria-hidden="true" />
+                Scroll
+              </a>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.12} className="ascii-name">
+            {/* Shade-block source keeps the silhouette solid (letters dissolve
+                into noise at this density); the ripple shader shimmers it. */}
+            <AsciiTextCanvas
+              text={"ABRAÃO\nALVES"}
+              ripple
+              source="▓█▒▓░█"
+              speed={1.4}
+              scale={0.13}
+              threshold={0.34}
+              weight={900}
+              fontSize={11}
+              color={ink}
+              background={paper}
+              className="h-[30vw] min-h-[200px] max-h-[380px] w-full"
+              style={{ minHeight: 200 }}
+            />
+          </Reveal>
         </div>
-
-        <p className="mt-8 max-w-2xl text-lg md:text-xl leading-relaxed text-stone-600 dark:text-stone-300 text-balance">
-          Building software that lasts. High-impact engineering, architecture,
-          and mentorship since 2008.
-        </p>
       </div>
     </section>
   );

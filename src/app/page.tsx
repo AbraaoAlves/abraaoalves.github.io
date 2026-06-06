@@ -17,9 +17,11 @@ function SectionHeader({ ghost, label }: { ghost: string; label: string }) {
 
 export default function Home() {
   return (
-    <main className="flex-1 flex flex-col p-4 md:p-8 gap-32 md:gap-40 max-w-6xl mx-auto w-full mb-32">
+    <main className="flex flex-1 flex-col">
       <Hero />
 
+      {/* Legacy sections — replaced by the prototype sections in Phase E. */}
+      <div className="wrap flex flex-col gap-32 pb-32 md:gap-40">
       {/* WORK / IMPACT SECTION */}
       <section id="work" className="w-full scroll-mt-24">
         <Reveal><SectionHeader ghost="Work" label="Selected Impact" /></Reveal>
@@ -126,7 +128,7 @@ export default function Home() {
           </div>
         </Reveal>
       </section>
-
+      </div>
     </main>
   );
 }
