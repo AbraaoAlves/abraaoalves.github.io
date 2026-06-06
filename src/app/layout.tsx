@@ -6,6 +6,7 @@ import { LanguageProvider } from "@/components/language-provider";
 import { LenisProvider } from "@/components/lenis-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { FloatingControls } from "@/components/floating-controls";
 
 // Type system from proto/index.html (the source of truth):
 //   Space Grotesk 700 — display (headings, ghost text, names, brand)
@@ -89,6 +90,7 @@ export default function RootLayout({
                   {children}
                 </div>
                 <Footer />
+                <FloatingControls />
               </div>
             </LenisProvider>
           </LanguageProvider>

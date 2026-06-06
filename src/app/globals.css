@@ -270,24 +270,13 @@ body::before {
 .nav-links a:hover { color: var(--fg); }
 .nav-links a:hover::after { width: 100%; }
 
-.nav-tools { display: flex; align-items: center; gap: 14px; }
-.lang-toggle {
-  display: inline-flex; border: 1px solid var(--line-2); border-radius: 999px; overflow: hidden;
-}
-.lang-toggle button {
-  font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em;
-  padding: 5px 10px; background: transparent; border: 0; color: var(--fg-2); cursor: pointer;
-  transition: color .2s, background .2s;
-}
-.lang-toggle button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
-.theme-toggle { display: inline-flex; gap: 2px; }
+/* .icon-btn used by burger only */
 .icon-btn {
   width: 30px; height: 30px; display: grid; place-items: center;
   background: transparent; border: 1px solid transparent; border-radius: 8px;
   color: var(--fg-3); cursor: pointer; transition: color .2s, border-color .2s, background .2s;
 }
 .icon-btn:hover { color: var(--fg-1); }
-.icon-btn[aria-pressed="true"] { color: var(--fg); border-color: var(--line-2); background: var(--bg-1); }
 .icon-btn svg { width: 16px; height: 16px; }
 .nav-burger { display: none; }
 
@@ -301,6 +290,82 @@ body::before {
   .nav-burger { display: grid; }
 }
 @media (max-width: 960px) and (min-width: 681px) { .brand .name { display: none; } }
+
+/* =========================================================================
+   Floating controls — fixed bottom-right: language dropdown + theme toggle
+   ========================================================================= */
+.floating-controls {
+  position: fixed; bottom: 24px; right: 24px; z-index: 100;
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 8px;
+  background: color-mix(in srgb, var(--bg-1) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  box-shadow: 0 4px 20px -4px rgba(0,0,0,.18);
+  transition: background .4s, border-color .4s;
+}
+
+/* divider between lang and theme */
+.fc-divider {
+  width: 1px; height: 18px;
+  background: var(--line-2);
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
+/* --- Language dropdown --- */
+.fc-lang { position: relative; }
+
+.fc-lang-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 8px 4px 6px;
+  background: transparent; border: 0; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .05em;
+  color: var(--fg-2); cursor: pointer;
+  transition: color .2s, background .2s;
+}
+.fc-lang-btn:hover { color: var(--fg); background: color-mix(in srgb, var(--fg) 8%, transparent); }
+.fc-lang-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+.fc-lang-label { white-space: nowrap; }
+@media (max-width: 480px) { .fc-lang-label { display: none; } }
+
+.fc-chevron { transition: transform .2s ease; }
+.fc-chevron.open { transform: rotate(180deg); }
+
+.fc-lang-menu {
+  position: absolute; bottom: calc(100% + 8px); left: 0;
+  min-width: 120px; margin: 0; padding: 4px 0; list-style: none;
+  background: var(--bg-1);
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px -6px rgba(0,0,0,.22);
+  overflow: hidden;
+}
+.fc-lang-menu li[aria-selected="true"] button { color: var(--fg); }
+.fc-lang-menu button {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  width: 100%; padding: 8px 14px;
+  background: transparent; border: 0;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .05em;
+  color: var(--fg-2); cursor: pointer; text-align: left;
+  transition: background .15s, color .15s;
+}
+.fc-lang-menu button:hover { background: color-mix(in srgb, var(--fg) 8%, transparent); color: var(--fg); }
+.fc-check { font-size: 11px; color: var(--fg-2); }
+
+/* --- Theme icons in the widget --- */
+.fc-theme { display: inline-flex; gap: 1px; }
+
+.fc-icon-btn {
+  width: 28px; height: 28px; display: grid; place-items: center;
+  background: transparent; border: 1px solid transparent; border-radius: 8px;
+  color: var(--fg-3); cursor: pointer; transition: color .2s, border-color .2s, background .2s;
+}
+.fc-icon-btn:hover { color: var(--fg-1); }
+.fc-icon-btn[aria-pressed="true"] { color: var(--fg); border-color: var(--line-2); background: color-mix(in srgb, var(--fg) 8%, transparent); }
+.fc-icon-btn svg { width: 14px; height: 14px; }
 
 /* =========================================================================
    Hero — proto/index.html
