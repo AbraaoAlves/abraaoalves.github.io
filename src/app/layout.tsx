@@ -7,6 +7,7 @@ import { LenisProvider } from "@/components/lenis-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { FloatingControls } from "@/components/floating-controls";
+import { BootSplash } from "@/components/boot-splash";
 
 // Type system from proto/index.html (the source of truth):
 //   Space Grotesk 700 — display (headings, ghost text, names, brand)
@@ -75,6 +76,8 @@ export default function RootLayout({
             __html: "try{document.documentElement.classList.add('js-anim')}catch(e){}",
           }}
         />
+        {/* Cold-load splash — paints on first byte, fades out after hydration. */}
+        <BootSplash />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
