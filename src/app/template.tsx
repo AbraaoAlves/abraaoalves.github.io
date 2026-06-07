@@ -1,27 +1,13 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
-
 /**
- * Per-route entrance animation. Two correctness constraints:
+ * Per-route entrance. CSS-only (no framer-motion) so the server-rendered HTML is
+ * always visible even before/without JS — important for a static export and for
+ * crawlers. The animation is transform-only (a small slide, never an opacity
+ * fade), gated on `.js-anim` and disabled under `prefers-reduced-motion` in
+ * globals.css (`.route-enter`). Dropping framer-motion here removes ~38KB gzip
+ * from every route — it was this file's only consumer.
  *
- * 1. Respect `prefers-reduced-motion` — when set, render with no animation
- *    (`initial={false}` makes Framer mount directly at the target state).
- * 2. Never ship invisible content. The reveal is transform-only (a small slide),
- *    not an opacity fade, so the server-rendered HTML is always visible even
- *    before/without JS — important for a static export and for crawlers.
+ * No client hooks remain, so this is a server component (less client JS).
  */
 export default function Template({ children }: { children: React.ReactNode }) {
-  const reduce = useReducedMotion();
-
-  return (
-    <motion.div
-      initial={reduce ? false : { y: 8 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-      className="flex flex-col flex-1 w-full"
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className="route-enter flex flex-col flex-1 w-full">{children}</div>;
 }

@@ -550,3 +550,17 @@ body::before {
   .reveal, .js-anim .reveal { opacity: 1 !important; transform: none !important; transition: none; }
 }
 .reveal-force { opacity: 1 !important; transform: none !important; transition: none !important; }
+
+/* =========================================================================
+   Route entrance — replaces the former framer-motion template. Transform-only
+   (no opacity fade) so content is always visible even if the animation never
+   runs (no-JS, crawlers). Gated on .js-anim (added pre-paint by the layout
+   script); off under reduced-motion.
+   ========================================================================= */
+/* fill=backwards (not both): hold the start frame before running, but revert to
+   the base style after — so the finished element has NO transform. `both` would
+   leave an identity-matrix transform that establishes a containing block,
+   trapping any descendant `position: fixed`/`sticky`. */
+.js-anim .route-enter { animation: route-enter .35s cubic-bezier(.2,.7,.2,1) backwards; }
+@keyframes route-enter { from { transform: translateY(8px); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .js-anim .route-enter { animation: none; } }
