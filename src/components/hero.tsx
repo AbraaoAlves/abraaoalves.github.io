@@ -87,7 +87,7 @@ export function Hero() {
               text={"ABRAÃO\nALVES"}
               ripple
               source="▓█▒▓░█"
-              speed={1.4}
+              speed={1.2}
               scale={0.13}
               threshold={0.34}
               weight={900}
