@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 /**
  * Cold-load splash for slow connections. Client components are still
@@ -36,40 +35,57 @@ const BOOT_CSS = `
 `;
 
 export function BootSplash() {
-  const pathname = usePathname();
-  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    if (pathname === "/") {
-      el.classList.remove("is-hidden");
-      return;
-    }
-
     const frame = requestAnimationFrame(() => {
-      el.classList.add("is-hidden");
+      setVisible(false);
     });
 
     return () => cancelAnimationFrame(frame);
-  }, [pathname]);
+  }, [setVisible]);
+
+  if (!visible) return null;
 
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: BOOT_CSS }} />
       <noscript>
-        <style dangerouslySetInnerHTML={{ __html: "#boot-splash{display:none!important}" }} />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: "#boot-splash{display:none!important}",
+          }}
+        />
       </noscript>
-      <div id="boot-splash" ref={ref} aria-hidden="true">
+      <div id="boot-splash" aria-hidden="true">
         <div className="bs-inner">
           {/* Monochrome site mark (two-tone via opacity), inherits color. */}
-          <svg viewBox="344 -44 680 680" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Abraão Alves">
-            <path fill="currentColor" fillRule="evenodd"
-              d="M374,565 L684.4,27.3 L995,565 Z M684.4,207.3 L477.9,565 L891.1,565 Z" />
-            <path fill="currentColor" opacity="0.55" d="M995.8,562.4L837.4,471.8L685.2,210.1L684.8,27.7l311,534.7Z" />
-            <path fill="currentColor" opacity="0.55" d="M550,565.7l103.1,0.8L738.2,420.3L686.6,330.9L550,565.7Z" />
-            <path fill="currentColor" opacity="0.55" d="M999.6,562.5l-108.1,1.3l-55,-93.2l163.1,91.9Z" />
+          <svg
+            viewBox="344 -44 680 680"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Abraão Alves"
+          >
+            <path
+              fill="currentColor"
+              fillRule="evenodd"
+              d="M374,565 L684.4,27.3 L995,565 Z M684.4,207.3 L477.9,565 L891.1,565 Z"
+            />
+            <path
+              fill="currentColor"
+              opacity="0.55"
+              d="M995.8,562.4L837.4,471.8L685.2,210.1L684.8,27.7l311,534.7Z"
+            />
+            <path
+              fill="currentColor"
+              opacity="0.55"
+              d="M550,565.7l103.1,0.8L738.2,420.3L686.6,330.9L550,565.7Z"
+            />
+            <path
+              fill="currentColor"
+              opacity="0.55"
+              d="M999.6,562.5l-108.1,1.3l-55,-93.2l163.1,91.9Z"
+            />
           </svg>
           <span className="bs-text">loading…</span>
         </div>
