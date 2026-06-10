@@ -239,11 +239,11 @@ export const CONTENT: Record<Lang, LangContent> = {
       quotes: [
         {
           t: "Working with Abraão is knowing your engineering foundation is in safe hands. I had the privilege of seeing his growth — evolving from mid-level developer to the software architect responsible for our entire authentication.",
-          by: "On mentoring Hiléo Andersson",
+          by: "Senior engineer — mentored at Beakyn",
         },
         {
           t: "His contribution goes far beyond delivering functional code. He's one of those rare professionals who combines a strong product-first mindset with impeccable technical rigor.",
-          by: "On mentoring Lamartine",
+          by: "Engineer — mentored at Beakyn",
         },
       ],
     },
@@ -470,11 +470,11 @@ export const CONTENT: Record<Lang, LangContent> = {
       quotes: [
         {
           t: "Trabalhar com o Abraão é ter a certeza de que sua base de engenharia está em boas mãos. Tive o privilégio de acompanhar seu crescimento — de desenvolvedor pleno a arquiteto de software responsável por toda a nossa autenticação.",
-          by: "Sobre mentorar Hiléo Andersson",
+          by: "Engenheiro sênior — mentorado na Beakyn",
         },
         {
           t: "A contribuição dele vai muito além de código que funciona. É um daqueles profissionais raros que une visão de produto com rigor técnico de verdade.",
-          by: "Sobre mentorar Lamartine",
+          by: "Engenheiro — mentorado na Beakyn",
         },
       ],
     },
