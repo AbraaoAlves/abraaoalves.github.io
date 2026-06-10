@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LOCALES, isLocale } from "@/lib/i18n";
 import { CONTENT } from "@/lib/content";
+import { JsonLd } from "@/components/json-ld";
+import { personLd } from "@/lib/structured-data";
 
 /** Build a static page per locale: /en/* and /pt/*. */
 export function generateStaticParams() {
@@ -40,5 +42,10 @@ export default async function LangLayout({
 }) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
-  return <>{children}</>;
+  return (
+    <>
+      <JsonLd data={personLd} />
+      {children}
+    </>
+  );
 }
