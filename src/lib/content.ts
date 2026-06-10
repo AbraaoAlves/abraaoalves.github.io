@@ -17,6 +17,10 @@ export type LangContent = {
     ctaPrimary: string;
     ctaSecondary: string;
   };
+  /** Outcome metrics band on the home (after Hero). Each cell links to proof. */
+  proof: {
+    items: { figure: string; label: string; href: string }[];
+  };
   geo: {
     eyebrow: string;
     ghost: string;
@@ -101,6 +105,14 @@ export const CONTENT: Record<Lang, LangContent> = {
       cue: "Scroll",
       ctaPrimary: "Get in touch",
       ctaSecondary: "See selected work",
+    },
+    proof: {
+      items: [
+        { figure: "10s → 800ms", label: "Query latency, redesigned", href: "/work/smartscout-geospatial" },
+        { figure: "100k+", label: "Records rendered client-side", href: "/work/smartscout-geospatial" },
+        { figure: "5", label: "Stack migrations led end-to-end", href: "/#work" },
+        { figure: "9 yrs", label: "One platform — prototype to acquisition", href: "/work/smartscout-geospatial" },
+      ],
     },
     geo: {
       eyebrow: "GEOSPATIAL",
@@ -328,6 +340,14 @@ export const CONTENT: Record<Lang, LangContent> = {
       cue: "Rolar",
       ctaPrimary: "Fale comigo",
       ctaSecondary: "Ver trabalhos",
+    },
+    proof: {
+      items: [
+        { figure: "10s → 800ms", label: "Latência de consulta, redesenhada", href: "/work/smartscout-geospatial" },
+        { figure: "100k+", label: "Registros renderizados no cliente", href: "/work/smartscout-geospatial" },
+        { figure: "5", label: "Migrações lideradas de ponta a ponta", href: "/#work" },
+        { figure: "9 anos", label: "Um produto — do protótipo à aquisição", href: "/work/smartscout-geospatial" },
+      ],
     },
     geo: {
       eyebrow: "GEOESPACIAL",

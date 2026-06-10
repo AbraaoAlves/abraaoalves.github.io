@@ -700,6 +700,65 @@ body::before {
     order: -1;
 }
 
+/* Proof band — outcome metrics between Hero and Geo (sections/proof.tsx).
+   Static figures, hairline-bounded; no count-up, no cards, no icons. */
+.proof {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+.proof-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+.proof-cell {
+    border-left: 1px solid var(--line);
+}
+.proof-cell:first-child {
+    border-left: none;
+}
+.proof-link {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: clamp(26px, 3.4vw, 42px) clamp(16px, 1.8vw, 28px);
+    color: inherit;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+.proof-link:hover {
+    background: color-mix(in srgb, var(--fg) 4%, transparent);
+}
+.proof-cell .fig {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(26px, 3vw, 40px);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--fg);
+}
+.proof-cell .lbl {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-2);
+    line-height: 1.4;
+}
+@media (max-width: 720px) {
+    .proof-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .proof-cell:nth-child(odd) {
+        border-left: none;
+    }
+    .proof-cell:nth-child(even) {
+        border-left: 1px solid var(--line);
+    }
+    .proof-cell:nth-child(n + 3) {
+        border-top: 1px solid var(--line);
+    }
+}
+
 /* =========================================================================
    Sections — proto/index.html (Geo, Work + migrations, Stack, Mentorship,
    Roots, Lab). Ported verbatim.

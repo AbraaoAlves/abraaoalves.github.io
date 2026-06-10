@@ -1,5 +1,5 @@
 import { Hero } from "@/components/hero";
-import { Geo, Work, Stack, Mentorship } from "@/components/sections";
+import { Geo, Proof, Work, Stack, Mentorship } from "@/components/sections";
 
 /**
  * Home — composed from the prototype (proto/index.html) section order:
@@ -10,6 +10,7 @@ export default function Home() {
   return (
     <main className="flex flex-1 flex-col">
       <Hero />
+      <Proof />
       <Geo />
       <Work />
       <Stack />
