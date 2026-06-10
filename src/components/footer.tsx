@@ -54,16 +54,22 @@ export function Footer() {
           <div className="foot-hero-text">
             <Eyebrow>{t.eyebrow}</Eyebrow>
             <p className="foot-cta">{t.cta}</p>
+            {/* Dual-intent: let recruiters and project leads self-identify so
+                the email lands pre-triaged (distinct mailto subjects). */}
             <div className="btn-row">
-              <Button href={`mailto:${EMAIL}`} variant="primary" arrow>
-                {t.ctaLink}
+              <Button
+                href={`mailto:${EMAIL}?subject=${encodeURIComponent(t.hireSubject)}`}
+                variant="primary"
+                arrow
+              >
+                {t.hireLabel}
               </Button>
               <Button
-                href="https://linkedin.com/in/abraaoalves"
+                href={`mailto:${EMAIL}?subject=${encodeURIComponent(t.projectSubject)}`}
                 variant="ghost"
-                newTab
+                arrow
               >
-                LinkedIn
+                {t.projectLabel}
               </Button>
             </div>
           </div>

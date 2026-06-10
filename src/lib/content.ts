@@ -73,7 +73,12 @@ export type LangContent = {
   contact: {
     eyebrow: string;
     cta: string;
-    ctaLink: string;
+    /** Dual-intent CTAs: recruiters vs. project/partner inquiries. The *Subject
+     *  strings pre-fill the mailto subject so Abraão can triage his inbox. */
+    hireLabel: string;
+    hireSubject: string;
+    projectLabel: string;
+    projectSubject: string;
     navH: string;
     connectH: string;
     emailH: string;
@@ -288,7 +293,10 @@ export const CONTENT: Record<Lang, LangContent> = {
     contact: {
       eyebrow: "CONTACT",
       cta: "Let’s build something that lasts.",
-      ctaLink: "Get in touch",
+      hireLabel: "I’m hiring",
+      hireSubject: "Hiring Abraão — let’s talk",
+      projectLabel: "I have a project",
+      projectSubject: "Project inquiry for Abraão",
       navH: "Navigate",
       connectH: "Connect",
       emailH: "Email",
@@ -508,7 +516,10 @@ export const CONTENT: Record<Lang, LangContent> = {
     contact: {
       eyebrow: "CONTATO",
       cta: "Vamos construir algo que dure de verdade.",
-      ctaLink: "Fale comigo",
+      hireLabel: "Estou contratando",
+      hireSubject: "Contratação — vamos conversar",
+      projectLabel: "Tenho um projeto",
+      projectSubject: "Proposta de projeto",
       navH: "Navegar",
       connectH: "Conectar",
       emailH: "Email",
