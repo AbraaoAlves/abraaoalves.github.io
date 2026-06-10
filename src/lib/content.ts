@@ -33,6 +33,8 @@ export type LangContent = {
       year: string;
       desc: string;
       bullets: string[];
+      /** When set, the item links to a case-study page at /work/<caseSlug>. */
+      caseSlug?: string;
     }[];
     migLabel: string;
     migrations: { from: string; to: string; why: string }[];
@@ -121,6 +123,7 @@ export const CONTENT: Record<Lang, LangContent> = {
             "Designed a serverless data pipeline in Go that has run autonomously for 2+ years after I trained the team to own it.",
             "Built the 2018 DX foundation — CI/CD, PR preview environments, devcontainers — still in production seven years later.",
           ],
+          caseSlug: "smartscout-geospatial",
         },
         {
           role: "Enterprise Infrastructure Migration",
@@ -343,6 +346,7 @@ export const CONTENT: Record<Lang, LangContent> = {
             "Projetei um pipeline de dados serverless em Go que roda sem intervenção há mais de 2 anos, depois de treinar o time para tocá-lo sozinho.",
             "Montei a base de DX em 2018 — CI/CD, ambientes de preview por PR, devcontainers — em produção até hoje, sete anos depois.",
           ],
+          caseSlug: "smartscout-geospatial",
         },
         {
           role: "Migração de Infraestrutura Enterprise",

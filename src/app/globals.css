@@ -797,6 +797,30 @@ body::before {
     padding: 5px 13px;
     align-self: start;
 }
+.work-item .role .case-link {
+    align-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: var(--t-label);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-2);
+    padding-bottom: 3px;
+    transition: border-color 0.2s ease;
+}
+.work-item .role .case-link span {
+    transition: transform 0.2s ease;
+}
+.work-item .role .case-link:hover {
+    border-color: var(--fg);
+}
+.work-item .role .case-link:hover span {
+    transform: translateX(3px);
+}
 
 /* migrations strip */
 .migrations {

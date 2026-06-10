@@ -1,14 +1,20 @@
 "use client";
 
+import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { SectionHead } from "@/components/ui/section-head";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { useLanguage } from "@/components/language-provider";
 import { CONTENT } from "@/lib/content";
+import { localizeHref } from "@/lib/i18n";
+
+// Localized label for the case-study link (items carrying a `caseSlug`).
+const caseCta: Record<string, string> = { en: "Read the case", pt: "Ler o case" };
 
 /**
  * Work section from proto/index.html: a hairline list of roles (index / role +
- * org + year + bullets) followed by the five-migrations strip.
+ * org + year + bullets) followed by the five-migrations strip. Items with a
+ * `caseSlug` get a "Read the case →" link to their /work/<slug> deep-dive.
  */
 export function Work() {
   const { lang } = useLanguage();
@@ -30,6 +36,15 @@ export function Work() {
                 <div className="meta-r">
                   <span className="yr">{it.year}</span>
                 </div>
+                {it.caseSlug ? (
+                  <Link
+                    href={localizeHref(`/work/${it.caseSlug}`, lang)}
+                    className="case-link"
+                  >
+                    {caseCta[lang] ?? caseCta.en}{" "}
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                ) : null}
               </div>
               <ul className="bullets">
                 {it.bullets.map((b) => (

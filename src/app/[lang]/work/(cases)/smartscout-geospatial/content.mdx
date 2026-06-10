@@ -1,0 +1,77 @@
+# SmartScout — Geographic Audience Intelligence
+
+**Beakyn · for OUTFRONT Media (NYSE: OUT) · 2017 – 2026**
+
+For nine years I owned the interactive map at the heart of SmartScout, a geographic
+audience-intelligence platform that OUTFRONT Media — one of the largest out-of-home
+advertising companies in the US — first licensed, then acquired. I joined as a founding
+member of the Brazil engineering team when it was still a prototype, and stayed through
+MVP, licensing, exclusivity, acquisition, and the enterprise migration that closed the
+loop. Few engineers get to watch their own architectural decisions age for almost a
+decade. This is what I learned doing it.
+
+## The brief: 100,000 records that had to feel instant
+
+SmartScout answers a deceptively simple question for media planners: *who is near this
+billboard, and are they the audience I'm paying for?* Answering it means holding 100,000+
+geographic records — demographics, movement, audience segments — in the browser at once,
+and letting a planner pan, zoom, filter, and re-segment without ever waiting on a spinner.
+
+The first version couldn't. Filters were flat: every change recomputed the entire set on
+the main thread, and the map dropped frames the moment a planner got curious. A tool that
+punishes curiosity doesn't get used.
+
+## Why flat filters had to die
+
+The fix wasn't a faster filter — it was a different *shape* of data. We replaced ad-hoc
+flat filters with 200+ **pre-computed personas**: named, reusable audience definitions
+calculated ahead of time, so the client only ever swaps between ready answers instead of
+recomputing from raw rows. That single decision moved the expensive work off the critical
+path and dropped query latency from ~10 seconds to under 800ms.
+
+## The architecture
+
+I architected the rebuild around three load-bearing ideas:
+
+- **React + redux-saga** for predictable orchestration of long-running, cancelable map
+  interactions.
+- **Web Workers** to keep parsing, indexing, and persona math off the main thread, so the
+  map kept its frame budget under real browser memory pressure.
+- **A query layer that spoke in personas, not rows** — the UI asked for an *answer*, never
+  for data to crunch.
+
+```ts
+// Illustrative: personas resolve off the main thread, so the map only ever
+// renders a ready answer — never the raw 100k rows.
+const worker = new Worker(new URL("./persona.worker.ts", import.meta.url));
+
+worker.postMessage({ type: "resolve", personaId, viewport });
+
+worker.onmessage = ({ data }) => {
+  // data.points is already filtered + binned for the current viewport.
+  mapStore.dispatch(renderPersona(data.points));
+};
+```
+
+## The data pipeline
+
+Behind the map, a **serverless data pipeline in Go** ingested raw sources and pre-computed
+the persona layers. I designed it to be boring on purpose: it has run autonomously for 2+
+years after I trained the team to own it — no heroics, no pager.
+
+## What owning it for nine years taught me
+
+The developer-experience foundation I built in 2018 — CI/CD, PR preview environments,
+devcontainers — is still in production seven years later. That's the real test of
+architecture: not how clever it looks at launch, but whether it's still load-bearing after
+the people, the company, and the requirements have all changed. When OUTFRONT acquired the
+product in 2025, I led the migration into their enterprise environment myself — because I
+was the person who knew where every decision was buried.
+
+## Trade-offs I'd make again — and one I wouldn't
+
+Pre-computing personas trades flexibility for speed: a brand-new ad-hoc question still
+needs a pipeline run. I'd make that trade again — planners value an instant answer over an
+infinite menu of slow ones. The thing I'd revisit: I let the worker message protocol grow
+organically. Next time I'd version that contract from day one, the same way I'd version a
+public API.
