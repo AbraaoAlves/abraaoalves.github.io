@@ -610,6 +610,51 @@ body::before {
     border-radius: 50%;
     background: var(--fg-3);
 }
+.hero-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    align-self: start;
+    font-family: var(--font-mono);
+    font-size: var(--t-label);
+    letter-spacing: 0.04em;
+    color: var(--fg-1);
+}
+.hero-status .dot-live {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--fg);
+    flex: none;
+}
+.hero-status .dot-live::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid var(--fg);
+    opacity: 0.4;
+    animation: dot-pulse 2.4s ease-out infinite;
+}
+@keyframes dot-pulse {
+    0% {
+        transform: scale(0.55);
+        opacity: 0.5;
+    }
+    70% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-status .dot-live::after {
+        animation: none;
+    }
+}
 .scroll-cue {
     display: inline-flex;
     align-items: center;

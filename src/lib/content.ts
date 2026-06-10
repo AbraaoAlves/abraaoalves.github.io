@@ -11,6 +11,8 @@ export type LangContent = {
     eyebrow: string;
     lead: string;
     meta: string[];
+    /** "Open to work" signal recruiters scan for, near the hero CTAs. */
+    availability: string;
     cue: string;
     ctaPrimary: string;
     ctaSecondary: string;
@@ -95,6 +97,7 @@ export const CONTENT: Record<Lang, LangContent> = {
       eyebrow: "SOFTWARE ENGINEER · FULL-STACK",
       lead: "Building software that lasts with Javascript since 2008.",
       meta: ["Based in Brazil", "Remote", "Fluent English"],
+      availability: "Open to Staff / Principal roles & select projects",
       cue: "Scroll",
       ctaPrimary: "Get in touch",
       ctaSecondary: "See selected work",
@@ -321,6 +324,7 @@ export const CONTENT: Record<Lang, LangContent> = {
       eyebrow: "STAFF ENGINEER · ARQUITETO · MENTOR",
       lead: "Software que não envelhece — dezoito anos de engenharia de alto impacto, arquitetura e mentoria.",
       meta: ["Brasil", "Remoto", "Inglês fluente"],
+      availability: "Aberto a vagas Staff / Principal e projetos selecionados",
       cue: "Rolar",
       ctaPrimary: "Fale comigo",
       ctaSecondary: "Ver trabalhos",

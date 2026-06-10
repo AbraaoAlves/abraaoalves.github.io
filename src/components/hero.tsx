@@ -63,6 +63,11 @@ export function Hero() {
               ))}
             </Reveal>
 
+            <Reveal delay={0.2} className="hero-status">
+              <span className="dot-live" aria-hidden="true" />
+              {t.availability}
+            </Reveal>
+
             <Reveal delay={0.24} className="btn-row">
               <Button href="#contact" variant="primary" arrow>
                 {t.ctaPrimary}
