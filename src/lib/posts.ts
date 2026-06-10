@@ -8,7 +8,8 @@ export type Post = {
   title: string;
   date: string;
   tag: string;
-  excerpt: string;
+  /** One-line claim shown under the title in the Lab listing (bilingual). */
+  excerpt: { en: string; pt: string };
 };
 
 export const posts: Post[] = [
@@ -17,7 +18,9 @@ export const posts: Post[] = [
     title: "The GOTO Lesson",
     date: "May 30, 2026",
     tag: "CRAFT",
-    excerpt:
-      "Why my failing grade on a digital marquee in 2000 taught me the most important rule of software architecture: code is for humans first.",
+    excerpt: {
+      en: "A failing grade on a 2000 microcontroller project taught me software's first rule: code is for humans.",
+      pt: "Uma nota baixa num projeto de microcontrolador em 2000 me ensinou a 1ª regra do software: código é para humanos.",
+    },
   },
 ];

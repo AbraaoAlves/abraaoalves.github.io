@@ -1180,11 +1180,28 @@ body::before {
     color: var(--fg-2);
     letter-spacing: 0.03em;
 }
+.lab-item .ti-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
 .lab-item .ti {
     font-family: var(--font-display);
     font-weight: 700;
     font-size: clamp(18px, 2vw, 24px);
     letter-spacing: -0.01em;
+}
+.lab-item .ex {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--fg-2);
+    max-width: 68ch;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 .lab-item .tag {
     font-family: var(--font-mono);

@@ -29,7 +29,10 @@ export default function LabPage() {
               <Reveal key={post.slug} delay={i * 0.06}>
                 <Link href={localizeHref(`/lab/${post.slug}`, lang)} className="lab-item lab-item--link">
                   <span className="d">{post.date}</span>
-                  <span className="ti">{post.title}</span>
+                  <span className="ti-wrap">
+                    <span className="ti">{post.title}</span>
+                    <span className="ex">{post.excerpt[lang]}</span>
+                  </span>
                   <span className="tag">{post.tag}</span>
                 </Link>
               </Reveal>
