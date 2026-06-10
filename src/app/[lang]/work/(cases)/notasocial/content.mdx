@@ -1,0 +1,49 @@
+# NotaSocial — Founder & Full-Stack Engineer
+
+**Fortaleza, Brazil · 2014 – 2016**
+
+Before I spent nine years deep in one platform, I built one from nothing. NotaSocial was a
+mobile-first donation platform that turned an everyday Brazilian habit — asking for a *nota
+fiscal* (electronic invoice) at the checkout — into a frictionless way to fund charities. I
+founded it and owned the entire stack: Ionic on the phone, Node.js and MongoDB on the
+server, OCR in between, and no dedicated PM or designer to hide behind.
+
+## The idea: receipts that give
+
+In Brazil, consumers can assign their electronic invoices to a registered charity, turning
+everyday spending into tax-deductible donations. The mechanism existed; the experience
+didn't. Using it meant hoarding paper receipts and typing long codes into a clunky
+government portal — so almost nobody did. NotaSocial collapsed that into three taps: snap
+the receipt, pick a cause, done.
+
+## Building it solo
+
+The interesting engineering lived in the seam between a photo and a donation. The app
+scanned a receipt, OCR'd the 44-digit invoice access key, validated it, and registered the
+donation against the chosen charity.
+
+```ts
+// The 44-digit access key is the spine of a Brazilian e-invoice. OCR is
+// noisy, so we validated structure + check digit before trusting a scan.
+function parseAccessKey(raw: string): string | null {
+  const digits = raw.replace(/\D/g, "");
+  if (digits.length !== 44) return null;
+  return isValidCheckDigit(digits) ? digits : null;
+}
+```
+
+Owning the whole stack alone forces a kind of honesty: every shortcut is one you'll
+maintain, and every abstraction has to earn its keep — there's no one else to explain it to.
+
+## Validation
+
+NotaSocial took **1st place at the III Startup Weekend Fortaleza** and was one of **12 global
+finalists at the Global Startup Battle 2014**, out of thousands of teams worldwide. Not bad
+for a receipt scanner.
+
+## What zero-to-one taught me
+
+Founding NotaSocial is why I now read architecture decisions the way I do — not as
+abstractions, but as bets someone has to live with. The instinct to build software that
+lasts didn't come from a big company. It came from being the person who answered the pager
+at 2am for something I'd shipped myself.

@@ -27,4 +27,13 @@ export const cases: Case[] = [
       "Owning a geospatial audience-intelligence platform end-to-end for nine years — prototype to acquisition — and the architecture that kept 100,000+ records live in the browser at sub-800ms.",
     tag: "GEOSPATIAL",
   },
+  {
+    slug: "notasocial",
+    title: "NotaSocial — Founder & Full-Stack Engineer",
+    org: "Fortaleza, Brazil",
+    year: "2014 — 2016",
+    summary:
+      "Founding and building a mobile donation platform on Brazilian e-invoices — solo, full-stack — to 1st place at Startup Weekend and a global top-12 finish.",
+    tag: "FOUNDER",
+  },
 ];

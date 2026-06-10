@@ -14,6 +14,7 @@ const PAGES: { path: string; changeFrequency: "monthly" | "weekly" | "yearly"; p
   { path: "/lab/rendering-100k-points", changeFrequency: "yearly", priority: 0.6 },
   { path: "/lab/aurelia-to-react", changeFrequency: "yearly", priority: 0.6 },
   { path: "/work/smartscout-geospatial", changeFrequency: "yearly", priority: 0.7 },
+  { path: "/work/notasocial", changeFrequency: "yearly", priority: 0.6 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
