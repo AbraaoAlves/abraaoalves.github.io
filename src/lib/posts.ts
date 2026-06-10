@@ -14,6 +14,26 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "aurelia-to-react",
+    title: "Why I migrated a whole team from Aurelia to React",
+    date: "June 8, 2026",
+    tag: "ARCHITECTURE",
+    excerpt: {
+      en: "The decision was about people, not the framework — and how to migrate without a big-bang rewrite.",
+      pt: "A decisão foi sobre pessoas, não o framework — e como migrar sem um rewrite big-bang.",
+    },
+  },
+  {
+    slug: "rendering-100k-points",
+    title: "Rendering 100,000 points without dropping a frame",
+    date: "June 6, 2026",
+    tag: "PERFORMANCE",
+    excerpt: {
+      en: "Keeping 100k+ geographic points live in the browser at 60fps: workers, typed arrays, and pre-computed answers.",
+      pt: "Mantendo 100k+ pontos geográficos vivos no browser a 60fps: workers, typed arrays e respostas pré-computadas.",
+    },
+  },
+  {
     slug: "the-goto-lesson",
     title: "The GOTO Lesson",
     date: "May 30, 2026",

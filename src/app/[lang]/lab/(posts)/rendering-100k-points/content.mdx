@@ -1,0 +1,52 @@
+# Rendering 100,000 points without dropping a frame
+
+**June 6, 2026**
+
+For nine years, the interactive map at the heart of SmartScout had one non-negotiable
+rule: a media planner could pan, zoom, and re-segment 100,000+ geographic records, and the
+map had to answer instantly. A spinner mid-thought loses the user. Here is how you keep
+that many reactive points alive in a browser without dropping a frame.
+
+## Why the main thread loses
+
+You have ~16ms per frame. The naïve version blows it two ways: it recomputes the full
+result set on every filter change, and it stores each point as an object — 100,000 little
+heap allocations the garbage collector has to chase. The GC pauses *are* the dropped
+frames. The fix isn't a faster loop; it's never doing the work on the main thread, and
+never allocating per point.
+
+## Move the math off the main thread
+
+Points live as one flat `Float32Array`, not an array of objects. Flat typed arrays are
+cache-friendly, GC-free, and **transferable** — they move between threads with zero copy.
+
+```ts
+// [x0, y0, weight0, x1, y1, weight1, ...] — one contiguous buffer.
+const points = new Float32Array(count * 3);
+
+// The worker bins to the current viewport and transfers ownership BACK,
+// so the main thread never blocks on (de)serialization.
+worker.postMessage({ type: "bin", viewport, points }, [points.buffer]);
+```
+
+The main thread's only job becomes drawing the answer the worker hands back.
+
+## Bin to the viewport, not the dataset
+
+You never need to draw 100,000 points — only the ones in view, at the resolution the eye
+can actually resolve. A spatial index lets the worker return just the visible bucket,
+aggregated to screen-space cells. Pan and zoom change *which* bucket, not *how much* work.
+
+## Pre-compute the answer, not the data
+
+The deepest win was conceptual: stop shipping rows to the client to crunch. SmartScout
+pre-computed 200+ **personas** — named audience definitions resolved ahead of time — so the
+UI asks for an *answer* and swaps between ready ones. The expensive work happens in a Go
+pipeline overnight, not in the user's tab.
+
+## The result
+
+Query latency went from ~10 seconds to under 800ms, and the map held its frame budget
+under real memory pressure for years. I tell the full product story — prototype to
+acquisition — in the [SmartScout case study](/work/smartscout-geospatial), where there's
+also a live 100,000-point canvas you can drag around.

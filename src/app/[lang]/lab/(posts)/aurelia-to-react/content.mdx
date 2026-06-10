@@ -1,0 +1,53 @@
+# Why I migrated a whole team from Aurelia to React
+
+**June 8, 2026**
+
+Aurelia was a genuinely good framework — clean conventions, honest two-way binding, a
+pleasure to write. I still moved an entire team off it onto React. The decision had almost
+nothing to do with the framework, and everything to do with people.
+
+## The decision was about hiring, not elegance
+
+A framework you love but can't hire for is a slow-motion staffing crisis. Aurelia's talent
+pool was a rounding error next to React's. Every new hire meant weeks of ramp on a
+framework they'd never touch again; every React hire arrived productive and left more
+employable. Ecosystem gravity compounds it — the libraries, the answers, the tooling all
+pool around the popular choice. **The framework you can staff beats the framework you
+prefer.** That's an architectural decision, not a fashion one.
+
+## Migrate the seams, not the app
+
+A big-bang rewrite would have meant a feature freeze nobody would forgive. Instead we used
+a strangler-fig: each Aurelia view mounted a React island, and we migrated screen by
+screen while shipping product the whole time.
+
+```ts
+// Each legacy view-model mounts a React island — so we moved screen by
+// screen, no freeze, no "rewrite quarter".
+import { createRoot } from "react-dom/client";
+
+export class LegacyView {
+  attached() {
+    this.root = createRoot(this.host);
+    this.root.render(<MapPanel datasetId={this.datasetId} />);
+  }
+  detached() {
+    this.root.unmount();
+  }
+}
+```
+
+## The hard parts
+
+Two frameworks sharing state during the transition is where it gets real: a single source
+of truth had to live outside both, routing had to hand off cleanly, and the team had to
+learn React under deadline. I paired and reviewed heavily — a migration is a teaching
+project as much as a technical one.
+
+## What I'd tell my past self
+
+Start at the leaves, not the shell. Keep each step boring and reversible. And measure
+success by one number: **can a new hire ship something real in their first week?** When the
+answer flipped to yes, the migration had already paid for itself. This was one of five
+stack migrations I've led end-to-end — the pattern repeats: the hard part is never the
+code, it's keeping the team shipping while the ground moves.

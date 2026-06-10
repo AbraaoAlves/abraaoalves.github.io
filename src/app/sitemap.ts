@@ -11,6 +11,8 @@ const PAGES: { path: string; changeFrequency: "monthly" | "weekly" | "yearly"; p
   { path: "/about", changeFrequency: "monthly", priority: 0.8 },
   { path: "/lab", changeFrequency: "weekly", priority: 0.7 },
   { path: "/lab/the-goto-lesson", changeFrequency: "yearly", priority: 0.6 },
+  { path: "/lab/rendering-100k-points", changeFrequency: "yearly", priority: 0.6 },
+  { path: "/lab/aurelia-to-react", changeFrequency: "yearly", priority: 0.6 },
   { path: "/work/smartscout-geospatial", changeFrequency: "yearly", priority: 0.7 },
 ];
 
