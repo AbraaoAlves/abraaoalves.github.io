@@ -8,10 +8,6 @@ import { CONTENT } from "@/lib/content";
 import { localizeHref } from "@/lib/i18n";
 import { posts } from "@/lib/posts";
 
-const postTags: Record<string, string> = {
-  "the-goto-lesson": "CRAFT",
-};
-
 export default function LabPage() {
   const { lang } = useLanguage();
   const t = CONTENT[lang].lab;
@@ -34,7 +30,7 @@ export default function LabPage() {
                 <Link href={localizeHref(`/lab/${post.slug}`, lang)} className="lab-item lab-item--link">
                   <span className="d">{post.date}</span>
                   <span className="ti">{post.title}</span>
-                  <span className="tag">{postTags[post.slug] ?? "LAB"}</span>
+                  <span className="tag">{post.tag}</span>
                 </Link>
               </Reveal>
             ))}
