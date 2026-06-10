@@ -27,7 +27,13 @@ export type LangContent = {
     eyebrow: string;
     ghost: string;
     title: string;
-    items: { role: string; org: string; year: string; desc: string; bullets: string[] }[];
+    items: {
+      role: string;
+      org: string;
+      year: string;
+      desc: string;
+      bullets: string[];
+    }[];
     migLabel: string;
     migrations: { from: string; to: string; why: string }[];
   };
@@ -79,7 +85,7 @@ export const CONTENT: Record<Lang, LangContent> = {
   en: {
     nav: { work: "Work", mentorship: "Mentorship", lab: "Lab", about: "About" },
     hero: {
-      eyebrow: "SOFTWARE ENGINEER · CONSULTANT · MENTOR",
+      eyebrow: "SOFTWARE ENGINEER · FULL-STACK",
       lead: "Building software that lasts with Javascript since 2008.",
       meta: ["Based in Brazil", "Remote", "Fluent English"],
       cue: "Scroll",
@@ -139,11 +145,27 @@ export const CONTENT: Record<Lang, LangContent> = {
       ],
       migLabel: "FIVE MIGRATIONS, LED END-TO-END",
       migrations: [
-        { from: "JavaScript", to: "TypeScript", why: "Type safety + tooling conventions, year one." },
-        { from: "Aurelia", to: "React", why: "Unlocked a far larger talent pool." },
-        { from: "Monolith", to: "Serverless", why: "Removed scale bottlenecks." },
+        {
+          from: "JavaScript",
+          to: "TypeScript",
+          why: "Type safety + tooling conventions, year one.",
+        },
+        {
+          from: "Aurelia",
+          to: "React",
+          why: "Unlocked a far larger talent pool.",
+        },
+        {
+          from: "Monolith",
+          to: "Serverless",
+          why: "Removed scale bottlenecks.",
+        },
         { from: "Node.js", to: "Go", why: "For data-intensive pipelines." },
-        { from: "Internal infra", to: "OUTFRONT", why: "Full enterprise environment." },
+        {
+          from: "Internal infra",
+          to: "OUTFRONT",
+          why: "Full enterprise environment.",
+        },
       ],
     },
     stack: {
@@ -151,10 +173,51 @@ export const CONTENT: Record<Lang, LangContent> = {
       ghost: "STACK",
       title: "Stack",
       cols: [
-        { h: "Languages", items: ["TypeScript", "JavaScript", "Go", "C#", "Java", "Ruby", "SQL"] },
-        { h: "Frontend", items: ["React", "Redux · Saga", "Web Workers", "GraphQL", "Mapbox GL", "Tailwind · SASS"] },
-        { h: "Backend & Data", items: ["Node.js", "PostgreSQL", "MongoDB · DynamoDB", "ElasticSearch", "Redis", "RabbitMQ"] },
-        { h: "Infra & Ops", items: ["AWS · Vercel", "CI/CD · Serverless", "Devcontainers", "PostHog · Sentry", "TDD", "AI Workflow"] },
+        {
+          h: "Languages",
+          items: [
+            "TypeScript",
+            "JavaScript",
+            "Go",
+            "C#",
+            "Java",
+            "Ruby",
+            "SQL",
+          ],
+        },
+        {
+          h: "Frontend",
+          items: [
+            "React",
+            "Redux · Saga",
+            "Web Workers",
+            "GraphQL",
+            "Mapbox GL",
+            "Tailwind · SASS",
+          ],
+        },
+        {
+          h: "Backend & Data",
+          items: [
+            "Node.js",
+            "PostgreSQL",
+            "MongoDB · DynamoDB",
+            "ElasticSearch",
+            "Redis",
+            "RabbitMQ",
+          ],
+        },
+        {
+          h: "Infra & Ops",
+          items: [
+            "AWS · Vercel",
+            "CI/CD · Serverless",
+            "Devcontainers",
+            "PostHog · Sentry",
+            "TDD",
+            "AI Workflow",
+          ],
+        },
       ],
     },
     ment: {
@@ -163,8 +226,14 @@ export const CONTENT: Record<Lang, LangContent> = {
       title: "Mentorship",
       body: "I trained engineering hires internally at Beakyn, designed the technical interview process from year one, and taught externally as a part-time programming instructor — feeding qualified candidates into the hiring pipeline. Growing engineers is the work I am proudest of.",
       quotes: [
-        { t: "Working with Abraão is knowing your engineering foundation is in safe hands. I had the privilege of seeing his growth — evolving from mid-level developer to the software architect responsible for our entire authentication.", by: "On mentoring Hiléo Andersson" },
-        { t: "His contribution goes far beyond delivering functional code. He's one of those rare professionals who combines a strong product-first mindset with impeccable technical rigor.", by: "On mentoring Lamartine" },
+        {
+          t: "Working with Abraão is knowing your engineering foundation is in safe hands. I had the privilege of seeing his growth — evolving from mid-level developer to the software architect responsible for our entire authentication.",
+          by: "On mentoring Hiléo Andersson",
+        },
+        {
+          t: "His contribution goes far beyond delivering functional code. He's one of those rare professionals who combines a strong product-first mindset with impeccable technical rigor.",
+          by: "On mentoring Lamartine",
+        },
       ],
     },
     roots: {
@@ -174,10 +243,16 @@ export const CONTENT: Record<Lang, LangContent> = {
       p1: "I didn't start with the web. In 2002 I took a technical course in electronics and learned <b>Assembly and pic8051 microcontrollers</b> — counting clock cycles, fighting for every byte. My first job came in 2004; the move into software engineering followed in 2008.",
       p2: "That low-level beginning still shapes how I work. It taught me early that the evolution of programming languages is largely about constraining our ability to write unmaintainable code — and that <em>software must be understood by humans first.</em> If a team cannot read and judge the code, the architecture has failed, however clever it seems.",
       timeline: [
-        ["2002", "Technical course in electronics — Assembly & microcontrollers"],
+        [
+          "2002",
+          "Technical course in electronics — Assembly & microcontrollers",
+        ],
         ["2004", "First job — support & web development"],
         ["2008", "Transition into software engineering"],
-        ["2013", "TypeScript contributor — DefinitelyTyped (FeathersJS, CucumberJS)"],
+        [
+          "2013",
+          "TypeScript contributor — DefinitelyTyped (FeathersJS, CucumberJS)",
+        ],
         ["2017", "Founding Brazil engineer on SmartScout"],
       ],
       beyondH: "BEYOND THE KEYBOARD",
@@ -193,8 +268,16 @@ export const CONTENT: Record<Lang, LangContent> = {
       title: "Lab",
       body: "Notes on architecture, geospatial systems, and the craft of software built to outlive its first author.",
       items: [
-        ["Soon", "Rendering 100k points without dropping a frame", "GEOSPATIAL"],
-        ["Soon", "Why I migrated a whole team from Aurelia to React", "ARCHITECTURE"],
+        [
+          "Soon",
+          "Rendering 100k points without dropping a frame",
+          "GEOSPATIAL",
+        ],
+        [
+          "Soon",
+          "Why I migrated a whole team from Aurelia to React",
+          "ARCHITECTURE",
+        ],
         ["Soon", "Assembly taught me to read code like a human", "CRAFT"],
       ],
       soon: "In draft",
@@ -284,11 +367,31 @@ export const CONTENT: Record<Lang, LangContent> = {
       ],
       migLabel: "CINCO MIGRAÇÕES, LIDERADAS DO INÍCIO AO FIM",
       migrations: [
-        { from: "JavaScript", to: "TypeScript", why: "Type safety e padronização, logo no primeiro ano." },
-        { from: "Aurelia", to: "React", why: "Abriu um mercado de talentos muito maior." },
-        { from: "Monolito", to: "Serverless", why: "Eliminou os gargalos de escala." },
-        { from: "Node.js", to: "Go", why: "Para pipelines intensivos em dados." },
-        { from: "Infra própria", to: "OUTFRONT", why: "Ambiente enterprise completo." },
+        {
+          from: "JavaScript",
+          to: "TypeScript",
+          why: "Type safety e padronização, logo no primeiro ano.",
+        },
+        {
+          from: "Aurelia",
+          to: "React",
+          why: "Abriu um mercado de talentos muito maior.",
+        },
+        {
+          from: "Monolito",
+          to: "Serverless",
+          why: "Eliminou os gargalos de escala.",
+        },
+        {
+          from: "Node.js",
+          to: "Go",
+          why: "Para pipelines intensivos em dados.",
+        },
+        {
+          from: "Infra própria",
+          to: "OUTFRONT",
+          why: "Ambiente enterprise completo.",
+        },
       ],
     },
     stack: {
@@ -296,10 +399,51 @@ export const CONTENT: Record<Lang, LangContent> = {
       ghost: "STACK",
       title: "Stack",
       cols: [
-        { h: "Linguagens", items: ["TypeScript", "JavaScript", "Go", "C#", "Java", "Ruby", "SQL"] },
-        { h: "Frontend", items: ["React", "Redux · Saga", "Web Workers", "GraphQL", "Mapbox GL", "Tailwind · SASS"] },
-        { h: "Backend & Dados", items: ["Node.js", "PostgreSQL", "MongoDB · DynamoDB", "ElasticSearch", "Redis", "RabbitMQ"] },
-        { h: "Infra & Ops", items: ["AWS · Vercel", "CI/CD · Serverless", "Devcontainers", "PostHog · Sentry", "TDD", "AI Workflow"] },
+        {
+          h: "Linguagens",
+          items: [
+            "TypeScript",
+            "JavaScript",
+            "Go",
+            "C#",
+            "Java",
+            "Ruby",
+            "SQL",
+          ],
+        },
+        {
+          h: "Frontend",
+          items: [
+            "React",
+            "Redux · Saga",
+            "Web Workers",
+            "GraphQL",
+            "Mapbox GL",
+            "Tailwind · SASS",
+          ],
+        },
+        {
+          h: "Backend & Dados",
+          items: [
+            "Node.js",
+            "PostgreSQL",
+            "MongoDB · DynamoDB",
+            "ElasticSearch",
+            "Redis",
+            "RabbitMQ",
+          ],
+        },
+        {
+          h: "Infra & Ops",
+          items: [
+            "AWS · Vercel",
+            "CI/CD · Serverless",
+            "Devcontainers",
+            "PostHog · Sentry",
+            "TDD",
+            "AI Workflow",
+          ],
+        },
       ],
     },
     ment: {
@@ -308,8 +452,14 @@ export const CONTENT: Record<Lang, LangContent> = {
       title: "Mentoria",
       body: "Formei engenheiros internamente na Beakyn, montei o processo de entrevista técnica do zero e dei aulas fora como instrutor de programação em tempo parcial — levando candidatos qualificados direto para o processo seletivo. Desenvolver pessoas é o trabalho de que mais me orgulho.",
       quotes: [
-        { t: "Trabalhar com o Abraão é ter a certeza de que sua base de engenharia está em boas mãos. Tive o privilégio de acompanhar seu crescimento — de desenvolvedor pleno a arquiteto de software responsável por toda a nossa autenticação.", by: "Sobre mentorar Hiléo Andersson" },
-        { t: "A contribuição dele vai muito além de código que funciona. É um daqueles profissionais raros que une visão de produto com rigor técnico de verdade.", by: "Sobre mentorar Lamartine" },
+        {
+          t: "Trabalhar com o Abraão é ter a certeza de que sua base de engenharia está em boas mãos. Tive o privilégio de acompanhar seu crescimento — de desenvolvedor pleno a arquiteto de software responsável por toda a nossa autenticação.",
+          by: "Sobre mentorar Hiléo Andersson",
+        },
+        {
+          t: "A contribuição dele vai muito além de código que funciona. É um daqueles profissionais raros que une visão de produto com rigor técnico de verdade.",
+          by: "Sobre mentorar Lamartine",
+        },
       ],
     },
     roots: {
@@ -322,7 +472,10 @@ export const CONTENT: Record<Lang, LangContent> = {
         ["2002", "Curso técnico em eletrônica — Assembly & microcontroladores"],
         ["2004", "Primeiro emprego — suporte & desenvolvimento web"],
         ["2008", "Transição para a engenharia de software"],
-        ["2013", "Contribuidor TypeScript — DefinitelyTyped (FeathersJS, CucumberJS)"],
+        [
+          "2013",
+          "Contribuidor TypeScript — DefinitelyTyped (FeathersJS, CucumberJS)",
+        ],
         ["2017", "Engenheiro fundador do SmartScout no Brasil"],
       ],
       beyondH: "ALÉM DO TECLADO",
@@ -339,7 +492,11 @@ export const CONTENT: Record<Lang, LangContent> = {
       body: "Notas sobre arquitetura, sistemas geoespaciais e o ofício de escrever software que sobrevive ao seu primeiro autor.",
       items: [
         ["Em breve", "Renderizando 100k pontos sem travar", "GEOESPACIAL"],
-        ["Em breve", "Por que migrei um time inteiro de Aurelia para React", "ARQUITETURA"],
+        [
+          "Em breve",
+          "Por que migrei um time inteiro de Aurelia para React",
+          "ARQUITETURA",
+        ],
         ["Em breve", "Assembly me ensinou a ler código como gente", "OFÍCIO"],
       ],
       soon: "Rascunho",

@@ -522,6 +522,7 @@ body::before {
   .ment-grid, .roots-grid { grid-template-columns: 1fr; }
   .work-item { grid-template-columns: 60px 1fr; }
   .work-item .meta-r { grid-column: 1 / -1; flex-direction: row; align-items: center; }
+  .work-item .bullets { grid-column: 1 / -1; }
   .foot-cols { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 680px) {
