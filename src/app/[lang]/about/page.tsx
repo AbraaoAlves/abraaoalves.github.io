@@ -12,7 +12,7 @@ export async function generateMetadata({
   if (!isLocale(lang)) return {};
   const t = CONTENT[lang];
   return {
-    title: t.nav.about,
+    title: t.roots.title,
     description: t.roots.p1,
     alternates: {
       canonical: `/${lang}/about`,

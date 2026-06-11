@@ -6,7 +6,8 @@ import type { Lang } from "@/components/language-provider";
  * CONTENT[lang]. SOCIALS is language-independent and uses real profile URLs.
  */
 export type LangContent = {
-  nav: { work: string; mentorship: string; lab: string; about: string };
+  /** Accessible labels for the menu button (the nav items come from contact.navLinks). */
+  nav: { menu: string; close: string };
   hero: {
     eyebrow: string;
     lead: string;
@@ -96,7 +97,7 @@ export type LangContent = {
 
 export const CONTENT: Record<Lang, LangContent> = {
   en: {
-    nav: { work: "Work", mentorship: "Mentorship", lab: "Lab", about: "About" },
+    nav: { menu: "Menu", close: "Close" },
     hero: {
       eyebrow: "SOFTWARE ENGINEER · FULL-STACK",
       lead: "Building software that lasts with Javascript since 2008.",
@@ -332,7 +333,7 @@ export const CONTENT: Record<Lang, LangContent> = {
   },
 
   pt: {
-    nav: { work: "Work", mentorship: "Mentoria", lab: "Lab", about: "Sobre" },
+    nav: { menu: "Menu", close: "Fechar" },
     hero: {
       eyebrow: "STAFF ENGINEER · ARQUITETO · MENTOR",
       lead: "Software que não envelhece — dezoito anos de engenharia de alto impacto, arquitetura e mentoria.",
