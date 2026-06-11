@@ -392,7 +392,7 @@ body::before {
 }
 
 /* =========================================================================
-   Menu — ettrics-style full-screen overlay (replaces the inline nav)
+   Menu — minimalist full-screen overlay (replaces the inline nav)
    ========================================================================= */
 
 /* Two-line button that morphs into an × */
@@ -1374,7 +1374,7 @@ html.menu-open {
 
 /* =========================================================================
    Contact / footer — an always-distinct surface in both themes, with an ASCII
-   logo backdrop and an ettrics-style hover spotlight (proto/index.html).
+   logo backdrop and an editorial hover spotlight (proto/index.html).
    ========================================================================= */
 .footer {
     position: relative;

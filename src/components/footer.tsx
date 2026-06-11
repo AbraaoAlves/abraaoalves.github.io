@@ -23,7 +23,7 @@ const LOGO_DARK = "#e7e9e9";
 /**
  * Contact / footer from proto/index.html: a CTA block over an ASCII logo
  * backdrop, three link columns (Navigate / Connect / Email), a version strip,
- * and the ettrics spotlight — hovering any link dims everything else.
+ * and the editorial spotlight — hovering any link dims everything else.
  */
 export function Footer() {
   const year = new Date().getFullYear();
@@ -112,7 +112,7 @@ export function Footer() {
             </ul>
           </Reveal>
 
-          {/* Theme switch lives in the footer, ettrics-style — right-aligned,
+          {/* Theme switch lives in the footer, minimalist style — right-aligned,
               just above the © / version strip. */}
           <ThemeToggle className="foot-theme" />
         </div>

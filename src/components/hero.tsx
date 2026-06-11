@@ -63,11 +63,6 @@ export function Hero() {
               ))}
             </Reveal>
 
-            <Reveal delay={0.2} className="hero-status">
-              <span className="dot-live" aria-hidden="true" />
-              {t.availability}
-            </Reveal>
-
             <Reveal delay={0.24} className="btn-row">
               <Button href="#contact" variant="primary" arrow>
                 {t.ctaPrimary}
@@ -91,7 +86,8 @@ export function Hero() {
             <AsciiTextCanvas
               text={"ABRAÃO\nALVES"}
               ripple
-              source="▓█▒▓░█"
+              // source="▓█▒▓░█"
+              source=".:*;!"
               speed={1.2}
               scale={0.13}
               threshold={0.34}

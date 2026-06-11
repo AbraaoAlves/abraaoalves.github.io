@@ -99,8 +99,8 @@ export const CONTENT: Record<Lang, LangContent> = {
   en: {
     nav: { menu: "Menu", close: "Close" },
     hero: {
-      eyebrow: "SOFTWARE ENGINEER · FULL-STACK",
-      lead: "Building software that lasts with Javascript since 2008.",
+      eyebrow: "FULL-STACK · SOFTWARE · ENGINEER",
+      lead: "Building software that lasts with since 2008.",
       meta: ["Based in Brazil", "Remote", "Fluent English"],
       availability: "Open to Staff / Principal roles & select projects",
       cue: "Scroll",
@@ -109,10 +109,26 @@ export const CONTENT: Record<Lang, LangContent> = {
     },
     proof: {
       items: [
-        { figure: "10s → 800ms", label: "Query latency, redesigned", href: "/work/smartscout-geospatial" },
-        { figure: "100k+", label: "Records rendered client-side", href: "/work/smartscout-geospatial" },
-        { figure: "5", label: "Stack migrations led end-to-end", href: "/#work" },
-        { figure: "9 yrs", label: "One platform — prototype to acquisition", href: "/work/smartscout-geospatial" },
+        {
+          figure: "10s → 800ms",
+          label: "Query latency, redesigned",
+          href: "/work/smartscout-geospatial",
+        },
+        {
+          figure: "100k+",
+          label: "Records rendered client-side",
+          href: "/work/smartscout-geospatial",
+        },
+        {
+          figure: "5",
+          label: "Stack migrations led end-to-end",
+          href: "/#work",
+        },
+        {
+          figure: "9 yrs",
+          label: "One platform — prototype to acquisition",
+          href: "/work/smartscout-geospatial",
+        },
       ],
     },
     geo: {
@@ -345,10 +361,26 @@ export const CONTENT: Record<Lang, LangContent> = {
     },
     proof: {
       items: [
-        { figure: "10s → 800ms", label: "Latência de consulta, redesenhada", href: "/work/smartscout-geospatial" },
-        { figure: "100k+", label: "Registros renderizados no cliente", href: "/work/smartscout-geospatial" },
-        { figure: "5", label: "Migrações lideradas de ponta a ponta", href: "/#work" },
-        { figure: "9 anos", label: "Um produto — do protótipo à aquisição", href: "/work/smartscout-geospatial" },
+        {
+          figure: "10s → 800ms",
+          label: "Latência de consulta, redesenhada",
+          href: "/work/smartscout-geospatial",
+        },
+        {
+          figure: "100k+",
+          label: "Registros renderizados no cliente",
+          href: "/work/smartscout-geospatial",
+        },
+        {
+          figure: "5",
+          label: "Migrações lideradas de ponta a ponta",
+          href: "/#work",
+        },
+        {
+          figure: "9 anos",
+          label: "Um produto — do protótipo à aquisição",
+          href: "/work/smartscout-geospatial",
+        },
       ],
     },
     geo: {

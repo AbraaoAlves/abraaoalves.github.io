@@ -10,7 +10,7 @@ import { CONTENT } from "@/lib/content";
 import { localizeHref } from "@/lib/i18n";
 
 /**
- * Fixed top nav from proto/index.html, with an ettrics-style menu: the brand
+ * Fixed top nav from proto/index.html, with a minimalist menu: the brand
  * mark + name on the left, a tools cluster on the right (PT|EN + a two-line
  * button that morphs to an ×). The button opens a full-screen overlay — large
  * left-aligned links with index numbers, a giant number reel on the right that
@@ -101,7 +101,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* Full-screen overlay menu (ettrics-style). */}
+      {/* Full-screen overlay menu (minimalist style). */}
       <div
         id="primary-menu"
         ref={overlayRef}

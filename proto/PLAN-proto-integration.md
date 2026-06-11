@@ -177,7 +177,7 @@ nav, a small client-side language context (or `localStorage.aa_lang` +
 A  feat(theme): port prototype token system, type scale, grain overlay, fonts
 B  feat(ui): eyebrow, ghost heading, buttons, section shell primitives
 C  feat(nav): fixed 64px nav with scroll blur, brand, lang + theme tools, burger
-D  feat(hero): ettrics hero grid — lead, meta, CTAs, scroll cue, ASCII name
+D  feat(hero): hero grid — lead, meta, CTAs, scroll cue, ASCII name
 E  feat(sections): add Geo, Stack, Lab; rebuild Work (+migrations), Mentorship, Roots
 F  feat(footer): CTA block, ASCII logo backdrop, 3 columns, spotlight polish
 G  feat(i18n): bilingual EN/PT content map + nav language toggle

@@ -6,7 +6,7 @@ Este arquivo contém o registro histórico dos prompts do usuário e as principa
 
 1. **A Visão:** "seu meu consultor de carreira para um staff software developer com mais de 18 anos de experiência... Preciso refazer meu site abraaoalves.github.io... A ideia é criar algo tão profissional como o ythecombinator.space... Minha maior inspiração como dev é o rodrigo pombo (pomb.us)... gostaria de usar o codehike."
 2. **Refinando a Narrativa:** "Miture B, C e A. Nessa ordem. Gostei de onde descidiu focar. Mas lembre-se não quero que faça uma copia de desses sites, na verdade quero que me dê referencias antes de começar a trabalhar para ter certeza que você vai começar corretamente."
-3. **Definição Visual:** "Quero a tipografia e motion desing do ettrics.com E a estrutura do javisperez.com... uma animação do ettrics... versão light/dark/system mode."
+3. **Definição Visual:** "Quero a tipografia e motion desing do protótipo E a estrutura do javisperez.com... uma animação fluida... versão light/dark/system mode."
 4. **Escolha Técnica:** [Resposta do usuário selecionando Next.js App Router e integração Pretext].
 5. **Ajuste de Posicionamento:** "Não quero me prender a um cargo, quero deixar as portas abertas para freelance, consultoria, senior, staff e o que precisar. Frizar staff não parece uma coisa inteligente nesse sentido. Acredito que o meu nome deve ser lembrado no Hero."
 6. **Início da Execução:** "Sim, vamos lá, mas crie um um novo branch antes de começar os trabalhos. Lembre-se de fazer commits pequenos para podermos auditar os trabalhos posteriormente. Para poder fazer commits pequenos, faça um plan.md detalhando pequenas tarefas que possam ser executadas a cada commit."
@@ -22,7 +22,7 @@ Este arquivo contém o registro histórico dos prompts do usuário e as principa
 - **Narrativa de Impacto:** O valor real está em mostrar a evolução de longo prazo (9 anos na Beakyn) e a capacidade de multiplicador (Mentoria).
 
 ### Frontend & Motion Design
-- **ASCII Canvas Renderer:** O efeito visual agressivo do Ettrics pode ser recriado em React usando um canvas oculto para renderizar texto com fontes variáveis e converter os dados de pixel (luminância) em caracteres ASCII dinamicamente.
+- **ASCII Canvas Renderer:** O efeito visual agressivo do protótipo pode ser recriado em React usando um canvas oculto para renderizar texto com fontes variáveis e converter os dados de pixel (luminância) em caracteres ASCII dinamicamente.
 - **Logo SVG Customizada:** Integramos uma logo geométrica complexa (baseada em um trabalho anterior do Abraão no CodePen) como um componente React funcional, permitindo controle dinâmico de cores via Tailwind.
 - **Next.js 16 + Turbopack:** Descobrimos que o Turbopack ainda tem limitações com MDX loaders ao passar opções não-serializáveis (como instâncias de plugins remark). O uso de `next dev --webpack` e `next build --webpack` é necessário para compatibilidade com ecossistemas complexos como o Code Hike.
 - **Tailwind CSS 4:** Iniciamos o uso da versão 4, que simplifica a importação de plugins (ex: `@plugin "@tailwindcss/typography"`) diretamente no CSS.

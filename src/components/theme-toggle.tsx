@@ -13,7 +13,7 @@ const themeOptions = [
 
 /**
  * Three-way theme toggle (System / Light / Dark) with a circular View-Transition
- * wipe from the click point. Lives in the footer (ettrics keeps its theme
+ * wipe from the click point. Lives in the footer (keeps the theme
  * switch there) — positioning is left to the parent via `className`.
  */
 export function ThemeToggle({ className = "" }: { className?: string }) {

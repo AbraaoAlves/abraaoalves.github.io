@@ -17,7 +17,7 @@ Source map of the bundle:
 
 ## 1. Design language
 
-Monochrome, "ettrics-grade" editorial portfolio. Warm-ink dark default, warm
+Monochrome, "premium-grade" editorial portfolio. Warm-ink dark default, warm
 paper light. No color except an *optional* accent (off by default — `accent: mono`).
 Texture comes from: a fixed film-grain + vignette overlay, giant ghost headings
 behind section titles, mono eyebrows with a tick, and animated ASCII art canvases
