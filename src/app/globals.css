@@ -589,6 +589,9 @@ body::before {
     display: flex;
     flex-direction: column;
     gap: clamp(22px, 3vw, 34px);
+    /* Let the column shrink below its content's intrinsic width so a long line
+       (e.g. the availability status) wraps instead of forcing the grid wide. */
+    min-width: 0;
 }
 .hero-meta {
     display: flex;
@@ -612,12 +615,14 @@ body::before {
 }
 .hero-status {
     display: inline-flex;
-    align-items: center;
+    align-items: start;
     gap: 11px;
     align-self: start;
+    max-width: 100%;
     font-family: var(--font-mono);
     font-size: var(--t-label);
     letter-spacing: 0.04em;
+    line-height: 1.5;
     color: var(--fg-1);
 }
 .hero-status .dot-live {
@@ -1434,7 +1439,7 @@ body::before {
 
 @media (max-width: 1080px) {
     .hero-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 36px;
     }
     .ascii-name {
