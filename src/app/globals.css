@@ -471,31 +471,20 @@ body::before {
     }
 }
 
-/* =========================================================================
-   Floating controls — fixed bottom-right: language dropdown + theme toggle
-   ========================================================================= */
-.floating-controls {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 100;
+/* --- Header right cluster: nav links + tools (language, menu) --- */
+.nav-right {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 8px;
-    background: color-mix(in srgb, var(--bg-1) 88%, transparent);
-    backdrop-filter: blur(14px) saturate(1.2);
-    -webkit-backdrop-filter: blur(14px) saturate(1.2);
-    border: 1px solid var(--line-2);
-    border-radius: 999px;
-    box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.18);
-    transition:
-        background 0.4s,
-        border-color 0.4s;
+    gap: clamp(18px, 2.4vw, 40px);
+}
+.nav-tools {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 /* --- Language toggle (PT | EN) --- */
-.fc-lang {
+.lang-toggle {
     display: inline-flex;
     align-items: center;
     gap: 2px;
@@ -503,7 +492,7 @@ body::before {
     font-size: 12px;
     letter-spacing: 0.06em;
 }
-.fc-lang-opt {
+.lang-opt {
     padding: 4px 6px;
     background: transparent;
     border: 0;
@@ -513,17 +502,17 @@ body::before {
     cursor: pointer;
     transition: color 0.2s;
 }
-.fc-lang-opt:hover {
+.lang-opt:hover {
     color: var(--fg-1);
 }
-.fc-lang-opt.active {
+.lang-opt.active {
     color: var(--fg);
     font-weight: 600;
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
 }
-.fc-lang-sep {
+.lang-sep {
     color: var(--line-2);
     user-select: none;
 }

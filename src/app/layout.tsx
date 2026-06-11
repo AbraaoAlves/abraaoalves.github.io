@@ -6,7 +6,6 @@ import { LanguageProvider } from "@/components/language-provider";
 import { LenisProvider } from "@/components/lenis-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { FloatingControls } from "@/components/floating-controls";
 import { BootSplash } from "@/components/boot-splash";
 
 // Type system from proto/index.html (the source of truth):
@@ -93,7 +92,6 @@ export default function RootLayout({
                   {children}
                 </div>
                 <Footer />
-                <FloatingControls />
               </div>
             </LenisProvider>
           </LanguageProvider>

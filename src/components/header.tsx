@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Logo } from "./icons/logo";
+import { LanguageToggle } from "./language-toggle";
 import { useLanguage } from "./language-provider";
 import { CONTENT } from "@/lib/content";
 import { localizeHref } from "@/lib/i18n";
@@ -39,27 +40,32 @@ export function Header() {
         <span className="name">Abraão Alves</span>
       </Link>
 
-      <nav
-        className={`nav-links${open ? " open" : ""}`}
-        onClick={() => setOpen(false)}
-        aria-label="Primary"
-      >
-        {navLinks.map((link) => (
-          <Link key={link.href} href={localizeHref(link.href, lang)}>
-            {link.label}
-          </Link>
-        ))}
-      </nav>
+      <div className="nav-right">
+        <nav
+          className={`nav-links${open ? " open" : ""}`}
+          onClick={() => setOpen(false)}
+          aria-label="Primary"
+        >
+          {navLinks.map((link) => (
+            <Link key={link.href} href={localizeHref(link.href, lang)}>
+              {link.label}
+            </Link>
+          ))}
+        </nav>
 
-      <button
-        type="button"
-        className="icon-btn nav-burger"
-        aria-label="Menu"
-        aria-expanded={open}
-        onClick={() => setOpen((o) => !o)}
-      >
-        {open ? <X /> : <Menu />}
-      </button>
+        <div className="nav-tools">
+          <LanguageToggle className="nav-lang" />
+          <button
+            type="button"
+            className="icon-btn nav-burger"
+            aria-label="Menu"
+            aria-expanded={open}
+            onClick={() => setOpen((o) => !o)}
+          >
+            {open ? <X /> : <Menu />}
+          </button>
+        </div>
+      </div>
     </header>
   );
 }
