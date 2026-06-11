@@ -6,6 +6,7 @@ import { AsciiArtCanvas } from "./asciiart";
 import { Reveal } from "./reveal";
 import { Eyebrow } from "./ui/eyebrow";
 import { Button } from "./ui/button";
+import { ThemeToggle } from "./theme-toggle";
 import { useLanguage } from "./language-provider";
 import { CONTENT, SOCIALS } from "@/lib/content";
 import { localizeHref } from "@/lib/i18n";
@@ -110,6 +111,10 @@ export function Footer() {
               </li>
             </ul>
           </Reveal>
+
+          {/* Theme switch lives in the footer, ettrics-style — right-aligned,
+              just above the © / version strip. */}
+          <ThemeToggle className="foot-theme" />
         </div>
 
         <div className="foot-bottom">

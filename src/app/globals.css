@@ -494,15 +494,6 @@ body::before {
         border-color 0.4s;
 }
 
-/* divider between lang and theme */
-.fc-divider {
-    width: 1px;
-    height: 18px;
-    background: var(--line-2);
-    margin: 0 2px;
-    flex-shrink: 0;
-}
-
 /* --- Language toggle (PT | EN) --- */
 .fc-lang {
     display: inline-flex;
@@ -537,15 +528,16 @@ body::before {
     user-select: none;
 }
 
-/* --- Theme icons in the widget --- */
-.fc-theme {
+/* =========================================================================
+   Theme toggle (System / Light / Dark) — reusable; lives in the footer
+   ========================================================================= */
+.theme-toggle {
     display: inline-flex;
     gap: 1px;
 }
-
-.fc-icon-btn {
-    width: 28px;
-    height: 28px;
+.theme-opt {
+    width: 30px;
+    height: 30px;
     display: grid;
     place-items: center;
     background: transparent;
@@ -558,17 +550,24 @@ body::before {
         border-color 0.2s,
         background 0.2s;
 }
-.fc-icon-btn:hover {
+.theme-opt:hover {
     color: var(--fg-1);
 }
-.fc-icon-btn[aria-pressed="true"] {
+.theme-opt[aria-pressed="true"] {
     color: var(--fg);
     border-color: var(--line-2);
     background: color-mix(in srgb, var(--fg) 8%, transparent);
 }
-.fc-icon-btn svg {
-    width: 14px;
-    height: 14px;
+.theme-opt svg {
+    width: 15px;
+    height: 15px;
+}
+
+/* Footer placement: right-aligned, just above the © / version strip. */
+.foot-theme {
+    position: absolute;
+    right: 0;
+    bottom: 8px;
 }
 
 /* =========================================================================
@@ -1338,6 +1337,7 @@ body::before {
 }
 
 .foot-cols {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: clamp(24px, 3vw, 48px);
@@ -1490,6 +1490,12 @@ body::before {
     }
     .foot-cols {
         grid-template-columns: 1fr;
+    }
+    /* Single column: pull the theme switch back into flow, right-aligned. */
+    .foot-theme {
+        position: static;
+        justify-self: end;
+        margin-top: 28px;
     }
     .foot-hero {
         min-height: 0;
